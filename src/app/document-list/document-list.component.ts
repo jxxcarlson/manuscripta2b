@@ -48,7 +48,7 @@ export class DocumentListComponent implements OnInit {
 
     }
 
-    if (this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
+    if (this.activeDocument.links != undefined && this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
 
       this.parentId = this.activeDocument.links.parent.id
       this.parentTitle = this.activeDocument.links.parent.title

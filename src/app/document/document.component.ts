@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Document } from '../shared/document.model'
 import { DocumentNotificationService } from '../shared/document-notification.service'
+import { ApiService } from '../shared/api.service'
 
 @Component({
   selector: 'app-document',
@@ -31,8 +32,13 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
   activeDocument: Document
   parentId: string = '-1'
   parentTitle: string = '-'
+  subdocuments: Document[] = []
+  documents: Document[] = []
 
-  constructor(documentService: DocumentNotificationService) {
+  constructor(private documentService: DocumentNotificationService, private apiService: ApiService) {
+
+    this.documentService = documentService
+    this.apiService = apiService
 
     this.activeDocument = this.exampleDocument
     documentService.announceSelection(this.exampleDocument)
@@ -45,6 +51,16 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
 
   }
 
+  loadParent() {
+
+    console.log(`LOAD ${this.parentId}: ${this.parentTitle}`)
+    if (this.parentId != '-1') {
+
+      this.apiService.loadDocument(this.parentId, this.documents)
+      // this.documentService.announceSelection(this.documents[0])
+    }
+
+  }
 
   getParentTitle(): string {
 
@@ -59,8 +75,6 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
       this.parentTitle = ''
 
     }
-
-    console.log(`In DOC COMPONENT, PARENT = ${this.parentTitle}`)
 
     return this.parentTitle
   }
