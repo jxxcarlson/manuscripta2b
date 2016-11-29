@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Document, DocumentList } from './document.model'
+import { QueryParser } from './queryparser.service'
 
 
 @Injectable()
@@ -56,6 +57,27 @@ export class ApiService {
   loadDocuments(idList: string[] , documentArray: Array<Document>) {
 
     idList.forEach( (id) => this.loadDocument(id, documentArray) )
+
+  }
+
+  search (searchTerm: string, documentList: Document[]): void {
+
+    console.log(`performSearch: ${searchTerm}`)
+
+    var qp: QueryParser = new QueryParser();
+
+    var apiQuery: string = qp.parse(searchTerm)
+
+    // (1) THE PROBLEM IS HERE
+    this.findDocuments(apiQuery)
+      .subscribe(
+
+        searchResult => [
+          console.log(searchResult),
+          this.loadDocuments(searchResult.documents.map( (hash) => hash.id ), documentList )
+        ]
+      )
+
   }
 
 }

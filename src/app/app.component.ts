@@ -33,7 +33,9 @@ export class AppComponent {
 
     this.apiService.loadDocument('177', this.testDocuments)
 
-    this.apiService.loadDocuments(['76', '60', '78', '59', '226'], this.testDocuments)
+    // this.apiService.loadDocuments(['76', '60', '78', '59', '226'], this.testDocuments)
+
+    this.apiService.search('snell', this.testDocuments)
 
   }
 
