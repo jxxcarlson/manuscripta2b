@@ -42,6 +42,10 @@ export class ApiService {
 
   }
 
+
+  //////////////////////
+
+
   loadDocument(id: string, documentArray: Array<Document>): void {
 
     console.log(`loadDocument: ${id}`)

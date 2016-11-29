@@ -42,6 +42,7 @@ export class DocumentListComponent implements OnInit {
     this.documentService.announceSelection(document)
 
     if (this.activeDocument.has_subdocuments) {
+      console.log(`In document-list for ${this.activeDocument.title}, loading subdocuments`)
       this.apiService.loadSubdocuments(this.activeDocument, this.subdocuments)
       this.documentService.announceDocumentList(this.subdocuments)
       this.subdocuments = []
