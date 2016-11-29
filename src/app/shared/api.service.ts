@@ -60,6 +60,14 @@ export class ApiService {
 
   }
 
+  loadSubdocuments(doc: Document, documentArray: Array<Document>): void {
+
+    var docs = doc.links.documents || []
+    var docList = docs.map( (doc) => doc.id )
+    console.log(`doclist: ${docList}`)
+    this.loadDocuments(docList, documentArray)
+  }
+
   search (searchTerm: string, documentList: Document[]): void {
 
     console.log(`performSearch: ${searchTerm}`)

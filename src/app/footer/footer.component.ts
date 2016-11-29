@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit {
 
   activeDocument: Document
   id: string
+  has_subdocuments: boolean
 
 
 
@@ -21,6 +22,7 @@ export class FooterComponent implements OnInit {
       doc => {
         this.activeDocument = doc;
         this.id = doc.id || '0'
+        this.has_subdocuments = doc.has_subdocuments || false
         console.log(`FF: Active document received by footer: ${doc.title}`)
       });
 
