@@ -1,0 +1,6 @@
+@import '../../app/vendor/semantic.min.css';
+
+.ui.main.text.container {
+
+  margin-top: 1rem;
+}
