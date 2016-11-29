@@ -72,6 +72,20 @@ export class ApiService {
     this.loadDocuments(docList, documentArray)
   }
 
+  loadDocAndSubdocuments(id: string, documentArray: Array<Document>): void {
+
+    console.log(`loadDocument: ${id}`)
+
+    this.getDocument(id)
+      .subscribe(
+
+        doc => [
+          documentArray.push(doc),
+          this.loadSubdocuments(doc, documentArray)
+
+      )
+  }
+
   search (searchTerm: string, documentList: Document[]): void {
 
     console.log(`performSearch: ${searchTerm}`)
