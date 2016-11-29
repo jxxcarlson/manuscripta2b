@@ -7,7 +7,12 @@
   <div class="two column row">
 
     <div class="column five wide">
-      <document-list [documents]="testDocuments"> </document-list>
+      <div class="container" style="margin-left:-180px; margin-top:20px;">
+
+        <searchbar></searchbar>
+        <document-list [documents]="testDocuments"> </document-list>
+
+      </div>
     </div>
 
     <div class="column eleven wide">

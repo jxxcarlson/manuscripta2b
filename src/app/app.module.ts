@@ -20,7 +20,8 @@ import { MathJaxDirective } from './shared/mathjax.directive';
 
 import { TextPageHeightDirective } from './shared/textpageheight.directive';
 import { DocumentListComponent } from './document-list/document-list.component';
-import { DocumentListItemComponent } from './document-list-item/document-list-item.component'
+import { DocumentListItemComponent } from './document-list-item/document-list-item.component';
+import { SearchComponent } from './search/search.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DocumentListItemComponent } from './document-list-item/document-list-it
     DocumentComponent,
     HtmlPane, TextPane, MathJaxDirective, TextPageHeightDirective,
     DocumentListComponent, DocumentListItemComponent,
-    MathJaxPane
+    MathJaxPane,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
