@@ -59,7 +59,7 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
 
       this.documents = []
       // this.apiService.loadDocument(this.parentId, this.documents)
-      this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments)
+      this.apiService.loadDocAndSubdocuments(this.parentId, this.documents, this.subdocuments)
       // this.documentService.announceSelection(this.documents[0])
       this.documentService.announceDocumentList(this.subdocuments)
       this.documents = [];  this.subdocuments = []

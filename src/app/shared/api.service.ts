@@ -72,7 +72,7 @@ export class ApiService {
     this.loadDocuments(docList, documentArray)
   }
 
-  loadDocAndSubdocuments(id: string, documentArray: Array<Document>): void {
+  loadDocAndSubdocuments(id: string, documentArray: Array<Document>, subDocumentArray: Array<Document>): void {
 
     console.log(`loadDocument: ${id}`)
 
@@ -81,7 +81,8 @@ export class ApiService {
 
         doc => [
           documentArray.push(doc),
-          this.loadSubdocuments(doc, documentArray)
+          this.loadSubdocuments(doc, subDocumentArray)
+          ]
 
       )
   }
