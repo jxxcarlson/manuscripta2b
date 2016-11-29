@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service'
+import {DocumentNotificationService} from "../shared/document-notification.service";
 
 @Component({
   selector: 'searchbar',
@@ -8,9 +9,11 @@ import { ApiService } from '../shared/api.service'
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private documentService: DocumentNotificationService) {
 
     this.apiService = apiService
+
+    this.documentService = documentService
 
   }
 
@@ -19,8 +22,12 @@ export class SearchComponent implements OnInit {
   doSearch(searchTerm: HTMLInputElement) {
 
     this.apiService.search(searchTerm.value, this.searchResults)
+    this.documentService.announceDocumentList(this.searchResults)
 
   }
+
+
+
   ngOnInit() {
 
   }

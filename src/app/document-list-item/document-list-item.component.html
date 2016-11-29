@@ -1,3 +1,3 @@
-<li *ngIf="active" style="background-color: darkred; color: white;">{{ document.title }}</li>
-<li *ngIf="!active" > {{document.title }}</li>
+<li *ngIf="active" style="background-color: darkred; color: white;">{{ truncateString(document.title, 35) }}</li>
+<li *ngIf="!active" > {{ truncateString(document.title, 35) }}</li>
 

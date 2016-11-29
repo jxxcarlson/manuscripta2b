@@ -15,7 +15,14 @@ export class DocumentListComponent implements OnInit {
 
   documentListTitle:string = 'Documents'
 
-  constructor( private documentService: DocumentNotificationService ) { }
+  constructor( private documentService: DocumentNotificationService ) {
+
+    documentService.documentListAnnounced$.subscribe(
+      docList => {
+        this.documents = docList;
+        console.log(`Active document udpated:`)
+      })
+  }
 
   ngOnInit() {
 

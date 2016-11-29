@@ -15,21 +15,29 @@ export class DocumentNotificationService {
     activeTableOfContents: Array<Document>
     searchResultsList: Array<Document>
     hotList: Array<Document>
-    documents: DocumentList
+    documents: Array<Document>
 
 
-    // Observable document sources
+    // (1) Observable document sources
     private documentSelectionAnnounced = new Subject<Document>();
+    private searchResultsAnnounced = new Subject<Document[]>();
 
-    // Observable document streams
+    // (2) Observable document streams
     documentAnnounced$ = this.documentSelectionAnnounced.asObservable();
+    documentListAnnounced$ = this.searchResultsAnnounced.asObservable();
 
 
-    // Service message commands
+    // (3) Service message commands
     announceSelection(document: Document) {
       this.activeDocument = document
       console.log(`Announced: ${document.title}`)
       this.documentSelectionAnnounced.next(document);
+    }
+
+    announceDocumentList(document_list: Document[]) {
+      this.documents = document_list
+      console.log(`Doc list announced`)
+      this.searchResultsAnnounced.next(document_list);
     }
 
 
