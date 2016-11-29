@@ -1,4 +1,5 @@
 <div class="ui main text container">
+  <h4> {{ getParentTitle() }}</h4>
   <h1> {{ activeDocument.title }}</h1>
   <div [textPageHeight]>
     <mathjax-pane  [document]="activeDocument"></mathjax-pane>

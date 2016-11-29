@@ -14,6 +14,8 @@ export class DocumentListComponent implements OnInit {
 
   activeDocument: Document
   subdocuments: Document[] = []
+  parentId:string = '-1'
+  parentTitle: string = '-'
 
   documentListTitle:string = 'Documents'
 
@@ -45,6 +47,23 @@ export class DocumentListComponent implements OnInit {
       this.subdocuments = []
 
     }
+
+    if (this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
+
+      this.parentId = this.activeDocument.links.parent.id
+      this.parentTitle = this.activeDocument.links.parent.title
+
+    } else {
+
+      this.parentId = '-1'
+      this.parentTitle = '-'
+
+    }
+
+    console.log(`Parent id of ${this.activeDocument.id} = ${this.parentId}`)
+    console.log(`Parent title of ${this.activeDocument.id} = ${this.parentTitle}`)
+
+
   }
 
   isActive(document: Document): boolean {

@@ -29,6 +29,8 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
   })
 
   activeDocument: Document
+  parentId: string = '-1'
+  parentTitle: string = '-'
 
   constructor(documentService: DocumentNotificationService) {
 
@@ -40,14 +42,32 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
         this.activeDocument = doc;
         console.log(`Active document udpated: ${doc.title}`)
       });
+
+  }
+
+
+  getParentTitle(): string {
+
+    if (this.activeDocument.links != undefined && this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
+
+      this.parentId = this.activeDocument.links.parent.id
+      this.parentTitle = this.activeDocument.links.parent.title
+
+    } else {
+
+      this.parentId = '-1'
+      this.parentTitle = ''
+
+    }
+
+    console.log(`In DOC COMPONENT, PARENT = ${this.parentTitle}`)
+
+    return this.parentTitle
   }
 
   ngOnInit() {
 
 
-
   }
-
-
 
 }
