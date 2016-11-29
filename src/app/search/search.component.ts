@@ -21,8 +21,11 @@ export class SearchComponent implements OnInit {
 
   doSearch(searchTerm: HTMLInputElement) {
 
+
     this.apiService.search(searchTerm.value, this.searchResults)
+    console.log(`Search results: ${this.searchResults.length}`)
     this.documentService.announceDocumentList(this.searchResults)
+    this.searchResults = []
 
   }
 

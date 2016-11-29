@@ -20,7 +20,7 @@ export class DocumentListComponent implements OnInit {
     documentService.documentListAnnounced$.subscribe(
       docList => {
         this.documents = docList;
-        console.log(`Active document udpated:`)
+        console.log(`Active document updated:`)
       })
   }
 
