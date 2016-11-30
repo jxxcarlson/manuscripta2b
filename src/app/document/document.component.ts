@@ -57,11 +57,12 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
 
     if (this.parentId != '-1') {
 
-      this.documents = []
-      // this.apiService.loadDocument(this.parentId, this.documents)
-      this.apiService.loadDocAndSubdocuments(this.parentId, this.documents, this.subdocuments)
-      // this.documentService.announceSelection(this.documents[0])
+      this.apiService.loadDocAndSubdocuments(this.parentId, this.documents,
+        this.subdocuments, (d) => this.activeDocument = d)
+
       this.documentService.announceDocumentList(this.subdocuments)
+
+      console.log(`### (2b) this.documents.length = ${this.documents.length}`)
       this.documents = [];  this.subdocuments = []
     }
 
@@ -88,9 +89,5 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
   ngOnInit() {
   }
 
-
-
-
-}
 
 }
