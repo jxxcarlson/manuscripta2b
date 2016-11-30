@@ -80,7 +80,9 @@ export class ApiService {
       .subscribe(
 
         doc => [
+          console.log(`### doc: ${doc.id} (${doc.title})`),
           documentArray.push(doc),
+          console.log(`@@@ doc: ${documentArray[0].id} (${documentArray[0].title})`),
           this.loadSubdocuments(doc, subDocumentArray)
           ]
 
