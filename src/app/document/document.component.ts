@@ -57,8 +57,7 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
 
     if (this.parentId != '-1') {
 
-      this.apiService.loadDocAndSubdocuments(this.parentId, this.documents,
-        this.subdocuments, (d) => this.activeDocument = d)
+      this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments, (d) => this.activeDocument = d)
 
       this.documentService.announceDocumentList(this.subdocuments)
 
