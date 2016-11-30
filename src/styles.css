@@ -1,4 +1,4 @@
-@import './semantic/dist/semantic.min.css';
+@import './app/vendor/semantic.min.css';
 
 
 form.ui.segment.form {
