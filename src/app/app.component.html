@@ -1,30 +1,28 @@
 <!-- Menu Bar -->
 
+
 <navbar> </navbar>
 
-<div class="ui page grid">
+<div class="ui grid">
 
-  <div class="two column row">
-
-    <div class="column five wide">
-      <div class="container" style="margin-left:-45%; margin-top:20px;">
-
-        <searchbar></searchbar>
-        <document-list [documents]="testDocuments"> </document-list>
-
-      </div>
-    </div>
-
-    <div class="column eleven wide">
-      <app-document> </app-document>
-    </div>
-
-  </div>
+   <router-outlet></router-outlet>
 
 </div>
 
+<!-- <footer> </footer> -->
 
-<footer> </footer>
+<!--
+
+<navbar> </navbar>
+
+<div class="">
+
+  <router-outlet></router-outlet>
+
+</div>
+
+-->
+
 
 <!--
 

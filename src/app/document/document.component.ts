@@ -14,18 +14,20 @@ export class DocumentComponent implements OnInit {
 
     id: '23',
 
-    title: 'Old Latin Document',
+    title: 'Welcome!',
 
     text: `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maximus hendrerit. Duis feugiat egestas dapibus. Aenean pharetra odio in sapien efficitur lobortis. Donec leo dui, efficitur eget nisi ut, pulvinar posuere justo. Morbi eget turpis sapien. Maecenas rutrum ut risus quis porta. Phasellus pharetra efficitur mattis. Cras cursus massa vitae mauris maximus euismod. Quisque ultricies dapibus magna, eu finibus felis mattis ac. Ut vestibulum ex et luctus pretium. Vestibulum egestas, augue volutpat posuere volutpat, diam tortor venenatis ante, at tempus leo mauris vitae lacus. Suspendisse a fermentum ipsum, et efficitur libero. Ut rutrum erat sem, id tempor lectus venenatis non.
 `,
-    rendered_text: `
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maximus hendrerit. Duis feugiat egestas dapibus. Aenean pharetra odio in sapien efficitur lobortis. Donec leo dui, efficitur eget nisi ut, pulvinar posuere justo. Morbi eget turpis sapien. Maecenas rutrum ut risus quis porta. Phasellus pharetra efficitur mattis. Cras cursus massa vitae mauris maximus euismod. Quisque ultricies dapibus magna, eu finibus felis mattis ac. Ut vestibulum ex et luctus pretium. Vestibulum egestas, augue volutpat posuere volutpat, diam tortor venenatis ante, at tempus leo mauris vitae lacus. Suspendisse a fermentum ipsum, et efficitur libero. Ut rutrum erat sem, id tempor lectus venenatis non.
+    rendered_text: `<img src="http://psurl.s3.amazonaws.com/images/jc/bird-b4ba.jpeg" width="300" style="float:left; margin-right:15px; ">
+<p style="">Welcome to Manuscripta. With it can write ordinary text, place images, audio, and video — even write mathematics.</p>
+
+<p style="margin-top:60px;">
+\\[
+  \\int_0^1 x^n dx = \\frac{1}{n+1}
+\\]
 </p>
 
-<p>
-Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) and that the angle of refraction \\(\\theta_2\\) is \\(\\angle FGE\\)  
-</p>
 `
   })
 
@@ -78,7 +80,7 @@ Next observe that the angle of incidence \\(\\theta_1\\) is \\(\\angle AGB\\) an
     } else {
 
       this.parentId = '-1'
-      this.parentTitle = ''
+      this.parentTitle = '|•|'
 
     }
 
