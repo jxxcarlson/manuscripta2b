@@ -32,7 +32,7 @@ even write mathematics.</p>
 <p style="margin-top:4em;">To see more content, type &quot;harmonic&quot;
 in the search box.</p>
 
-<p>This app is a rewrite of <a href="http://www.manuscripta.io">Manuscripta.io</a> in
+<p>This app is a rewrite (n progress) of <a href="http://www.manuscripta.io">Manuscripta.io</a> in
 Angular2.  Still in a primitive state, but we are working on it.</p>
 
 `
