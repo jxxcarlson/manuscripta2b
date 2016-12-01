@@ -28,13 +28,12 @@ import { AboutComponent } from './about/about.component';
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
-//{ path: '', component: HomeComponent },
 //{ path: '**', component: PageNotFoundComponent }
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'read', component: ReaderComponent },
-  { path: '666', component: ReaderComponent }
+  { path: '', component: ReaderComponent }
 ];
 
 @NgModule({
