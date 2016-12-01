@@ -29,7 +29,7 @@ even write mathematics.</p>
 \\]
 </p>
 
-<p style="margin-top:4em;">To see more content, type &quot;harmonic&quot;
+<p style="margin-top:4em;">To see more content, type (for example) &quot;harmonic&quot; or &quot;climate&quot;
 in the search box.</p>
 
 <p>This app is a rewrite (n progress) of <a href="http://www.manuscripta.io">Manuscripta.io</a> in
