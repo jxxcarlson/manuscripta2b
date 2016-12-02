@@ -1,0 +1,6 @@
+
+<div style="display: inline-block; margin-bottom:0.45em;">
+  <span *ngFor="let option of options">
+    <input type="radio" name="price" [checked]="option.id == selectedOption.id" (click)="getValue(option.id)" value= {{option.id}}>{{option.name}}
+  </span>
+</div>
