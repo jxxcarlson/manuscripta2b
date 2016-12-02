@@ -25,6 +25,7 @@ import { MathJaxPane } from './shared/mathjaxpane.component';
 import { TextPane } from './shared/textpane.component';
 
 import { ApiService } from './services/api.service';
+import { SigninService } from './services/signin.service'
 import { DocumentNotificationService } from './services/document-notification.service';
 import { QueryParser } from './services/queryparser.service';
 import { MathJaxDirective } from './directives/mathjax.directive';
@@ -77,7 +78,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     DocumentNotificationService,
-    QueryParser, ApiService
+    QueryParser, ApiService, SigninService
   ],
   bootstrap: [AppComponent, [
     // DocumentService

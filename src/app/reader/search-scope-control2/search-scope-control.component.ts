@@ -11,7 +11,8 @@ export class SearchScopeControlComponent  {
 
   options = [
     new Options(1, 'My docs' ),
-    new Options(2, 'Other docs' ),
+    new Options(2, 'Other' ),
+    new Options(23, 'All' ),
   ];
 
   getValue(optionid) {
@@ -23,3 +24,6 @@ export class SearchScopeControlComponent  {
 export class Options {
   constructor(public id: number, public name: string) { }
 }
+
+
+// https://plnkr.co/edit/peK6zJngB9X76nOzDzYo?p=preview

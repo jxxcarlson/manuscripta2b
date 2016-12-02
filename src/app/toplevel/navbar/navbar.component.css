@@ -1,4 +1,10 @@
+.button {
 
+  margin-left: 2rem;
+  padding-botom: 8px;
+  background-colr: black;
+  color: white;
+}
 
 .ui .menu {
 
