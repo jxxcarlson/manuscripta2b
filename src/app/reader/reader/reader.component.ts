@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Document } from '../../shared/document.model';
 import { ApiService } from '../../services/api.service'
 
@@ -7,37 +7,37 @@ import { ApiService } from '../../services/api.service'
   templateUrl: './reader.component.html',
   styleUrls: ['./reader.component.css']
 })
-export class ReaderComponent {
+export class ReaderComponent implements OnInit {
 
-  d1: Document = new Document( {
+  d1: Document = new Document({
 
-    id: 1,
+      id: '23',
+
+      title: 'Imagine!',
+
+      text: `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maximus hendrerit. Duis feugiat egestas dapibus. Aenean pharetra odio in sapien efficitur lobortis. Donec leo dui, efficitur eget nisi ut, pulvinar posuere justo. Morbi eget turpis sapien. Maecenas rutrum ut risus quis porta. Phasellus pharetra efficitur mattis. Cras cursus massa vitae mauris maximus euismod. Quisque ultricies dapibus magna, eu finibus felis mattis ac. Ut vestibulum ex et luctus pretium. Vestibulum egestas, augue volutpat posuere volutpat, diam tortor venenatis ante, at tempus leo mauris vitae lacus. Suspendisse a fermentum ipsum, et efficitur libero. Ut rutrum erat sem, id tempor lectus venenatis non.
+`,
+      rendered_text: `<img src="http://psurl.s3.amazonaws.com/images/jc/1920px-Great_Wave_off_Kanagawa2-fe2b.jpg" width="600" style="float:left; margin-right:15px; ">
+`
+    }
+  )
+
+  d2: Document = new Document({
+
+    id: 2,
     title: 'Introductory Magick',
     text: 'It _is_ magical!',
     rendered_text: '<p>It <i>is</i> magical!</p>'
   })
 
-  d2: Document = new Document( {
 
-    id: 2,
-    title: 'Chemical Stories',
-    text: 'It all began with *Democritus*',
-    rendered_text: '<p>It all began with <b>Democritus</b></p>  '
-  })
+  testDocuments: Document[] = [this.d1, this.d2]
 
-  testDocuments: Document[] = [ this.d1, this.d2 ]
+  constructor() { }
 
-  constructor(private apiService: ApiService) {
-
-    this.apiService = apiService
-
-    // this.apiService.loadDocument('177', this.testDocuments)
-
-    // this.apiService.loadDocuments(['76', '60', '78', '59', '226'], this.testDocuments)
-
-    // this.apiService.search('snell', this.testDocuments)
+  ngOnInit() {
 
   }
-
 
 }

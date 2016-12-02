@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service'
-import {DocumentNotificationService} from "../../services/document-notification.service";
+
+import { Observable} from 'rxjs/Rx';
+import { Store } from '@ngrx/store'
+import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
+interface AppState {
+  documents: Document[],
+  activeDocument: Document
+}
 
 @Component({
   selector: 'searchbar',
@@ -9,11 +15,9 @@ import {DocumentNotificationService} from "../../services/document-notification.
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private documentService: DocumentNotificationService) {
+  constructor(private store: Store<AppState>) {
 
-    this.apiService = apiService
-
-    this.documentService = documentService
+    this.store = store.select(s => s.activeDocument)
 
   }
 
@@ -21,10 +25,9 @@ export class SearchComponent implements OnInit {
 
   doSearch(searchTerm: HTMLInputElement) {
 
-
-    this.apiService.search(searchTerm.value, this.searchResults)
+    //this.apiService.search(searchTerm.value, this.searchResults)
     console.log(`Search results: ${this.searchResults.length}`)
-    this.documentService.announceDocumentList(this.searchResults)
+    // this.documentService.announceDocumentList(this.searchResults)
     this.searchResults = []
 
   }

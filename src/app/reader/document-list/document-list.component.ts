@@ -1,7 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Document } from '../../shared/document.model'
-import { DocumentNotificationService } from '../../services/document-notification.service'
-import {ApiService} from "../../services/api.service";
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
@@ -29,12 +27,13 @@ export class DocumentListComponent implements OnInit {
 
   documentListTitle:string = 'Documents'
 
-  constructor( private store: Store<AppState>,
-    private apiService: ApiService) {
+  constructor( private store: Store<AppState>) {
 
-    this.documents = store.select(s => s.documents)
+    // this.documents = store.select(s => s.documents)
     this.activeDocument = store.select(s => s.activeDocument)
-    this.apiService = apiService
+
+    store.select(s => s.documents)
+      .subscribe( documents => this.documents = documents )
   }
 
   ngOnInit() {
@@ -46,10 +45,7 @@ export class DocumentListComponent implements OnInit {
 
     console.log(`clicked => ${document.title}`)
     this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
-
-
     this.activeDocument = document
-    //this.documentService.announceSelection(document)
 
     /*
     if (this.activeDocument.has_subdocuments) {

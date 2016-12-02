@@ -16,11 +16,11 @@ interface AppState {
 })
 export class DocumentComponent implements OnInit {
 
-  exampleDocument: Document = new Document ({
+  defaultDocument: Document = new Document ({
 
     id: '23',
 
-    title: '',
+    title: 'TEST',
 
     text: `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maximus hendrerit. Duis feugiat egestas dapibus. Aenean pharetra odio in sapien efficitur lobortis. Donec leo dui, efficitur eget nisi ut, pulvinar posuere justo. Morbi eget turpis sapien. Maecenas rutrum ut risus quis porta. Phasellus pharetra efficitur mattis. Cras cursus massa vitae mauris maximus euismod. Quisque ultricies dapibus magna, eu finibus felis mattis ac. Ut vestibulum ex et luctus pretium. Vestibulum egestas, augue volutpat posuere volutpat, diam tortor venenatis ante, at tempus leo mauris vitae lacus. Suspendisse a fermentum ipsum, et efficitur libero. Ut rutrum erat sem, id tempor lectus venenatis non.
@@ -38,7 +38,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
   constructor(private store: Store<AppState>) {
 
     store.select(s => s.activeDocument)
-      .subscribe( activeDocument => this.activeDocument = activeDocument)
+      .subscribe( activeDocument => this.activeDocument = activeDocument || this.defaultDocument)
 
   }
 
