@@ -1,4 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
+import { Constants } from './toplevel/constants'
+
 
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -78,7 +80,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     DocumentNotificationService,
-    QueryParser, ApiService, SigninService
+    QueryParser, ApiService, SigninService, Constants
   ],
   bootstrap: [AppComponent, [
     // DocumentService

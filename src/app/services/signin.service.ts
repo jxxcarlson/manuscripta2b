@@ -1,3 +1,5 @@
+import { Constants } from '../toplevel/constants'
+
 
 // Imports
 import { Injectable }     from '@angular/core';
@@ -9,28 +11,29 @@ import 'rxjs/add/operator/catch';
 
 import { Document, DocumentList } from '../shared/document.model'
 import { QueryParser } from './queryparser.service'
+import {constants} from "os";
 
 
 @Injectable()
 export class SigninService {
 
-  constructor (private http: Http) {
+  constructor (private http: Http, private constants : Constants) {
 
   }
 
-  // private apiUrl = 'http://xdoc-api.herokuapp.com/v1';
-  private apiUrl = 'http://localhost:2300/v1';
-
   getToken(username: string, password: string) : Observable<string>{
-    console.log(`getToken called with username ${username},calling ... `)
-    return this.http.get(`${this.apiUrl}/users/${username}?${password}`)
-      .map((res:Response) => alert(res.json))
+
+    var url = `${this.constants.apiRoot}/users/${username}?${password}`
+    console.log(`getToken called with url ${url}`)
+
+    return this.http.get(url)
+      .map((res:Response) => console.log(JSON.stringify(res.json)))
 
   }
 
  test() {
 
-   this.getToken('jc', 'logo4795')
+   this.getToken('jc', 'lobo4795')
  }
 
 }

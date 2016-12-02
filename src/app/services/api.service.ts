@@ -3,6 +3,7 @@
 import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable} from 'rxjs/Rx';
+import { Constants } from '../toplevel/constants'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -14,13 +15,14 @@ import { QueryParser } from './queryparser.service'
 @Injectable()
 export class ApiService {
   // Resolve HTTP using the constructor
-  constructor (private http: Http) {
+  constructor (private http: Http, private constants: Constants) {
 
     console.log('CONSTRUCT: ApiService')
   }
   // private instance variable to hold base url
-  // private apiUrl = 'http://localhost:2300/v1';
-  private apiUrl = 'http://xdoc-api.herokuapp.com/v1';
+  private apiUrl = this.constants.apiRoot
+  // private apiUrl = 'http://xdoc-api.herokuapp.com/v1';
+
 
   // Fetch document
   // getDocument(id: string) : Observable<Document>{
