@@ -1,17 +1,11 @@
 import { Constants } from '../toplevel/constants'
 
-
-// Imports
 import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
-import { Document, DocumentList } from '../shared/document.model'
-import { QueryParser } from './queryparser.service'
-import {constants} from "os";
 
 
 @Injectable()
@@ -24,16 +18,20 @@ export class SigninService {
   getToken(username: string, password: string) : Observable<string>{
 
     var url = `${this.constants.apiRoot}/users/${username}?${password}`
-    console.log(`getToken called with url ${url}`)
+
+    console.log(`Calling api server with url ${url}`)
 
     return this.http.get(url)
-      .map((res:Response) => console.log(JSON.stringify(res.json)))
+      .map((res:Response) => JSON.stringify(res.json()))
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 
   }
 
  test() {
 
    this.getToken('jc', 'lobo4795')
+     .subscribe( (x) => console.log(`Response: ${x}`))
+
  }
 
 }

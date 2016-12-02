@@ -19,13 +19,10 @@ export class ApiService {
 
     console.log('CONSTRUCT: ApiService')
   }
-  // private instance variable to hold base url
+
   private apiUrl = this.constants.apiRoot
-  // private apiUrl = 'http://xdoc-api.herokuapp.com/v1';
 
 
-  // Fetch document
-  // getDocument(id: string) : Observable<Document>{
   getDocument(id: string) : Observable<Document>{
     return this.http.get(`${this.apiUrl}/documents/${id}`)
       .map((res:Response) => new Document(res.json()['document']))
