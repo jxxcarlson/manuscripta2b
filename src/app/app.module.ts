@@ -12,11 +12,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './components/app/app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { DocumentComponent } from './components/document/document.component';
-import { ReaderComponent } from './components/reader/reader.component';
+import { AppComponent } from './toplevel/app/app.component';
+import { NavbarComponent } from './toplevel/navbar/navbar.component';
+import { FooterComponent } from './toplevel/footer/footer.component';
+import { DocumentComponent } from './reader/document/document.component';
+import { ReaderComponent } from './reader/reader/reader.component';
 
 import { HtmlPane } from './shared/htmlpane.component';
 import { MathJaxPane } from './shared/mathjaxpane.component';
@@ -28,10 +28,10 @@ import { QueryParser } from './services/queryparser.service';
 import { MathJaxDirective } from './directives/mathjax.directive';
 
 import { TextPageHeightDirective } from './directives/textpageheight.directive';
-import { DocumentListComponent } from './components/document-list/document-list.component';
-import { DocumentListItemComponent } from './components/document-list-item/document-list-item.component';
-import { SearchComponent } from './components/search/search.component';
-import { AboutComponent } from './about/about.component';
+import { DocumentListComponent } from './reader/document-list/document-list.component';
+import { DocumentListItemComponent } from './reader/document-list-item/document-list-item.component';
+import { SearchComponent } from './reader/search/search.component';
+import { AboutComponent } from './toplevel/about/about.component';
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
