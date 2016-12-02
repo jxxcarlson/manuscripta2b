@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/api.service'
-import {DocumentNotificationService} from "../shared/document-notification.service";
+import { ApiService } from '../../services/api.service'
+import {DocumentNotificationService} from "../../services/document-notification.service";
 
 @Component({
   selector: 'searchbar',

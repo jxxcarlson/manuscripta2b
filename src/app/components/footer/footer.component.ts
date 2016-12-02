@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Document } from '../shared/document.model'
-import { DocumentNotificationService } from '../shared/document-notification.service'
+import { Document } from '../../shared/document.model'
+import { DocumentNotificationService } from '../../services/document-notification.service'
 
 @Component({
   selector: 'footer',

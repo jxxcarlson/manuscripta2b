@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Document } from '../shared/document.model';
-import { ApiService } from '../shared/api.service'
+import { Document } from '../../shared/document.model';
+import { ApiService } from '../../services/api.service'
 
 @Component({
   selector: 'app-reader',

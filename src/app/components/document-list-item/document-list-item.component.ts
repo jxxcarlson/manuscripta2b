@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Document } from '../shared/document.model'
+import { Document } from '../../shared/document.model'
 
 @Component({
   selector: 'document-list-item',

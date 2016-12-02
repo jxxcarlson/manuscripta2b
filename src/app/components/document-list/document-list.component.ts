@@ -1,7 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Document } from '../shared/document.model'
-import { DocumentNotificationService } from '../shared/document-notification.service'
-import {ApiService} from "../shared/api.service";
+import { Document } from '../../shared/document.model'
+import { DocumentNotificationService } from '../../services/document-notification.service'
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'document-list',

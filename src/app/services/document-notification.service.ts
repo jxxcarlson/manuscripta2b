@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
-import { Document, DocumentList }  from './document.model';
+import { Document, DocumentList }  from '../shared/document.model';
 
 @Injectable()
 export class DocumentNotificationService {

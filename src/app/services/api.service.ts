@@ -7,7 +7,7 @@ import { Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Document, DocumentList } from './document.model'
+import { Document, DocumentList } from '../shared/document.model'
 import { QueryParser } from './queryparser.service'
 
 
