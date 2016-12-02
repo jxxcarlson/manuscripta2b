@@ -36,6 +36,7 @@ import { SearchComponent } from './reader/search/search.component';
 import { AboutComponent } from './toplevel/about/about.component';
 
 import { HomeComponent } from './toplevel/home/home.component';
+import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     AboutComponent,
     HomeComponent,
     EditorComponent,
-    ImagesComponent
+    ImagesComponent,
+    SearchScopeControlComponent
   ],
 
   imports: [
