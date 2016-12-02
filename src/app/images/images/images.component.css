@@ -1,0 +1,22 @@
+input[type=radio] {
+  display: none;
+}
+/* styling the spans adjacent to the radio inputs: */
+input[type=radio] + span {
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: 0 0.5em;
+}
+/* styling the span following the checked radio: */
+input[type=radio]:checked + span {
+  background-color: #ffa;
+}
+/* defining the height/width for the span-radio: */
+.radio1 {
+  width: 1.5em;
+  height: 1.5em;
+}
+input[type='radio'] {
+  transform: scale(2);
+}
