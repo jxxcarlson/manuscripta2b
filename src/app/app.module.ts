@@ -1,13 +1,17 @@
 import { RouterModule, Routes } from '@angular/router';
 import { Constants } from './toplevel/constants'
 
+import { StoreModule } from '@ngrx/store';
+import { documentsReducer } from './reducers/documents.reducer'
+import {DocumentService} from './services/document.service';
 
-import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreLogMonitorModule, useLogMonitor} from '@ngrx/store-log-monitor';
 
 import {provideStore} from '@ngrx/store';
-import {DocumentService} from './services/document.service';
+
+
+// StoreModule.provideStore( {'documents'})
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -76,18 +80,15 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    StoreModule.provideStore({ documents: documentsReducer })
   ],
   providers: [
     DocumentNotificationService,
-    QueryParser, ApiService, SigninService, Constants
+    QueryParser, ApiService, SigninService, Constants,
+    DocumentService
   ],
-  bootstrap: [AppComponent, [
-    // DocumentService
-  ]]
+  bootstrap: [AppComponent, [ ]]
 })
 export class AppModule { }
 
-
-// DocumentService, // The actions that consume our store
-// provideStore({documents}) // The store that defines our app state

@@ -1,9 +1,9 @@
 import {Document} from './document.model';
+import {User} from './user.model';
 
-export interface AppStore {
+export interface AppState{
 
-  apiToken: string // User obtains this by signing in
-
+  user: User
   documents: Document[]
   activeDocument: Document
 
