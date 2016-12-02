@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Document } from '../../shared/document.model'
-import { DocumentNotificationService } from '../../services/document-notification.service'
-import { ApiService } from '../../services/api.service'
+
+import { Observable} from 'rxjs/Rx';
+import { Store } from '@ngrx/store'
+import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
+interface AppState {
+  documents: Document[],
+  activeDocument: Document
+}
 
 @Component({
   selector: 'app-document',
@@ -27,21 +33,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
   parentId: string = '-1'
   parentTitle: string = '-'
   subdocuments: Document[] = []
-  documents: Document[] = []
+  documents: Observable<Document[]>
 
-  constructor(private documentService: DocumentNotificationService, private apiService: ApiService) {
+  constructor(private store: Store<AppState>) {
 
-    this.documentService = documentService
-    this.apiService = apiService
-
-    this.activeDocument = this.exampleDocument
-    documentService.announceSelection(this.exampleDocument)
-
-    documentService.documentAnnounced$.subscribe(
-      doc => {
-        this.activeDocument = doc;
-        console.log(`Active document udpated: ${doc.title}`)
-      });
+    store.select(s => s.activeDocument)
+      .subscribe( activeDocument => this.activeDocument = activeDocument)
 
   }
 
@@ -51,12 +48,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
 
     if (this.parentId != '-1') {
 
-      this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments, (d) => this.activeDocument = d)
+      //this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments, (d) => this.activeDocument = d)
 
-      this.documentService.announceDocumentList(this.subdocuments)
+      // this.documentService.announceDocumentList(this.subdocuments)
 
-      console.log(`### (2b) this.documents.length = ${this.documents.length}`)
-      this.documents = [];  this.subdocuments = []
+      // console.log(`### (2b) this.documents.length = ${this.documents.length}`)
+      // this.documents = [];  this.subdocuments = []
     }
 
 

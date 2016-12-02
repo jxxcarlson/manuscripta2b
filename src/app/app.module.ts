@@ -3,6 +3,7 @@ import { Constants } from './toplevel/constants'
 
 import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from './reducers/documents.reducer'
+import { activeDocumentReducer } from './reducers/activeDocument.reducer'
 import {DocumentService} from './services/document.service';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -84,7 +85,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.provideStore({ documents: documentsReducer })
+    StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],
   providers: [
     DocumentNotificationService,
