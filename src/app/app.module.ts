@@ -44,6 +44,7 @@ import { AboutComponent } from './toplevel/about/about.component';
 
 import { HomeComponent } from './toplevel/home/home.component';
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
+import { SettingsComponent } from './toplevel/settings/settings.component';
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
   { path: 'read', component: ReaderComponent },
   { path: 'edit', component: EditorComponent },
   { path: 'images', component: ImagesComponent },
-  { path: '', component: ReaderComponent }
+  { path: 'settings', component: SettingsComponent },
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
@@ -73,7 +75,8 @@ const appRoutes: Routes = [
     HomeComponent,
     EditorComponent,
     ImagesComponent,
-    SearchScopeControlComponent
+    SearchScopeControlComponent,
+    SettingsComponent
   ],
 
   imports: [

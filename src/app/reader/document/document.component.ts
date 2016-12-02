@@ -14,27 +14,12 @@ export class DocumentComponent implements OnInit {
 
     id: '23',
 
-    title: 'Welcome!',
+    title: '',
 
     text: `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maximus hendrerit. Duis feugiat egestas dapibus. Aenean pharetra odio in sapien efficitur lobortis. Donec leo dui, efficitur eget nisi ut, pulvinar posuere justo. Morbi eget turpis sapien. Maecenas rutrum ut risus quis porta. Phasellus pharetra efficitur mattis. Cras cursus massa vitae mauris maximus euismod. Quisque ultricies dapibus magna, eu finibus felis mattis ac. Ut vestibulum ex et luctus pretium. Vestibulum egestas, augue volutpat posuere volutpat, diam tortor venenatis ante, at tempus leo mauris vitae lacus. Suspendisse a fermentum ipsum, et efficitur libero. Ut rutrum erat sem, id tempor lectus venenatis non.
 `,
-    rendered_text: `<img src="http://psurl.s3.amazonaws.com/images/jc/bird-b4ba.jpeg" width="300" style="float:left; margin-right:15px; ">
-<p style="">Welcome to Manuscripta. With it, you can write ordinary text, place images, audio, and video — 
-even write mathematics.</p>
-
-<p style="margin-top:60px;">
-\\[
-  \\int_0^1 x^n dx = \\frac{1}{n+1}
-\\]
-</p>
-
-<p style="margin-top:4em;">To see more content, type (for example) &quot;harmonic&quot; or &quot;climate&quot;
-in the search box.</p>
-
-<p>This app is a rewrite (in progress) of <a href="http://www.manuscripta.io">Manuscripta.io</a> in
-Angular2.  Still in a primitive state, but we are working on it.</p>
-
+    rendered_text: `<img src="http://psurl.s3.amazonaws.com/images/jc/1920px-Great_Wave_off_Kanagawa2-fe2b.jpg" width="600" style="float:left; margin-right:15px; ">
 `
   })
 
