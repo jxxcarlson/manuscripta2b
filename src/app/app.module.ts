@@ -31,7 +31,6 @@ import { HtmlPane } from './shared/htmlpane.component';
 import { MathJaxPane } from './shared/mathjaxpane.component';
 import { TextPane } from './shared/textpane.component';
 
-import { ApiService } from './services/api.service';
 import { SigninService } from './services/signin.service'
 import { QueryParser } from './services/queryparser.service';
 import { MathJaxDirective } from './directives/mathjax.directive';
@@ -87,7 +86,7 @@ const appRoutes: Routes = [
     StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],
   providers: [
-    QueryParser, ApiService, SigninService, Constants,
+    QueryParser, SigninService, Constants,
     DocumentService
   ],
   bootstrap: [AppComponent, [ ]]
