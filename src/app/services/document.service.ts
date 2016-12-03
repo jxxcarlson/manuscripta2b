@@ -62,6 +62,21 @@ export class DocumentService {
       ])
   }
 
+  if (document.has_subdocuments) {
+
+
+
+}
+
+  getDocumentAndSubdocuments(id: number) {
+    this.http.get(`${this.apiRoot}/documents/${id}`)
+      .map(res => res.json())
+      .subscribe(payload =>  [
+        this.store.dispatch({type: IDENTITY, payload: payload['document']}),
+        this.store.dispatch({type: SET_DOCUMENTS, payload: payload.document.links.documents})
+      ])
+  }
+
   select(document) {
     if (document.rendered_content == undefined) {
 
