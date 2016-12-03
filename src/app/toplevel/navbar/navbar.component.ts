@@ -44,8 +44,8 @@ export class NavbarComponent implements OnInit {
 
   doIt() {
 
-  this.documentService.search('snell')
-  console.log('OK Boss, I got the document')
+  this.documentService.fetchById(1)
+
 }
 
   doIt1() {

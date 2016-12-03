@@ -36,9 +36,12 @@ export class DocumentService {
     this.store.dispatch({type: ADD_DOCUMENT, payload: document})
   }
 
-  fetchById(id: number): Document {
+  fetchById(id: number) {
 
-    return this.store.select( s => s.documents ).filter( obj => obj.id == id )[0]
+    // return this.store.select( s => s.documents ).filter( obj => obj.id == id )[0]
+    // return this.store.select( s => s.documents ).map( obj => typeof(obj))
+    // return this.store.select( s => s.documents ).find( obj => obj.id == id )
+    // return this.store.select(s => s.documents ).map((docs: Observable<Document>) => docs.find((doc: Document) => doc.id === id))
 
   }
 

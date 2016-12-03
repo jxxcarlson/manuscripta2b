@@ -45,21 +45,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
 
   loadParent() {
 
-    console.log(`LOAD ${this.parentId}: ${this.parentTitle}`)
-
     if (this.parentId != '-1') {
 
-      // this.documentService.select(document)
+      this.documentService.loadAndActivateDocument(this.parentId)
 
-      //this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments, (d) => this.activeDocument = d)
-
-      // this.documentService.announceDocumentList(this.subdocuments)
-
-      // console.log(`### (2b) this.documents.length = ${this.documents.length}`)
-      // this.documents = [];  this.subdocuments = []
     }
-
-
   }
 
   getParentTitle(): string {
