@@ -10,11 +10,7 @@ import {DocumentService} from './services/document.service';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreLogMonitorModule, useLogMonitor} from '@ngrx/store-log-monitor';
-
 import {provideStore} from '@ngrx/store';
-
-
-// StoreModule.provideStore( {'documents'})
 
 import { BrowserModule } from '@angular/platform-browser';
 

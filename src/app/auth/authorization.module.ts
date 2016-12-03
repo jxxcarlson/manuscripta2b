@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 
+// Internal to signin directory:
 import { SigninService } from './signin.service'
-import {SigninComponent} from "./signin/signin.component";
+import { SigninComponent } from "./signin/signin.component";
 
 @NgModule({
 
