@@ -36,6 +36,7 @@ export class DocumentService {
     this.store.dispatch({type: ADD_DOCUMENT, payload: document})
   }
 
+
   // Use document ID to get doc from the server, then append to document list
   getDocument(id: number) {
     this.http.get(`${this.apiRoot}/documents/${id}`)
@@ -43,7 +44,7 @@ export class DocumentService {
       .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
   }
 
-  ensureContentLoaded(document) {
+  select(document) {
     if (document.rendered_content == undefined) {
 
       this.http.get(`${this.apiRoot}/documents/${document.id}`)
@@ -52,7 +53,7 @@ export class DocumentService {
 
     } else {
 
-      this.store.dispatch({type: IDENTITY, payload: document]})
+      this.store.dispatch({type: IDENTITY, payload: document})
 
     }
 

@@ -21,8 +21,11 @@ interface AppState {
 })
 export class DocumentListComponent implements OnInit {
 
-  documents: Observable<Document[]>
-  activeDocument: Observable<Document>
+  //documents: Observable<Document[]>
+  //  activeDocument: Observable<Document>
+
+  documents: Document[]
+  activeDocument: Document
 
   subdocuments: Document[] = []
   parentId:string = '-1'
@@ -32,8 +35,6 @@ export class DocumentListComponent implements OnInit {
 
   constructor( private store: Store<AppState>, private documentService: DocumentService) {
 
-    // this.documents = store.select(s => s.documents)
-    // this.activeDocument = store.select(s => s.activeDocument)
     this.documentService = documentService
 
     store.select(s => s.documents)
@@ -51,8 +52,9 @@ export class DocumentListComponent implements OnInit {
 
 
     console.log(`clicked => ${document.title}`)
-    this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
-    //this.activeDocument = document
+    // this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
+    this.documentService.select(document)
+
 
 
 
@@ -83,7 +85,7 @@ export class DocumentListComponent implements OnInit {
 */
   }
 
-  isActive(document: Observable<Document>): boolean {
+  isActive(document): boolean {
 
     if ( document == undefined) { return false }
 
