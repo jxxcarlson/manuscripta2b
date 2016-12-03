@@ -12,16 +12,16 @@ export class DocumentListItemComponent implements OnInit {
   @Input() active: boolean
 
   // document_title = this.truncateString(document.title, 30)
-  document_title = document.title
+  // document_title = document.title
 
-  /**
+
   truncateString ( str: string, n: number, useWordBoundary: boolean = true ){
     var isTooLong = str.length > n,
       s_ = isTooLong ? str.substr(0,n-1) : str;
     s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
     return  isTooLong ? s_ + ' ...' : s_;
   };
-   **/
+
 
   constructor() { }
 

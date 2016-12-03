@@ -27,8 +27,8 @@ export class AppComponent {
     this.documentService = documentService
 
     // Set initinal list of documents
-    this.documentService.loadDocument(468)
-    this.documentService.loadAndActivateDocument(177)
+    this.documentService.loadAndActivateDocument(468)
+    this.documentService.loadDocument(177)
 
   }
 
