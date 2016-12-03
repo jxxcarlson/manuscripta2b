@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
 
   doIt1() {
 
-    this.documentService.getDocument(265)
+    this.documentService.loadDocument(265)
     console.log('OK Boss, I got the document')
   }
   doIt2() {

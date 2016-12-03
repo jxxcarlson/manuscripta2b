@@ -4,5 +4,6 @@ export interface Document {
   text: string;
   rendered_text: string;
   has_subdocuments: boolean;
+  documents: Document[]
 }
 

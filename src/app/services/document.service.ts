@@ -11,7 +11,7 @@ import {Constants} from '../toplevel/constants'
 import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
-import { IDENTITY} from '../reducers/activeDocument.reducer'
+import { IDENTITY } from '../reducers/activeDocument.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
@@ -38,10 +38,20 @@ export class DocumentService {
 
 
   // Use document ID to get doc from the server, then append to document list
-  getDocument(id: number) {
+  loadDocument(id: number) {
     this.http.get(`${this.apiRoot}/documents/${id}`)
       .map(res => res.json())
       .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
+  }
+
+  // Use document ID to get doc from the server, then append to document list
+  loadAndActivateDocument(id: number) {
+    this.http.get(`${this.apiRoot}/documents/${id}`)
+      .map(res => res.json())
+      .subscribe(payload =>  [
+        this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
+        this.store.dispatch({type: IDENTITY, payload: payload['document']}),
+      ])
   }
 
   select(document) {

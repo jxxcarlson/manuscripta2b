@@ -3,7 +3,7 @@ import { Document } from '../../shared/document.model'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { SELECT_DOCUMENT } from '../../reducers/activeDocument.reducer'
+import { SET_DOCUMENTS } from '../../reducers/documents.reducer'
 
 import { DocumentService } from '../../services/document.service'
 
@@ -20,9 +20,6 @@ interface AppState {
   styleUrls: ['./document-list.component.css']
 })
 export class DocumentListComponent implements OnInit {
-
-  //documents: Observable<Document[]>
-  //  activeDocument: Observable<Document>
 
   documents: Document[]
   activeDocument: Document
@@ -58,14 +55,17 @@ export class DocumentListComponent implements OnInit {
 
 
 
-    /*
-    if (this.activeDocument.has_subdocuments) {
-      console.log(`In document-list for ${this.activeDocument.title}, loading subdocuments`)
-      this.apiService.loadSubdocuments(this.activeDocument, this.subdocuments)
-      // this.documentService.announceDocumentList(this.subdocuments)
-      this.subdocuments = []
 
+    if (document.has_subdocuments) {
+      console.log(`In document-list for ${document.title}, loading subdocuments`)
+
+      this.store.dispatch({type: SET_DOCUMENTS, payload: document.links.documents})
+
+    } else {
+      console.log('no subdocuments')
     }
+
+    /*
 
     if (this.activeDocument.links != undefined && this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
 
@@ -87,9 +87,7 @@ export class DocumentListComponent implements OnInit {
 
   isActive(document): boolean {
 
-    if ( document == undefined) { return false }
-
-    if ( document == this.activeDocument) {
+    if ( document.id == this.activeDocument.id) {
 
       return true
 
