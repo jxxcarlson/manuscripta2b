@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
 interface AppState {
   documents: Document[],
   activeDocument: Document

@@ -7,7 +7,6 @@ import { SigninService } from '../../services/signin.service'
 
 // import { AppState } from '../../models/appstate.model'
 import { Store } from '@ngrx/store'
-import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
 
 interface AppState {
   documents: Document[]
@@ -38,21 +37,12 @@ export class NavbarComponent implements OnInit {
     this.documents = store.select(s => s.documents)
   }
 
-  loadInitialDocuments() {
-
-    this.store.dispatch({ type: INITIALIZE_DOCUMENTS, payload: this.initialDocuments }  )
-  }
 
   ngOnInit() {
   }
 
+  d
   doIt() {
-
-    this.loadInitialDocuments
-    console.log("I did it, boss, the documents are there.")
-  }
-
-  doIt1() {
 
     this.signinService.test()
     console.log("I did it, boss")

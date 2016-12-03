@@ -1,6 +1,7 @@
 // https://github.com/ngrx/store
 //
-export const INITIALIZE_DOCUMENTS =  'INITIALIZE_DOCUMENTS'
+export const SET_DOCUMENTS =  'SET_DOCUMENTS'
+export const ADD_DOCUMENT =  'ADD_DOCUMENT'
 
 import { Document } from '../models/document.model'
 import { ActionReducer, Action } from '@ngrx/store';
@@ -8,8 +9,11 @@ import { ActionReducer, Action } from '@ngrx/store';
 export const documentsReducer: ActionReducer<Document[]> =
   (state: Document[] = [], action: Action) => {
   switch (action.type) {
-    case INITIALIZE_DOCUMENTS:
+    case SET_DOCUMENTS:
       return action.payload
+    case ADD_DOCUMENT:
+      return [ ...state, action.payload]
+
     default:
       return state;
   }

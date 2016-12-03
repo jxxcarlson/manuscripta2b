@@ -3,7 +3,6 @@ import { Document } from '../../shared/document.model'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
 interface AppState {
   documents: Document[],
   activeDocument: Document

@@ -3,8 +3,12 @@ import { Document } from '../../shared/document.model'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { INITIALIZE_DOCUMENTS } from '../../reducers/documents.reducer'
+import { ADD_DOCUMENT } from '../../reducers/documents.reducer'
 import { SELECT_DOCUMENT } from '../../reducers/activeDocument.reducer'
+
+import { DocumentService } from '../../services/document.service'
+
+
 interface AppState {
   documents: Document[]
   activeDocument: Document
@@ -18,7 +22,7 @@ interface AppState {
 })
 export class DocumentListComponent implements OnInit {
 
-  @Input() documents: Observable<Document[]>
+  documents: Observable<Document[]>
   activeDocument: Observable<Document>
 
   subdocuments: Document[] = []
@@ -27,17 +31,17 @@ export class DocumentListComponent implements OnInit {
 
   documentListTitle:string = 'Documents'
 
-  constructor( private store: Store<AppState>) {
+  constructor( private store: Store<AppState>, private documentService: DocumentService) {
 
     // this.documents = store.select(s => s.documents)
     this.activeDocument = store.select(s => s.activeDocument)
+    this.documentService = documentService
 
     store.select(s => s.documents)
       .subscribe( documents => this.documents = documents )
   }
 
   ngOnInit() {
-
 
   }
 
