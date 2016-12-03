@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { RouterModule, Routes } from '@angular/router';
+import {routing} from './routes'
+
 import { Constants } from './toplevel/constants'
 
 import { StoreModule } from '@ngrx/store';
@@ -41,27 +42,21 @@ import { AboutComponent } from './toplevel/about/about.component';
 import { HomeComponent } from './toplevel/home/home.component';
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
 import { SettingsComponent } from './toplevel/settings/settings.component';
+
 import {AuthorizationModule} from "./auth/authorization.module";
+import {NavbarModule} from "./toplevel/navbar/navbar.module"
 import {HomeModule} from "./toplevel/home/home.module";
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
 //{ path: '**', component: PageNotFoundComponent }
 
-const appRoutes: Routes = [
-  { path: 'about', component: AboutComponent },
-  { path: 'home', component: HomeComponent},
-  { path: 'read', component: ReaderComponent },
-  { path: 'edit', component: EditorComponent },
-  { path: 'images', component: ImagesComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: '', component: HomeComponent }
-];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+
     FooterComponent,
     DocumentComponent,
     EditorComponent,
@@ -80,9 +75,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    routing,
     AuthorizationModule,
     HomeModule,
-    RouterModule.forRoot(appRoutes),
+    NavbarModule,
     StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],
   providers: [
