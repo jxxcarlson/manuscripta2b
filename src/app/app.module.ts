@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Constants } from './toplevel/constants'
 
-// import { AuthorizationModule } from './auth/authorization.module'
-
 import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from './reducers/documents.reducer'
 import { activeDocumentReducer } from './reducers/activeDocument.reducer'
@@ -48,7 +46,7 @@ import { HomeComponent } from './toplevel/home/home.component';
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
 import { SettingsComponent } from './toplevel/settings/settings.component';
 import {AuthorizationModule} from "./auth/authorization.module";
-import { SigninComponent } from './auth/signin/signin.component';
+import {HomeModule} from "./toplevel/home/home.module";
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
@@ -70,18 +68,16 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     DocumentComponent,
+    EditorComponent,
     ReaderComponent,
     HtmlPane, TextPane, MathJaxDirective, TextPageHeightDirective,
     DocumentListComponent, DocumentListItemComponent,
     MathJaxPane,
     SearchComponent,
     AboutComponent,
-    HomeComponent,
-    EditorComponent,
     ImagesComponent,
     SearchScopeControlComponent,
-    SettingsComponent,
-    SigninComponent
+    SettingsComponent
   ],
 
   imports: [
@@ -89,6 +85,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     AuthorizationModule,
+    HomeModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],

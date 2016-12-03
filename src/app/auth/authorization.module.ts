@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SigninService } from './signin.service'
+import {SigninComponent} from "./signin/signin.component";
 
 @NgModule({
 
   declarations: [
 
+    SigninComponent
   ],
 
   imports: [ ],
@@ -16,7 +18,10 @@ import { SigninService } from './signin.service'
 
   ],
 
-  exports: [ ]
+  exports: [
+
+    SigninComponent
+  ]
 
 })
 export class AuthorizationModule { }
