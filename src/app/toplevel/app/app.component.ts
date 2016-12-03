@@ -26,8 +26,10 @@ export class AppComponent {
 
     this.documentService = documentService
 
+    // Set initinal list of documents
     this.documentService.addDocument(this.constants.document1)
     this.documentService.addDocument(this.constants.document2)
+    this.documentService.getDocument(177)
 
   }
 

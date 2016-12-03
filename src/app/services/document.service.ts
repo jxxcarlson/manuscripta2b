@@ -28,25 +28,18 @@ export class DocumentService {
 
   apiRoot = this.constants.apiRoot
 
+  // Add existing document to document list
   addDocument(document) {
 
     this.store.dispatch({type: ADD_DOCUMENT, payload: document})
   }
 
-  loadDocument(id: number) {
+  // Use document ID to get doc from the server, then append to document list
+  getDocument(id: number) {
     this.http.get(`${this.apiRoot}/documents/${id}`)
       .map(res => res.json())
-      .map(payload => ({ type: 'ADD_DOCUMENT', payload: payload }))
-      .subscribe(action => this.store.dispatch(action));
+      .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
   }
 
-  /*
-  getDocument(id: number) {
-    this.http.get(`${BASE_URL}/documents/${id}`)
-      .map((res) => res.json())
-      .map(payload => ({ type: 'ADD_DOCUMENT', payload }))
-      .subscribe(action => this.store.dispatch(action));
-  }
-  */
 
 }

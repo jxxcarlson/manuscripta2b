@@ -7,6 +7,7 @@ import { SigninService } from '../../services/signin.service'
 
 // import { AppState } from '../../models/appstate.model'
 import { Store } from '@ngrx/store'
+import { DocumentService } from '../../services/document.service'
 
 interface AppState {
   documents: Document[]
@@ -31,18 +32,22 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private signinService: SigninService,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private documentService: DocumentService) {
 
     this.signinService = signinService
     this.documents = store.select(s => s.documents)
   }
 
-
   ngOnInit() {
   }
 
-  d
   doIt() {
+
+    this.documentService.getDocument(265)
+    console.log('OK Boss, I got the document')
+  }
+  doIt2() {
 
     this.signinService.test()
     console.log("I did it, boss")
