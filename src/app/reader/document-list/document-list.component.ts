@@ -47,27 +47,18 @@ export class DocumentListComponent implements OnInit {
 
   selectDocument(document) {
 
-
-    console.log(`clicked => ${document.title}`)
-    // this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
     this.documentService.select(document)
 
-
-
-
-
     if (document.has_subdocuments) {
-      console.log(`In document-list for ${document.title}, loading subdocuments`)
 
       this.store.dispatch({type: SET_DOCUMENTS, payload: document.links.documents})
 
-    } else {
-      console.log('no subdocuments')
     }
 
-    /*
 
-    if (this.activeDocument.links != undefined && this.activeDocument.links.parent != undefined && this.activeDocument.links.parent.id != undefined) {
+    if (this.activeDocument.links != undefined &&
+      this.activeDocument.links.parent != undefined &&
+      this.activeDocument.links.parent.id != undefined) {
 
       this.parentId = this.activeDocument.links.parent.id
       this.parentTitle = this.activeDocument.links.parent.title
@@ -79,10 +70,7 @@ export class DocumentListComponent implements OnInit {
 
     }
 
-    console.log(`Parent id of ${this.activeDocument.id} = ${this.parentId}`)
-    console.log(`Parent title of ${this.activeDocument.id} = ${this.parentTitle}`)
 
-*/
   }
 
   isActive(document): boolean {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Document } from '../../shared/document.model'
+import { DocumentService } from '../../services/document.service'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
@@ -34,7 +35,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
   subdocuments: Document[] = []
   documents: Observable<Document[]>
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private documentService: DocumentService ) {
 
     store.select(s => s.activeDocument)
       .subscribe( activeDocument => this.activeDocument = activeDocument || this.defaultDocument)
@@ -46,6 +48,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
     console.log(`LOAD ${this.parentId}: ${this.parentTitle}`)
 
     if (this.parentId != '-1') {
+
+      // this.documentService.select(document)
 
       //this.apiService.loadDocAndSubdocuments(this.parentId, this.subdocuments, (d) => this.activeDocument = d)
 

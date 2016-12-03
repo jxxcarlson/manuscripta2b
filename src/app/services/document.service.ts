@@ -36,6 +36,11 @@ export class DocumentService {
     this.store.dispatch({type: ADD_DOCUMENT, payload: document})
   }
 
+  fetchById(id: number): Document {
+
+    return this.store.select( s => s.documents ).filter( obj => obj.id == id )[0]
+
+  }
 
   // Use document ID to get doc from the server, then append to document list
   loadDocument(id: number) {
