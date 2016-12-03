@@ -8,8 +8,9 @@ import {AppState} from '../models/appstate.model';
 import {Document} from '../models/document.model';
 import {Constants} from '../toplevel/constants'
 
-import { ADD_DOCUMENT } from '../reducers/documents.reducer'
-import { SELECT_DOCUMENT } from '../reducers/activeDocument.reducer'
+import { QueryParser } from './queryparser.service'
+
+import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
@@ -41,5 +42,18 @@ export class DocumentService {
       .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
   }
 
+  // Query the database and replace the current document list
+  // with the results of the search
+  search (searchTerm: string): void {
+
+    console.log(`performSearch: ${searchTerm}`)
+    var qp: QueryParser = new QueryParser();
+    var apiQuery: string = qp.parse(searchTerm)
+
+    this.http.get(`${this.apiRoot}/documents?${apiQuery}`)
+      .map((res) => res.json())
+      .subscribe(payload =>  this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']}))
+
+  }
 
 }
