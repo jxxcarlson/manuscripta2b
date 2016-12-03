@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DocumentService } from '../../services/document.service'
 
-import { Observable} from 'rxjs/Rx';
-import { Store } from '@ngrx/store'
 interface AppState {
   documents: Document[],
   activeDocument: Document
@@ -14,24 +13,17 @@ interface AppState {
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) {
+  constructor(private documentService: DocumentService) {
 
-    this.store = store.select(s => s.activeDocument)
+    this.documentService = documentService
 
   }
-
-  searchResults = []
 
   doSearch(searchTerm: HTMLInputElement) {
 
-    //this.apiService.search(searchTerm.value, this.searchResults)
-    console.log(`Search results: ${this.searchResults.length}`)
-    // this.documentService.announceDocumentList(this.searchResults)
-    this.searchResults = []
+    this.documentService.search(searchTerm.value)
 
   }
-
-
 
   ngOnInit() {
 
