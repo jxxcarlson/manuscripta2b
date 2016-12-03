@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 // Internal to signin directory:
 import { SigninService } from './signin.service'
 import { SigninComponent } from "./signin/signin.component";
@@ -11,7 +14,13 @@ import { SigninComponent } from "./signin/signin.component";
     SigninComponent
   ],
 
-  imports: [ ],
+  imports: [
+
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+
+  ],
 
   providers: [
 
@@ -27,3 +36,4 @@ import { SigninComponent } from "./signin/signin.component";
 })
 export class AuthorizationModule { }
 
+// http://juristr.com/blog/2016/09/ng2-serialize-with-json-pipe/

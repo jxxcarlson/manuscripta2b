@@ -1,0 +1,48 @@
+input[type=text] {
+
+  display: inline-block;
+  position:relative;
+  left: 40px;
+  background-color: darkblue;
+  margin-bottom: 18px;
+  color: white;
+  height:2rem;
+
+}
+
+label {
+
+  display:  inline-block;
+  position:relative;
+  width:60px;
+  left: 0px;
+  margin-bottom: 18px;
+
+}
+
+input[type=button], input[type=text]
+{
+  border: 0;
+  border-radius:5px;
+  font-family: Sansation,Arial;
+}
+
+input[type=button]
+{
+  background-color: #1E1E1E;
+  color: #979797;
+  height: 24px;
+  width: 103px;
+  color: #bbbbbb;
+  text-transform:uppercase;
+  box-shadow:-1px 2px #6E6B6A inset;
+}
+
+.advice {
+
+  display: inline-block;
+  margin-left: 220px;
+  color: red;
+}
+
+/* http://stackoverflow.com/questions/7095895/style-input-elements-css  */
