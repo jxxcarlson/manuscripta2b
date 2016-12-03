@@ -5,6 +5,7 @@ import {routing} from '../../routes'
 
 // Internal to navbar directory:
 import { NavbarComponent } from './navbar.component'
+import {NavbarService} from "./navbar.service";
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import { NavbarComponent } from './navbar.component'
   ],
 
   providers: [
+
+    NavbarService
 
   ],
 

@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './toplevel/app/app.component';
-import { NavbarComponent } from './toplevel/navbar/navbar.component';
 import { FooterComponent } from './toplevel/footer/footer.component';
 import { DocumentComponent } from './reader/document/document.component';
 import { ReaderComponent } from './reader/reader/reader.component';
@@ -39,7 +38,6 @@ import { DocumentListItemComponent } from './reader/document-list-item/document-
 import { SearchComponent } from './reader/search/search.component';
 import { AboutComponent } from './toplevel/about/about.component';
 
-import { HomeComponent } from './toplevel/home/home.component';
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
 import { SettingsComponent } from './toplevel/settings/settings.component';
 

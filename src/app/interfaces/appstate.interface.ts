@@ -11,6 +11,6 @@ export interface AppState{
   activeDocument: Document
 
   defaultDocumentList: Document[]
-  tableOfContents: Document[]  // Array of subdocuments of activeDocument (can be empty)
+  tableOfContents: Document[]
 
 };

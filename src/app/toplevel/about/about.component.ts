@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UPDATE_NAV_STATE } from '../../reducers/uistate.reducer'
-
-import { Observable} from 'rxjs/Rx';
-import { Store } from '@ngrx/store'
-interface AppState {
-  documents: Document[],
-  activeDocument: Document
-}
-
+import {NavbarService} from '../navbar/navbar.service'
 
 @Component({
   selector: 'about',
@@ -16,12 +8,17 @@ interface AppState {
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private navbarService: NavbarService) {
+
+    this.navbarService = navbarService
+
+  }
 
   ngOnInit() {
 
     console.log('INIT: ABOUT')
-    this.store.dispatch({type: UPDATE_NAV_STATE, payload: {activeNavSection: 'about'}})
+
+    this.navbarService.updateUIState('about')
   }
 
 }
