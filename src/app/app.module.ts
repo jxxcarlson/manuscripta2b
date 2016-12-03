@@ -33,7 +33,6 @@ import { TextPane } from './shared/textpane.component';
 
 import { ApiService } from './services/api.service';
 import { SigninService } from './services/signin.service'
-import { DocumentNotificationService } from './services/document-notification.service';
 import { QueryParser } from './services/queryparser.service';
 import { MathJaxDirective } from './directives/mathjax.directive';
 
@@ -88,7 +87,6 @@ const appRoutes: Routes = [
     StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],
   providers: [
-    DocumentNotificationService,
     QueryParser, ApiService, SigninService, Constants,
     DocumentService
   ],

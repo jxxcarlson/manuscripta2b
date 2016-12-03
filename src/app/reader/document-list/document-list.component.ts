@@ -3,7 +3,6 @@ import { Document } from '../../shared/document.model'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { ADD_DOCUMENT } from '../../reducers/documents.reducer'
 import { SELECT_DOCUMENT } from '../../reducers/activeDocument.reducer'
 
 import { DocumentService } from '../../services/document.service'
@@ -34,11 +33,14 @@ export class DocumentListComponent implements OnInit {
   constructor( private store: Store<AppState>, private documentService: DocumentService) {
 
     // this.documents = store.select(s => s.documents)
-    this.activeDocument = store.select(s => s.activeDocument)
+    // this.activeDocument = store.select(s => s.activeDocument)
     this.documentService = documentService
 
     store.select(s => s.documents)
       .subscribe( documents => this.documents = documents )
+
+    store.select(s => s.activeDocument)
+      .subscribe( activeDocument => this.activeDocument = activeDocument )
   }
 
   ngOnInit() {
@@ -47,9 +49,12 @@ export class DocumentListComponent implements OnInit {
 
   selectDocument(document) {
 
+
     console.log(`clicked => ${document.title}`)
     this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
-    this.activeDocument = document
+    //this.activeDocument = document
+
+
 
     /*
     if (this.activeDocument.has_subdocuments) {

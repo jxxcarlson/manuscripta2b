@@ -2,6 +2,7 @@
 // https://github.com/ngrx/store
 //
 export const SELECT_DOCUMENT =  'SELECT_DOCUMENT'
+export const IDENTITY = 'IDENTITY'
 
 import { Document } from '../models/document.model'
 import { ActionReducer, Action } from '@ngrx/store';
@@ -10,6 +11,8 @@ export const activeDocumentReducer: ActionReducer<Document> = (state: any = [], 
   switch (action.type) {
     case SELECT_DOCUMENT:
       return action.payload;
+    case IDENTITY:
+      return action.payload
     default:
       return state;
   }
