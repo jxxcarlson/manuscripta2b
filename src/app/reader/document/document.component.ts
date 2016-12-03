@@ -47,7 +47,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum maxim
 
     if (this.parentId != '-1') {
 
-      this.documentService.getDocumentAndSubdocuments(this.parentId)
+      this.documentService.getDocumentAndSubdocuments(parseInt(this.parentId))
 
     }
   }

@@ -62,11 +62,6 @@ export class DocumentService {
       ])
   }
 
-  if (document.has_subdocuments) {
-
-
-
-}
 
   getDocumentAndSubdocuments(id: number) {
     this.http.get(`${this.apiRoot}/documents/${id}`)
