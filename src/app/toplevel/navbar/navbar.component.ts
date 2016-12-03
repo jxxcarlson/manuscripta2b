@@ -3,11 +3,11 @@ import { Observable} from 'rxjs/Rx';
 
 import { Document } from '../../models/document.model'
 
-import { SigninService } from '../../services/signin.service'
 
 // import { AppState } from '../../models/appstate.model'
 import { Store } from '@ngrx/store'
 import { DocumentService } from '../../services/document.service'
+import {SigninService} from "../../auth/signin.service";
 
 interface AppState {
   documents: Document[]
@@ -31,12 +31,12 @@ export class NavbarComponent implements OnInit {
   ]
 
 
-  constructor(private signinService: SigninService,
-              private store: Store<AppState>,
+  constructor(private store: Store<AppState>,
+              private signinService: SigninService,
               private documentService: DocumentService) {
 
-    this.signinService = signinService
     this.documents = store.select(s => s.documents)
+    this.signinService = signinService
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
 
   doIt() {
 
-  this.documentService.fetchById(1)
+  this.signinService.test()
 
 }
 

@@ -1,5 +1,9 @@
+import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { Constants } from './toplevel/constants'
+
+// import { AuthorizationModule } from './auth/authorization.module'
 
 import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from './reducers/documents.reducer'
@@ -15,7 +19,7 @@ import {provideStore} from '@ngrx/store';
 // StoreModule.provideStore( {'documents'})
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -31,7 +35,6 @@ import { HtmlPane } from './shared/htmlpane.component';
 import { MathJaxPane } from './shared/mathjaxpane.component';
 import { TextPane } from './shared/textpane.component';
 
-import { SigninService } from './services/signin.service'
 import { QueryParser } from './services/queryparser.service';
 import { MathJaxDirective } from './directives/mathjax.directive';
 
@@ -44,6 +47,8 @@ import { AboutComponent } from './toplevel/about/about.component';
 import { HomeComponent } from './toplevel/home/home.component';
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';
 import { SettingsComponent } from './toplevel/settings/settings.component';
+import {AuthorizationModule} from "./auth/authorization.module";
+import { SigninComponent } from './auth/signin/signin.component';
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
@@ -75,18 +80,20 @@ const appRoutes: Routes = [
     EditorComponent,
     ImagesComponent,
     SearchScopeControlComponent,
-    SettingsComponent
+    SettingsComponent,
+    SigninComponent
   ],
 
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AuthorizationModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
   ],
   providers: [
-    QueryParser, SigninService, Constants,
+    QueryParser, Constants,
     DocumentService
   ],
   bootstrap: [AppComponent, [ ]]
