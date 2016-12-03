@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Observable} from 'rxjs/Rx';
 
-import { Document } from '../../models/document.model'
+import { Document } from '../../interfaces/document.interface'
 
 
 // import { AppState } from '../../models/appstate.model'
@@ -42,21 +42,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+
   doIt() {
-
-  this.signinService.test()
-
-}
-
-  doIt1() {
 
     this.documentService.loadDocument(265)
     console.log('OK Boss, I got the document')
   }
-  doIt2() {
 
-    this.signinService.test()
-    console.log("I did it, boss")
-  }
 
 }

@@ -2,7 +2,7 @@ input[type=text] {
 
   display: inline-block;
   position:relative;
-  left: 40px;
+  left: 30px;
   background-color: darkblue;
   margin-bottom: 18px;
   color: white;
@@ -14,7 +14,7 @@ label {
 
   display:  inline-block;
   position:relative;
-  width:60px;
+  width:50px;
   left: 0px;
   margin-bottom: 18px;
 
@@ -38,10 +38,16 @@ input[type=button]
   box-shadow:-1px 2px #6E6B6A inset;
 }
 
-.advice {
+p {
 
-  display: inline-block;
-  margin-left: 220px;
+  margin-top: -15px;
+
+}
+
+small {
+
+  margin-top: -15px;
+  margin-bottom: 15px;
   color: red;
 }
 

@@ -1,5 +1,5 @@
-import {Document} from './document.model';
-import {User} from './user.model';
+import {Document} from './document.interface';
+import {User} from './user.interface';
 
 export interface AppState{
 

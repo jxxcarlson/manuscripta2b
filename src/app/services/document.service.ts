@@ -4,8 +4,8 @@ import {Store} from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
-import {AppState} from '../models/appstate.model';
-import {Document} from '../models/document.model';
+import {AppState} from '../interfaces/appstate.interface';
+import {Document} from '../interfaces/document.interface';
 import {Constants} from '../toplevel/constants'
 
 import { QueryParser } from './queryparser.service'

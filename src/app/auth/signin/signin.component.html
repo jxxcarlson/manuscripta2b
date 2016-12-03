@@ -3,27 +3,28 @@
 
 
 <div class="container">
-  <h3>Sign in</h3>
+  <h2>Sign in</h2>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
 
     <div class="form-group">
       <label for="">Username</label>
       <input type="text" class="form-control" formControlName="username">
-      <small class="advice" [hidden]="myForm.controls.username.valid || (myForm.controls.username.pristine && !submitted)" class="text-danger">
+      <p><small class="advice" [hidden]="myForm.controls.username.valid || (myForm.controls.username.pristine && !submitted)" class="text-danger">
         Username is required (minimum 5 characters).
-      </small>
+      </small></p>
       <!--<pre class="margin-20">{{ myForm.controls.name.errors | json }}</pre>-->
     </div>
 
+    <br>
     <div class="form-group">
       <label for="">Password</label>
       <input type="text" class="form-control" formControlName="password">
-      <small class="advice" [hidden]="myForm.controls.password.valid || (myForm.controls.password.pristine && !submitted)" class="text-danger">
+      <p><small class="advice" [hidden]="myForm.controls.password.valid || (myForm.controls.password.pristine && !submitted)" class="text-danger">
         Password is required (minimum 5 characters).
-      </small>
+    </small></p>
       <!--<pre class="margin-20">{{ myForm.controls.name.errors | json }}</pre>-->
     </div>
-
+<br>
     <button type="submit" class="btn btn-default">Submit</button>
 
 

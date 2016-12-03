@@ -50,7 +50,7 @@ export class SigninComponent implements OnInit {
     console.log('YAY!!')
     console.log(model, isValid);
     this.signinService.getToken(model.username, model.password)
-      .subscribe( (x) => console.log(`Response: ${x}`))
+    //  .subscribe( (x) => console.log(`Response: ${x}`))
   }
 
 }

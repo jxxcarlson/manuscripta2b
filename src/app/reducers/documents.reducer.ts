@@ -3,7 +3,7 @@
 export const SET_DOCUMENTS =  'SET_DOCUMENTS'
 export const ADD_DOCUMENT =  'ADD_DOCUMENT'
 
-import { Document } from '../models/document.model'
+import { Document } from '../interfaces/document.interface'
 import { ActionReducer, Action } from '@ngrx/store';
 
 export const documentsReducer: ActionReducer<Document[]> =
