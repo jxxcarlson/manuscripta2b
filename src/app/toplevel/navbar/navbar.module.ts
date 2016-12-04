@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import {routing} from '../../routes'
+import {AppRoutingModule} from '../../app-routing.module'
 
 
 // Internal to navbar directory:
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common'
 
   imports: [
 
-    routing,
+    AppRoutingModule,
     CommonModule // for async pipe
 
   ],

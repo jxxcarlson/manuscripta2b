@@ -1,5 +1,6 @@
+// https://angular.io/docs/ts/latest/guide/router.html#!#routing-module
 
-
+import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './toplevel/about/about.component'
@@ -19,4 +20,12 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes)
+@NgModule({
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class AppRoutingModule {}

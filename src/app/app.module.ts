@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import {routing} from './routes'
+import {AppRoutingModule} from './app-routing.module'
 
 import { Constants } from './toplevel/constants'
 
@@ -73,7 +73,7 @@ import {HomeModule} from "./toplevel/home/home.module";
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing,
+    AppRoutingModule,
     AuthorizationModule,
     HomeModule,
     NavbarModule,
