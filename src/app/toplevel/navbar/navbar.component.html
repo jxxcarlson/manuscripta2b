@@ -15,7 +15,7 @@
         <span class="nav-item"><a [routerLink]="['edit']">Compose</a></span>
         <span class="nav-item"><a [routerLink]="['images']">Media</a></span>
         <button style="background-color: darkred; color: white; border: none; height: 25px; margin-bottom: 8px; margin-left: 20px; padding-left:10px; padding-right:14px;" (click)="doIt()">Test</button>
-        <span class="" style="color:white; margin-left:50px;">  NS = {{navState$.activeNavSection}} </span>
+        <span class="" style="color:white; margin-left:50px;">  NS = [{{ navState$.activeNavSection | async}}] </span>
       </div>
 
       <div style="display: inline-block; float:right; margin-right:40px;padding-top:8px;">
@@ -30,3 +30,5 @@
     </div>
   </div>
 </div>
+
+<!-- {navState$.activeNavSection | async} -->

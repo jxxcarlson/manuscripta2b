@@ -6,6 +6,7 @@ import {routing} from '../../routes'
 // Internal to navbar directory:
 import { NavbarComponent } from './navbar.component'
 import {NavbarService} from "./navbar.service";
+import { CommonModule } from '@angular/common'
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {NavbarService} from "./navbar.service";
 
   imports: [
 
-    routing
+    routing,
+    CommonModule // for async pipe
 
   ],
 

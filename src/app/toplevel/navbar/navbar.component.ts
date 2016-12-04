@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Observable} from 'rxjs/Rx';
 import {NavbarService} from './navbar.service'
 
+
 import { AppState } from '../../interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
 import { UIState } from '../../interfaces/uistate.interface';
@@ -17,11 +18,15 @@ export class NavbarComponent implements OnInit {
 
    navState$: Observable<UIState>
 
-  constructor(private navbarService: NavbarService) {
+  constructor(private navbarService: NavbarService,
+              private store: Store<AppState>) {
 
-    this.navState$ = this.navbarService.navState$
+    // this.navState$ = this.navbarService.navState$
 
-    // store.select(s => s.uistate).subscribe(x => [console.log(JSON.stringify(x)), this.uistate = x ])
+    // store.select(s => s.uistate).subscribe(x => this.navState$ = x)
+
+    this.navState$ = store.select(s => s.uistate)
+
 
   }
 
