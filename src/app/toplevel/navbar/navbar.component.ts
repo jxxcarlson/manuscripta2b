@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Observable} from 'rxjs/Rx';
 import {NavbarService} from './navbar.service'
 import {DocumentService} from '../../services/document.service'
+import {Router} from '@angular/router';
 
 
 import { AppState } from '../../interfaces/appstate.interface';
@@ -21,7 +22,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(private navbarService: NavbarService,
               private documentService: DocumentService,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private router: Router
+  ) {
 
     // this.navState$ = this.navbarService.navState$
 
@@ -35,6 +38,9 @@ export class NavbarComponent implements OnInit {
   getRandomDocuments() {
 
     this.documentService.search('random=10')
+    this.router.navigateByUrl('/read');
+    console.log('Tried navigate to READ')
+    // this.router.navigateByUrl("/read", { skipLocationChange: true });
   }
 
   ngOnInit() {  }

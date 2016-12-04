@@ -35,6 +35,13 @@ export class QueryParser {
 
     var apiQuery
 
+    var regexNumber = /^[1-9][0-9]*$/
+
+    if (regexNumber.test(userQuery) ) {
+
+      return `id=${userQuery}`
+    }
+
     if ((standardSearchTerm == undefined) || (standardSearchTerm == '')) {
 
       apiQuery = bareSearchTerm

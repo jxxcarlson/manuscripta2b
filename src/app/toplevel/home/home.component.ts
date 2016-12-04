@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SigninComponent } from '../../auth/signin/signin.component'
 import {NavbarService} from '../navbar/navbar.service'
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

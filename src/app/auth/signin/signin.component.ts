@@ -33,7 +33,7 @@ export class SigninComponent implements OnInit {
 
     // Update single value
     (<FormControl>this.myForm.controls['username'])
-      .setValue('John', { onlySelf: true });
+      .setValue('', { onlySelf: true });
 
   }
 
@@ -47,8 +47,6 @@ export class SigninComponent implements OnInit {
 
   save(model: User, isValid: boolean) {
     this.submitted = true;
-    console.log('YAY!!')
-    console.log(model, isValid);
     this.signinService.getToken(model.username, model.password)
     //  .subscribe( (x) => console.log(`Response: ${x}`))
   }
