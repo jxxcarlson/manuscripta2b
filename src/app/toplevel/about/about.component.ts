@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavbarService} from '../navbar/navbar.service'
 
+
 @Component({
   selector: 'about',
   templateUrl: './about.component.html',
@@ -15,8 +16,6 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log('INIT: ABOUT')
 
     this.navbarService.updateUIState('about')
   }
