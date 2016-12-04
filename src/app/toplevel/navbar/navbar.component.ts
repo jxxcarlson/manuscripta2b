@@ -1,9 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { Observable} from 'rxjs/Rx';
+import {NavbarService} from './navbar.service'
 
 import { AppState } from '../../interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
 import { UIState } from '../../interfaces/uistate.interface';
+
+import { UIStateReducer, initialState } from '../../reducers/uistate.reducer'
 
 @Component({
   selector: 'navbar',
@@ -12,17 +15,13 @@ import { UIState } from '../../interfaces/uistate.interface';
 })
 export class NavbarComponent implements OnInit {
 
-  uistate: UIState
+   navState$: Observable<UIState>
 
+  constructor(private navbarService: NavbarService) {
 
-  constructor(private store: Store<AppState>) {
+    this.navState$ = this.navbarService.navState$
 
-    // store.select(s => s.uistate).subscribe(uistate => this.navState = uistate.activeNavSection)
-    // store.select(s => s.uistate).subscribe(uistate => console.log(`ANS: ${uistate.activeNavSection}`)
-    // store.select(s => s.uistate).subscribe(uistate => console.log(`ANS`))
-
-    //this.reporter = store.select(s => s.uistate)
-    store.select(s => s.uistate).subscribe(uistate => this.uistate = uistate)
+    // store.select(s => s.uistate).subscribe(x => [console.log(JSON.stringify(x)), this.uistate = x ])
 
   }
 

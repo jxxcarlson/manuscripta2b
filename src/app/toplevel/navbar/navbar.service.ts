@@ -25,10 +25,13 @@ export interface AppState{
 
 export class NavbarService {
 
+  navState$: Observable<UIState>
+
   constructor(private store: Store<AppState>) {
 
     // this.store =   store.select(s => s.uistate) ;
     this.store =   store
+    this.navState$ = this.store.select( s => s.uistate )
 
   }
 

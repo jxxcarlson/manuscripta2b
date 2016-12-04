@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
 @Component({
   selector: 'app-images',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navbarService: NavbarService) {
+
+    this.navbarService = navbarService
+
+  }
 
   ngOnInit() {
+
+    this.navbarService.updateUIState('media')
+
   }
 
 }
