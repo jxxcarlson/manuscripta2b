@@ -1,10 +1,10 @@
-/**
-.document-list.container {
 
-  margin-top:1rem;
+.document-list {
+
+  background-color: #efefef; padding-left:10px; margin-right:27px;
 
 }
-**/
+
 
 
 ul {
