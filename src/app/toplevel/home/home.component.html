@@ -23,7 +23,8 @@
     Angular2 + ngrx.  Still in a primitive state, but we are working on it.</p>
   -->
 
-
-  <signin></signin>
+  <p style="font-size:1.5em;" [hidden]="!(user$.signedIn)">Logged in as {{ username$ }}</p>
+  <button [hidden]="!(user$.signedIn)" (click)="signOut()">Sign out</button>
+  <signin [hidden]="user$.signedIn"></signin>
 
 </div>

@@ -3,12 +3,19 @@ import { Constants } from '../toplevel/constants'
 import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Store} from '@ngrx/store';
-import {User} from '../../models/user.model'
+// import {User} from '../../models/user.model'
 
 interface AppState {
   documents: Document[],
   activeDocument: Document
   user: User
+}
+
+interface User {
+  id: number
+  username: string
+  token: string
+  signedIn: boolean
 }
 
 import 'rxjs/add/operator/map';
@@ -26,7 +33,7 @@ export class SigninService {
 
   }
 
-  getToken(username: string, password: string) {
+  signin(username: string, password: string) {
 
     var url = `${this.constants.apiRoot}/users/${username}?${password}`
 
@@ -35,10 +42,19 @@ export class SigninService {
       .subscribe(payload => [
           this.store.dispatch({
             type: AUTHORIZE_USER,
-            payload: { username: username, id: payload.user_id, token: payload.token }
+            payload: { username: username, id: payload.user_id, token: payload.token, signedIn: payload.token != null }
           })
         ]
       )
+
+
+  }
+
+  signout() {
+
+    var nullUser: User = {id: -1, username: 'nobody', token: '', signedIn: false }
+
+    this.store.dispatch({type: AUTHORIZE_USER, payload: nullUser})
   }
 
 

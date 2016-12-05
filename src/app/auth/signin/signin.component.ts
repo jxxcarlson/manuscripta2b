@@ -47,7 +47,7 @@ export class SigninComponent implements OnInit {
 
   save(model: User, isValid: boolean) {
     this.submitted = true;
-    this.signinService.getToken(model.username, model.password)
+    this.signinService.signin(model.username, model.password)
     //  .subscribe( (x) => console.log(`Response: ${x}`))
   }
 

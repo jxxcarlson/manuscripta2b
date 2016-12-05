@@ -1,11 +1,10 @@
-input[type=text] {
+input[type=text], input[type=password] {
 
   display: inline-block;
   position:relative;
   left: 30px;
-  background-color: darkblue;
+  background-color: #eee;
   margin-bottom: 18px;
-  color: white;
   height:2rem;
 
 }
@@ -20,7 +19,7 @@ label {
 
 }
 
-input[type=button], input[type=text]
+input[type=button], input[type=text], , input[type=password]
 {
   border: 0;
   border-radius:5px;
