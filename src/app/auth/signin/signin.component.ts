@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../user.interface'
+import { AppState } from '../../interfaces/appstate.interface';
 import { SigninService } from '../signin.service'
+import { Observable} from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'signin',
@@ -15,12 +19,33 @@ export class SigninComponent implements OnInit {
   public submitted: boolean;
   public events: any[] = [];
 
-  constructor(private _fb: FormBuilder, private signinService: SigninService) {
+  username$: Observable<string>
+  user$: Observable<User>
+
+
+  constructor(private _fb: FormBuilder,
+              private signinService: SigninService,
+              private userStore: Store<AppState>
+  ) {
 
     this.signinService = signinService
   }
 
+  signOut() {
+
+    this.signinService.signout()
+  }
+
+
   ngOnInit() {
+
+    this.userStore
+      .select('user')
+      .subscribe((val: Observable<User>)=> [
+        this.user$ = val,
+        this.username$ = val['username'],
+        console.log(`userState changed: ${JSON.stringify(this.user$)}`)
+      ])
 
     this.myForm = this._fb.group({
       username: ['', [<any>Validators.required, <any>Validators.minLength(5)]],

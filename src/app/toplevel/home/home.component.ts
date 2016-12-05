@@ -5,7 +5,6 @@ import { AppState } from '../../interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
 import { User } from '../../interfaces/user.interface'
 import { Observable} from 'rxjs/Rx';
-import {Pipe} from 'angular2/core';
 import {SigninService} from "../../auth/signin.service";
 
 
@@ -16,7 +15,7 @@ import {SigninService} from "../../auth/signin.service";
 })
 export class HomeComponent implements OnInit {
 
-  username$: Observable<string>
+ // username$: Observable<string>
   user$: Observable<User>
 
   constructor(private navbarService: NavbarService,
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
       .select('user')
       .subscribe((val: Observable<User>)=> [
         this.user$ = val,
-        this.username$ = val['username'],
         console.log(`userState changed: ${JSON.stringify(this.user$)}`)
       ])
   }
