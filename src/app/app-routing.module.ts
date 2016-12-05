@@ -1,4 +1,5 @@
 // https://angular.io/docs/ts/latest/guide/router.html#!#routing-module
+// https://angular.io/docs/ts/latest/guide/router.html
 
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

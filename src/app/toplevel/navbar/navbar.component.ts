@@ -9,7 +9,7 @@ import { AppState } from '../../interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
 import { UIState } from '../../interfaces/uistate.interface';
 
-import { UIStateReducer, initialState } from '../../reducers/uistate.reducer'
+import { uistateReducer, initialState } from '../../reducers/uistate.reducer'
 
 @Component({
   selector: 'navbar',
@@ -26,11 +26,11 @@ export class NavbarComponent implements OnInit {
               private router: Router
   ) {
 
-    // this.navState$ = this.navbarService.navState$
+    this.navState$ = this.navbarService.navState$
 
     // store.select(s => s.uistate).subscribe(x => this.navState$ = x)
 
-    this.navState$ = store.select(s => s.uistate)
+    // this.navState$ = store.select(s => s.uistate).subscribe(x => x)
 
 
   }
@@ -39,8 +39,6 @@ export class NavbarComponent implements OnInit {
 
     this.documentService.search('random=10')
     this.router.navigateByUrl('/read');
-    console.log('Tried navigate to READ')
-    // this.router.navigateByUrl("/read", { skipLocationChange: true });
   }
 
   ngOnInit() {  }
@@ -49,7 +47,7 @@ export class NavbarComponent implements OnInit {
     doIt() {
 
       this.documentService.search('random=10')
-    console.log('OK Boss, I got the document')
+      console.log('OK Boss, I got the document')
   }
 
 

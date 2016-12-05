@@ -25,6 +25,7 @@ export class DocumentService {
               private constants : Constants) {
 
     this.documents =   store.select(s => s.documents) ;
+    console.log(`CONSTRUCT: DOCUMENT_SERVICE`)
 
   }
 

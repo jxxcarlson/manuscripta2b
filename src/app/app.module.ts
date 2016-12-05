@@ -7,6 +7,10 @@ import { Constants } from './toplevel/constants'
 import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from './reducers/documents.reducer'
 import { activeDocumentReducer } from './reducers/activeDocument.reducer'
+import { uistateReducer } from './reducers/uistate.reducer'
+import { userReducer } from './reducers/user.reducer'
+
+
 import {DocumentService} from './services/document.service';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -77,7 +81,12 @@ import {HomeModule} from "./toplevel/home/home.module";
     AuthorizationModule,
     HomeModule,
     NavbarModule,
-    StoreModule.provideStore({ documents: documentsReducer, activeDocument: activeDocumentReducer })
+    StoreModule.provideStore({
+      documents: documentsReducer,
+      activeDocument: activeDocumentReducer,
+      user: userReducer,
+      uistate: uistateReducer
+    })
   ],
   providers: [
     QueryParser, Constants,

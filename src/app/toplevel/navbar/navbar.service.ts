@@ -27,18 +27,22 @@ export class NavbarService {
 
   navState$: Observable<UIState>
 
-  constructor(private store: Store<AppState>) {
+  constructor( private navStore: Store<UIState>) {
 
-    // this.store =   store.select(s => s.uistate) ;
-    this.store =   store
-    this.navState$ = this.store.select( s => s.uistate )
+    console.log(`CONSTRUCT: NAVBAR_SERVICE`)
+
+    this.navStore = navStore // .select(s => s.activeNavSection)
+
+    const subscriber = this.navStore.select('uistate')
+      .subscribe(val =>  console.log(`VALUE FROM NAV STORE: ${JSON.stringify(val)}`)
+      );
 
   }
 
   updateUIState(signal: string) {
 
     console.log(`updateUIState sends signal ${signal}`)
-    this.store.dispatch({type: UPDATE_NAV_STATE, payload: {activeNavSection: signal}})
+    this.navStore.dispatch({type: UPDATE_NAV_STATE, payload: {activeNavSection: signal}})
   }
 
 

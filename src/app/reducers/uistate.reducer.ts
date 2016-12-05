@@ -11,7 +11,7 @@ export const initialState: UIState = {
   searchScope: 'mydocs'
 }
 
-export const UIStateReducer: ActionReducer<UIState> =
+export const uistateReducer: ActionReducer<UIState> =
   (state: UIState = initialState, action: Action) => {
     switch (action.type) {
       case UPDATE_NAV_STATE:
