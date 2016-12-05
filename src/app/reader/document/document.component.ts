@@ -69,6 +69,8 @@ export class DocumentComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // this.navbarService.updateUIState('read')
   }
 
 

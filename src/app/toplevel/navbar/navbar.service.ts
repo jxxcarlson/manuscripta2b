@@ -26,6 +26,7 @@ export interface AppState{
 export class NavbarService {
 
   navState$: Observable<UIState>
+  activeNavSection$: Observable<string>
 
   constructor( private navStore: Store<UIState>) {
 
@@ -33,9 +34,10 @@ export class NavbarService {
 
     this.navStore = navStore // .select(s => s.activeNavSection)
 
+    /*
     const subscriber = this.navStore.select('uistate')
-      .subscribe(val =>  console.log(`VALUE FROM NAV STORE: ${JSON.stringify(val)}`)
-      );
+      .subscribe(val =>  [ console.log(`NAV STATE: ${JSON.stringify(val)}`)]);
+    */
 
   }
 

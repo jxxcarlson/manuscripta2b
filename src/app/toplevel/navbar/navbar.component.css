@@ -2,12 +2,12 @@
 
   margin-left: 2rem;
   padding-botom: 8px;
-  background-colr: black;
+  background-color: black;
   color: white;
 }
 
 .mybutton {
-  background-color: cornflowerblue; color: white;
+  background-color: #444; color: white;
   border: none; height: 25px;
   margin-bottom: 8px; margin-left: 20px;
   padding-left:10px; padding-right:14px;

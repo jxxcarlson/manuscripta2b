@@ -19,29 +19,55 @@ import { uistateReducer, initialState } from '../../reducers/uistate.reducer'
 export class NavbarComponent implements OnInit {
 
    navState$: Observable<UIState>
+   activeNavSection$: Observable<string>
 
   constructor(private navbarService: NavbarService,
               private documentService: DocumentService,
-              private store: Store<AppState>,
+              private navStore: Store<AppState>,
               private router: Router
   ) {
 
     this.navState$ = this.navbarService.navState$
+    this.activeNavSection$ = this.navbarService.activeNavSection$
 
-    // store.select(s => s.uistate).subscribe(x => this.navState$ = x)
 
-    // this.navState$ = store.select(s => s.uistate).subscribe(x => x)
 
+
+  }
+
+  textColor(target: string, active: string): string {
+
+     if (target == active) {
+
+       return 'red'
+
+     } else {
+
+       return 'white'
+     }
 
   }
 
   getRandomDocuments() {
 
+     console.log(`GET RANDOM DOCUMENT`)
+
     this.documentService.search('random=10')
-    this.router.navigateByUrl('/read');
+    this.router.navigateByUrl('/read', { skipLocationChange: false });
+
+    // this.navbarService.updateUIState('read')
   }
 
-  ngOnInit() {  }
+  ngOnInit() {
+
+    this.navStore
+      .select('uistate')
+      .subscribe((val: Observable<UIState>)=> [
+        this.navState$ = val,
+        this.activeNavSection$ = val['activeNavSection'],
+        console.log(`navState changed: ${JSON.stringify(this.navState$)}`)
+      ])
+  }
 
 
     doIt() {
