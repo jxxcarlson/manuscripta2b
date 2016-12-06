@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Document } from '../../shared/document.model'
-import { TextPageHeight } from '../../directives/textpageheight.directive'
+import { TextPageHeightDirective } from '../../directives/textpageheight.directive'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
