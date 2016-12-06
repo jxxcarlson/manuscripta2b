@@ -26,7 +26,6 @@ import { AppComponent } from './toplevel/app/app.component';
 import { FooterComponent } from './toplevel/footer/footer.component';
 import { DocumentComponent } from './reader/document/document.component';
 import { ReaderComponent } from './reader/reader/reader.component';
-import { EditorComponent } from './editor/editor/editor.component';
 import { ImagesComponent } from './images/images/images.component';
 
 import { HtmlPane } from './shared/htmlpane.component';
@@ -48,6 +47,7 @@ import { SettingsComponent } from './toplevel/settings/settings.component';
 import {AuthorizationModule} from "./auth/authorization.module";
 import {NavbarModule} from "./toplevel/navbar/navbar.module"
 import {HomeModule} from "./toplevel/home/home.module";
+import {EditorModule} from "./editor/editor.module";
 
 
 //{ path: 'hero/:id', component: HeroDetailComponent },
@@ -61,7 +61,6 @@ import {HomeModule} from "./toplevel/home/home.module";
 
     FooterComponent,
     DocumentComponent,
-    EditorComponent,
     ReaderComponent,
     HtmlPane, TextPane, MathJaxDirective, TextPageHeightDirective,
     DocumentListComponent, DocumentListItemComponent,
@@ -81,6 +80,7 @@ import {HomeModule} from "./toplevel/home/home.module";
     AuthorizationModule,
     HomeModule,
     NavbarModule,
+    EditorModule,
     StoreModule.provideStore({
       documents: documentsReducer,
       activeDocument: activeDocumentReducer,
