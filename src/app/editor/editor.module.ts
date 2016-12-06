@@ -10,6 +10,8 @@ import {DocumentService} from '../services/document.service'
 import {DocumentDisplayModule} from '../reader/document/document_display.module'
 import {DocumentListModule} from '../reader/document-list/document-list.module'
 import {TextHelpersModule} from '../directives/text_helpers.module'
+import {SearchModule} from '../search/search.module'
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import {TextHelpersModule} from '../directives/text_helpers.module'
     CommonModule, // for async pipe
     DocumentDisplayModule,
     DocumentListModule,
-    TextHelpersModule
+    TextHelpersModule,
+    SearchModule
 
   ],
 

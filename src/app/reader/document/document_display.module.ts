@@ -48,14 +48,4 @@ export class DocumentDisplayModule {}
 })
  export class DocumentDisplayModule {}
 
- metadata_resolver.js:489Uncaught Error:
- Type TextPageHeightDirective is part of
- the declarations of 2 modules:
- DocumentDisplayModule and DocumentListModule!
- Please consider moving TextPageHeightDirective
- to a higher module that imports DocumentDisplayModule
- and DocumentListModule. You can also create a new
- NgModule that exports and includes TextPageHeightDirective
- then import that NgModule in DocumentDisplayModule and DocumentListModule.(…)
-
  **/
