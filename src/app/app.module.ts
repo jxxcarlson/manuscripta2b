@@ -28,7 +28,7 @@ import { ImagesComponent } from './images/images/images.component';
 
 import { QueryParser } from './services/queryparser.service';
 
-import { SearchComponent } from './reader/search/search.component';
+import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './toplevel/about/about.component';
 
 import { SearchScopeControlComponent } from './reader/search-scope-control2/search-scope-control.component';

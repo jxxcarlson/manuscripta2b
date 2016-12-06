@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentService } from '../../services/document.service'
+import { DocumentService } from '../services/document.service'
 
 interface AppState {
   documents: Document[],
