@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SigninComponent } from '../../auth/signin/signin.component'
-import {NavbarService} from '../navbar/navbar.service'
+import { NavbarService } from '../navbar/navbar.service'
 import { AppState } from '../../interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
 import { User } from '../../interfaces/user.interface'
 import { Observable} from 'rxjs/Rx';
-import {SigninService} from "../../auth/signin.service";
 
 
 @Component({
@@ -15,22 +13,14 @@ import {SigninService} from "../../auth/signin.service";
 })
 export class HomeComponent implements OnInit {
 
- // username$: Observable<string>
   user$: Observable<User>
 
   constructor(private navbarService: NavbarService,
-              private userStore: Store<AppState>,
-              private signinService: SigninService) {
+              private userStore: Store<AppState>) {
 
     this.navbarService = navbarService
     this.userStore = userStore
-    this.signinService = signinService
 
-  }
-
-  signOut() {
-
-    this.signinService.signout()
   }
 
   ngOnInit() {
