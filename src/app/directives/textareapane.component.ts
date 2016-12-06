@@ -2,15 +2,16 @@ import { Component, Input } from '@angular/core';
 import { Document } from '../shared/document.model';
 
 @Component({
-  selector: 'text-pane',
-  template: `<div class="source-text">{{document.text}}</div>`,
+  selector: 'textarea-pane',
+  template: `<textarea class="rendered-document">{{document.text}}</textarea>`,
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);
+    width:300px;
     overflow: scroll;
     white-space: pre-line;
 }`]
 })
-export class TextPane {
+export class TextAreaPane {
   @Input() document:Document;
 }
