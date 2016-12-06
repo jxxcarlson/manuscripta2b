@@ -18,7 +18,7 @@ export class DocumentListItemComponent implements OnInit {
   truncateString ( str: string, n: number, useWordBoundary: boolean = true ){
     var isTooLong = str.length > n,
       s_ = isTooLong ? str.substr(0,n-1) : str;
-    s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+      s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
     return  isTooLong ? s_ + ' ...' : s_;
   };
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Document } from './document.model';
+import { Document } from '../shared/document.model';
 
 @Component({
   selector: 'text-pane',

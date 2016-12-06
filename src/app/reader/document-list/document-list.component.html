@@ -1,16 +1,21 @@
 <div class="document-list container">
   <h1> {{documentListTitle}}</h1>
 
+
   <div *ngIf="documents" [textPageHeight] style="overflow: scroll">
     <ul class="">
       <document-list-item class=""
+
           *ngFor="let currentDocument of documents"
                           [document]="currentDocument"
                           (click)="selectDocument(currentDocument)"
                           [active]="isActive(currentDocument)"
+
       >
       </document-list-item>
     </ul>
   </div>
+
+
 </div>
 

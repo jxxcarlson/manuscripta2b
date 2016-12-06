@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 
+
+import {DocumentListModule} from '../document-list/document-list.module'
+
 // import {NavbarService} from '../,,/toplevel/navbar/navbar.service'
 import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
