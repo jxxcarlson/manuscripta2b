@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 import {AppRoutingModule} from '../app-routing.module'
 
 
-import { CommonModule } from '@angular/common'
+import {CommonModule} from '@angular/common'
 import {EditorComponent} from "./editor/editor.component";
 import {DocumentService} from '../services/document.service'
-import {DocumentComponent} from '../reader/document/document.component'
+
+import {DocumentDisplayModule} from '../reader/document/document_display.module'
+import {DocumentListModule} from '../reader/document-list/document-list.module'
+import {TextHelpersModule} from '../directives/text_helpers.module'
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import {DocumentComponent} from '../reader/document/document.component'
   imports: [
 
     AppRoutingModule,
-    CommonModule // for async pipe
+    CommonModule, // for async pipe
+    DocumentDisplayModule,
+    DocumentListModule,
+    TextHelpersModule
 
   ],
 

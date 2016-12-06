@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
+import { Observable} from 'rxjs/Rx';
+import { Store } from '@ngrx/store'
+interface AppState {
+  documents: Document[],
+  activeDocument: Document
+}
+
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -8,9 +16,18 @@ import {NavbarService} from '../../toplevel/navbar/navbar.service'
 })
 export class EditorComponent implements OnInit {
 
-  constructor(private navbarService: NavbarService) {
+
+  activeDocument: Document
+  documents: Observable<Document[]>
+
+  constructor(private navbarService: NavbarService,
+              private store: Store<AppState>) {
 
     this.navbarService = navbarService
+    this.store = store
+
+    store.select(s => s.activeDocument)
+      .subscribe( activeDocument => this.activeDocument = activeDocument )
 
   }
 
