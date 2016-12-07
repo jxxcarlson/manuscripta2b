@@ -1,8 +1,10 @@
 
 
-<div style="margin-top:60px; margin-left:0; max-width: 600px; font-size: 1.2rem;">
+<div class="ui grid">
 
+ <div class="two wide column"></div>
 
+  <div class="four wide column">
   <img src="http://psurl.s3.amazonaws.com/images/jc/bird-b4ba.jpeg" width="280" style="float:left; margin-right:15px; ">
 
   <h2>Welcome to Manuscripta.io</h2>
@@ -17,13 +19,17 @@
     <span style="margin-left:2rem; font-size: 1.25rem;" class="nav-item"><a [routerLink]="['/read']">Read Now</a></span>
   </p>
 
+  </div>
+
+
 
   <!--
   <p>This app is a rewrite (in progress) of <a href="http://www.manuscripta.io">Manuscripta.io</a> in
     Angular2 + ngrx.  Still in a primitive state, but we are working on it.</p>
   -->
 
-  <br>
-  <signin></signin>
+  <div class="four wide column">
+    <signin></signin>
+  </div>
 
 </div>

@@ -8,7 +8,8 @@ import { Document } from '../shared/document.model';
     font-size: 1.25rem;
     height: calc(100% - 0px);
     overflow: scroll;
-}`]
+}` ],
+  styleUrls: ['../vendor/foundation-potion.css', '../vendor/extras.css', '../vendor/coderay.css']
 })
 export class MathJaxPane {
   @Input() document:Document;
