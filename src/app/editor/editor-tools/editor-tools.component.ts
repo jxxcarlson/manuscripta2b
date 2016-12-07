@@ -21,6 +21,7 @@ import {async} from "rxjs/scheduler/async";
 @Component({
   selector: 'editor-tools',
   templateUrl: './editor-tools.component.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./editor-tools.component.css']
 })
 export class EditorToolsComponent implements OnInit {

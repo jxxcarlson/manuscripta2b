@@ -1,6 +1,7 @@
 import {Document} from './document.interface';
 import {User} from './user.interface';
 import {UIState} from './uistate.interface';
+import {Editor} from './editor.interface';
 
 export interface AppState{
 
@@ -9,6 +10,8 @@ export interface AppState{
 
   documents: Document[]
   activeDocument: Document
+
+  editor: Editor
 
   defaultDocumentList: Document[]
   tableOfContents: Document[]
