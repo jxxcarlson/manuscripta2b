@@ -61,7 +61,7 @@ export class EditorComponent implements OnInit {
       .select('activeDocument')
       .subscribe((val: Document)=> [
         // this.text$ = val.text,
-        this.edit_text$ = val.text,
+        this.edit_text = val.text,
         console.log(`Text changed: ${val.text}`)
       ])
   }
