@@ -12,6 +12,8 @@ interface AppState {
   activeDocument: Document
 }
 
+import {Editor} from '../../../interfaces/editor.interface'
+
 
 @Component({
   selector: 'app-editor',
@@ -23,6 +25,7 @@ export class EditorComponent implements OnInit {
 
   activeDocument$: Observable<Document>
   documents: Observable<Document[]>
+  edit_text: string
 
   constructor(
               private navbarService: NavbarService,
@@ -36,12 +39,8 @@ export class EditorComponent implements OnInit {
     store.select('activeDocument')
       .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
 
-    store.select('activeDocument')
-      .take(1)
-      .subscribe( (doc: Document) => [
-        console.log(  `SET EDITOR TEXT TO ${doc.text}`),
-        this.store.dispatch({type:SET_EDIT_TEXT, payload: doc.text})
-      ])
+    store.select('editor')
+      .subscribe( (edit_state: Observable<Editor>) => this.edit_state$ = edit_state )
 
   }
 
@@ -49,6 +48,14 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
 
     this.navbarService.updateUIState('edit')
+
+    this.store.select('activeDocument')
+      .take(1)
+      .subscribe( (doc: Document) => [
+        console.log(  `SET EDITOR TEXT TO ${doc.text}`),
+        this.edit_text = doc.text,
+        this.store.dispatch({type:SET_EDIT_TEXT, payload: doc.text})
+      ])
 
     this.store
       .select('activeDocument')

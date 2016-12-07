@@ -3,7 +3,7 @@ import { Document } from '../shared/document.model';
 
 @Component({
   selector: 'textarea-pane',
-  template: `<textarea class="rendered-document">{{document.text}}</textarea>`,
+  template: `<textarea class="rendered-document">{{source_text}}</textarea>`,
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);
@@ -13,5 +13,5 @@ import { Document } from '../shared/document.model';
 }`]
 })
 export class TextAreaPane {
-  @Input() document:Document;
+  @Input() source_text:string;
 }
