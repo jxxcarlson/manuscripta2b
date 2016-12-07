@@ -3,7 +3,7 @@ import { Document } from '../shared/document.model';
 
 @Component({
   selector: 'text-pane',
-  template: `<div class="source-text">{{document.text}}</div>`,
+  template: `<div class="">{{document.text}}</div>`,
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);

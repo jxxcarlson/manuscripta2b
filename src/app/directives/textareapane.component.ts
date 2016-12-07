@@ -7,7 +7,7 @@ import { Document } from '../shared/document.model';
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);
-    width:300px;
+    width:100%;
     overflow: scroll;
     white-space: pre-line;
 }`]

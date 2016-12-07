@@ -1,24 +1,30 @@
 
-  <div class="" style="float:left; width:300px;">
-    <div class="" style="margin-top:40px;">
+<div class="ui grid">
+
+  <div class="four wide column">
+
       <!--
-      <app-search-scope-control></app-search-scope-control>
-         -->
+        <app-search-scope-control></app-search-scope-control>
+      -->
+
+    <div style="margin-left:4rem;">
       <searchbar></searchbar>
 
       <document-list> </document-list>
     </div>
+
   </div>
 
-  <div style="float:left; width:300px;margin-top:40px;">
+  <div class="five wide column">
     <div [textPageHeight]>
       <textarea-pane  [document]="activeDocument"></textarea-pane>
     </div>
   </div>
 
-  <div style="float:left; width:300px; margin-left:60px;margin-top:-70px;margin-top:40px;">
+  <div class="six wide column">
     <app-document></app-document>
   </div>
 
+</div>
 
 
