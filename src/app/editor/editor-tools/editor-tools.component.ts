@@ -55,12 +55,9 @@ export class EditorToolsComponent implements OnInit {
       .take(1)
       .subscribe((activeDocument: Document) => [
         this.doc = activeDocument,
-        console.log(`1. updateDocumentViaButton for id =  ${this.doc.id}`),
         this.documentService.updateDocument(this.doc, this.user$.token)
       ])
   }
-
-
 
   ngOnInit() {
 

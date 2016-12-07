@@ -162,7 +162,7 @@ export class DocumentService {
     return this.http.post(url, params , options)
       .map((res) => res.json())
       .subscribe(payload =>  [
-        this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload})
+        this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload['document']})
       ])
 
   }
