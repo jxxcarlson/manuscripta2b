@@ -1,19 +1,24 @@
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
-import {AppState} from '../interfaces/appstate.interface';
 import {Document} from '../interfaces/document.interface';
 import {Constants} from '../toplevel/constants'
 
 import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
-import { IDENTITY } from '../reducers/activeDocument.reducer'
+import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
+
+interface AppState {
+  documents: Document[],
+  activeDocument: Document
+}
+
 
 @Injectable()
 export class DocumentService {
@@ -98,6 +103,66 @@ export class DocumentService {
     this.http.get(`${this.apiRoot}/documents?${apiQuery}&content=all`)
       .map((res) => res.json())
       .subscribe(payload =>  this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']}))
+
+  }
+
+  //// EDITOR ////
+
+  /*
+
+   console.log('Doc Api, update enter')
+
+   var parameter = JSON.stringify(params);
+
+   if (params['query_string'] != undefined) {
+
+   var url = envService.read('apiUrl') + '/documents/' + params['id'] + '?' + params['query_string']
+   }
+   else {
+
+   var url = envService.read('apiUrl') + '/documents/' + params['id']
+   }
+
+   var options = {headers: {"accesstoken": UserService.accessToken()}}
+
+   $http.post(url, parameter, options)
+   */
+
+  // https://angular.io/docs/ts/latest/guide/server-communication.html
+
+  updateDocument(document: Document, token: string) {
+
+    console.log(`2. Update document ${document.id}`)
+
+    /*
+     var _params = {
+     id: scope.id,
+     title: scope.editableTitle,
+     public: scope.statusPublic,
+     text: scope.editText,
+     author_name: this.document().author
+     }
+     */
+
+    let params = {
+      id: document.id,
+      title: document.title,
+      text: document.text
+    }
+
+    let url = `${this.apiRoot}/documents/${document.id}`
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'accesstoken': token
+    });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(url, params , options)
+      .map((res) => res.json())
+      .subscribe(payload =>  [
+        console.log(JSON.stringify(payload)),
+        this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload})
+      ])
 
   }
 
