@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NavbarService} from '../../toplevel/navbar/navbar.service'
+import {NavbarService} from '../../../toplevel/navbar/navbar.service'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'

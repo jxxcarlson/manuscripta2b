@@ -4,13 +4,14 @@ import {AppRoutingModule} from '../app-routing.module'
 
 
 import {CommonModule} from '@angular/common'
-import {EditorComponent} from "./editor/editor.component";
+import {EditorComponent} from "./editor/editor/editor.component";
 import {DocumentService} from '../services/document.service'
 
 import {DocumentDisplayModule} from '../reader/document/document_display.module'
 import {DocumentListModule} from '../reader/document-list/document-list.module'
-import {TextHelpersModule} from '../directives/text_helpers.module'
+import {TextHelpersModule} from '../text_helpers/text_helpers.module'
 import {SearchModule} from '../search/search.module'
+import {EditorToolsComponent} from './editor-tools/editor-tools.component'
 
 
 
@@ -18,7 +19,8 @@ import {SearchModule} from '../search/search.module'
 
   declarations: [
 
-    EditorComponent
+    EditorComponent,
+    EditorToolsComponent
 
   ],
 

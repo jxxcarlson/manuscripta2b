@@ -1,0 +1,5 @@
+.rendered-document {
+  font-size: 1.25rem;
+  height: calc(100% - 0px);
+  overflow: scroll;
+}

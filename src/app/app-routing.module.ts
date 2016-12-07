@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './toplevel/about/about.component'
 import { HomeComponent } from './toplevel/home/home.component'
 import { ReaderComponent } from './reader/reader/reader.component'
-import { EditorComponent } from './editor/editor/editor.component'
+import { EditorComponent } from './editor/editor/editor/editor.component'
 import { ImagesComponent } from './images/images/images.component'
 import { SettingsComponent } from './toplevel/settings/settings.component'
 
