@@ -1,6 +1,6 @@
 export class Document {
 
-  public id: string;
+  public id: number;
   public author_id: string;
   public title: string;
   public text: string;

@@ -2,6 +2,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
+
 import 'rxjs/add/operator/map';
 
 import {Document} from '../interfaces/document.interface';
@@ -130,19 +131,19 @@ export class DocumentService {
 
   // https://angular.io/docs/ts/latest/guide/server-communication.html
 
+  // console.log(`2. Update document ${document.id}`)
+
+  /*
+   var _params = {
+   id: scope.id,
+   title: scope.editableTitle,
+   public: scope.statusPublic,
+   text: scope.editText,
+   author_name: this.document().author
+   }
+   */
+
   updateDocument(document: Document, token: string) {
-
-    console.log(`2. Update document ${document.id}`)
-
-    /*
-     var _params = {
-     id: scope.id,
-     title: scope.editableTitle,
-     public: scope.statusPublic,
-     text: scope.editText,
-     author_name: this.document().author
-     }
-     */
 
     let params = {
       id: document.id,
@@ -151,6 +152,7 @@ export class DocumentService {
     }
 
     let url = `${this.apiRoot}/documents/${document.id}`
+    console.log(`2: calling documentService.updateDocument with url = ${url}`)
     let headers = new Headers({
       'Content-Type': 'application/json',
       'accesstoken': token
@@ -160,7 +162,6 @@ export class DocumentService {
     return this.http.post(url, params , options)
       .map((res) => res.json())
       .subscribe(payload =>  [
-        console.log(JSON.stringify(payload)),
         this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload})
       ])
 

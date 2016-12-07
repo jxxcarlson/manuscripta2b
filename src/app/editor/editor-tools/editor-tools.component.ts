@@ -4,11 +4,14 @@ import { User } from '../../interfaces/user.interface'
 
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
+import 'rxjs/add/operator/take'
+
+import { Document } from '../../interfaces/document.interface'
+
 interface AppState {
   documents: Document[],
   activeDocument: Document
 }
-
 
 
 import {DocumentService} from '../../services/document.service'
@@ -23,6 +26,7 @@ import {async} from "rxjs/scheduler/async";
 export class EditorToolsComponent implements OnInit {
 
   activeDocument$: Observable<Document>
+  doc: Document
   user$: Observable<User>
 
   constructor(
@@ -34,16 +38,29 @@ export class EditorToolsComponent implements OnInit {
     this.store = store
     this.userStore = userStore
 
+
     store.select('activeDocument')
       .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
   }
 
   // https://scotch.io/tutorials/angular-2-http-requests-with-observables
+  // myservice.getDocument().mergeMap(doc => myhttp.postDoc(doc))
+
+  // https://github.com/ngrx/store/issues/175
+  // https://github.com/ngrx/store/issues/147
+
   updateDocument() {
 
-    console.log(`1. Updating document ${this.activeDocument$.id}`)
-    this.documentService.updateDocument(this.activeDocument$, this.user$.token)
+    this.store.select('activeDocument')
+      .take(1)
+      .subscribe((activeDocument: Document) => [
+        this.doc = activeDocument,
+        console.log(`1. updateDocumentViaButton for id =  ${this.doc.id}`),
+        this.documentService.updateDocument(this.doc, this.user$.token)
+      ])
   }
+
+
 
   ngOnInit() {
 

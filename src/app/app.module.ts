@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import {enableProdMode} from '@angular/core';
+
 
 import {AppRoutingModule} from './app-routing.module'
 
