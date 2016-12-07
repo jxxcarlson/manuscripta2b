@@ -23,7 +23,6 @@ export class EditorComponent implements OnInit {
 
   activeDocument$: Observable<Document>
   documents: Observable<Document[]>
-  doc: Document
 
   constructor(
               private navbarService: NavbarService,
@@ -33,6 +32,9 @@ export class EditorComponent implements OnInit {
     console.log('CONSTRUCT EDITOR')
     this.navbarService = navbarService
     this.store = store
+
+    store.select('activeDocument')
+      .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
 
     store.select('activeDocument')
       .take(1)
