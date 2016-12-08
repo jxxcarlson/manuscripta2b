@@ -22,8 +22,10 @@ import {Editor} from '../../../interfaces/editor.interface'
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(EditorToolsComponent)
+  private editorToolsComponent: EditorToolsComponent;
 
   activeDocument$: Observable<Document>
   documents: Observable<Document[]>
@@ -79,6 +81,8 @@ export class EditorComponent implements OnInit {
   manualUpdate() {
 
     this.updateTextOfActiveDocument()
+    this.editorToolsComponent.updateDocument()
+
 
   }
 

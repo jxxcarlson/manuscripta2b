@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { User } from '../../interfaces/user.interface'
 
 
@@ -24,10 +24,7 @@ import {async} from "rxjs/scheduler/async";
   // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./editor-tools.component.css']
 })
-export class EditorToolsComponent implements OnInit, AfterViewInit {
-
-  @ViewChild(EditorToolsComponent)
-  private editorToolsComponent: EditorToolsComponent;
+export class EditorToolsComponent implements OnInit {
 
   activeDocument$: Observable<Document>
   doc: Document
