@@ -20,11 +20,12 @@
   <div class="five wide column">
     <div [textPageHeight]>
       <div style="margin-bottom:8px;">
-        <button (click)="manualUpdate()">Update (ESC)</button>
+        <button (click)="updateAndRenderText()">Update (ESC)</button>
       </div>
       <textarea class="source-document"
                 id="text_input"
                 (keyup.escape)="manualUpdate()"
+                (keyup)="handleKeyPress($event.target)"
                 [(ngModel)]="model.source_text" name="source_text"
       ></textarea>
     </div>

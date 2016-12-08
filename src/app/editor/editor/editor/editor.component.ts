@@ -30,7 +30,15 @@ export class EditorComponent implements OnInit, AfterViewInit {
   activeDocument$: Observable<Document>
   documents: Observable<Document[]>
   edit_text: string
+
+
   model = { source_text: ''}
+  number_of_keypresses: number = 0
+  tickCycleSize = 10
+  tickCycleCount =0
+  private timer;
+  // Subscription object
+  private sub: Subscription;
 
   constructor(
               private navbarService: NavbarService,
@@ -58,6 +66,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   updateTextOfActiveDocument() {
 
+    console.log('Update text')
+
     this.store.select('activeDocument')
       .take(1)
       .subscribe( (doc: Document) => [
@@ -78,23 +88,44 @@ export class EditorComponent implements OnInit, AfterViewInit {
       ])
   }
 
-  manualUpdate() {
+  updateAndRenderText() {
 
+    // console.log(`Update and render text`)
     this.updateTextOfActiveDocument()
     this.editorToolsComponent.updateDocument()
 
 
   }
 
-  ticks=0
-  private timer;
-  // Subscription object
-  private sub: Subscription;
+  handleKeyPress(arg) {
+
+    console.log(`KP: ${this.number_of_keypresses}`)
+    this.number_of_keypresses  = this.number_of_keypresses + 1
+  }
+
+
 
   tickerFunc(tick){
-    console.log(tick);
-    this.updateTextOfActiveDocument()
-    this.ticks = tick + 1
+
+    console.log(`tick: ${this.tickCycleCount}`);
+
+    if (this.number_of_keypresses > 0 ) {
+
+      console.log(`update text: ${this.tickCycleCount}`)
+      this.updateTextOfActiveDocument()
+
+      if (this.tickCycleCount > this.tickCycleSize) {
+
+        console.log(`render text: ${this.tickCycleCount}`)
+        this.editorToolsComponent.updateDocument()
+        this.number_of_keypresses = 0
+
+        this.tickCycleCount = 0
+      }
+
+    }
+
+    this.tickCycleCount = this.tickCycleCount + 1
   }
 
   ngOnInit() {
@@ -112,17 +143,19 @@ export class EditorComponent implements OnInit, AfterViewInit {
         // console.log(`Text changed: ${val.text}`)
       ])
 
-    this.timer = Observable.timer(2000,5000);
+    this.timer = Observable.timer(2000,1000);
     // subscribing to a observable returns a subscription object
     this.sub = this.timer.subscribe(t => this.tickerFunc(t));
   }
 
   ngOnDestroy(){
+
     console.log("Destroy timer");
-    // unsubscribe here
     this.sub.unsubscribe();
 
   }
+
+
 
 
 }
