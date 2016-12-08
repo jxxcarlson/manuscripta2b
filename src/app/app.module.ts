@@ -19,8 +19,9 @@ import {StoreLogMonitorModule, useLogMonitor} from '@ngrx/store-log-monitor';
 import {provideStore} from '@ngrx/store';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 
 import { QueryParser } from './services/queryparser.service';
 
@@ -41,6 +42,7 @@ import {EditorModule} from "./editor/editor.module";
 import {DocumentDisplayModule} from './reader/document/document_display.module'
 import {DocumentListModule} from './reader/document-list/document-list.module'
 import {SearchModule} from './search/search.module';
+import {TextHelpersModule} from './text_helpers/text_helpers.module'
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import {SearchModule} from './search/search.module';
     NavbarModule,
     EditorModule,
     SearchModule,
+    TextHelpersModule,
 
     StoreModule.provideStore({
       documents: documentsReducer,

@@ -19,7 +19,8 @@
 
   <div class="five wide column">
     <div [textPageHeight]>
-      <textarea-pane  [source_text]="edit_text"></textarea-pane>
+      <textarea-pane  (keyup.escape)="report(textarea.value)" [source_text]="edit_text"></textarea-pane>
+      <!-- <text-input></text-input> -->
     </div>
   </div>
 

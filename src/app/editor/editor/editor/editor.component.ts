@@ -44,6 +44,12 @@ export class EditorComponent implements OnInit {
 
   }
 
+  report() {
+
+    console.log(`REPORT: source_text = ${this.edit_text}`)
+
+  }
+
 
   ngOnInit() {
 

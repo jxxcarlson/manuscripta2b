@@ -3,7 +3,8 @@ import { Document } from '../shared/document.model';
 
 @Component({
   selector: 'textarea-pane',
-  template: `<textarea class="rendered-document">{{source_text}}</textarea>`,
+  template: `<button (click)="report(textarea.value)">Update Log</button>
+    <textarea class="rendered-document">{{source_text}}</textarea>`,
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);
@@ -14,4 +15,9 @@ import { Document } from '../shared/document.model';
 })
 export class TextAreaPane {
   @Input() source_text:string;
+
+  report(str: string) {
+
+    console.log(`TEXTAREA VALUE: ${str}`)
+  }
 }
