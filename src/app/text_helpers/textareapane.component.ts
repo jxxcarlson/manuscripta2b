@@ -4,7 +4,9 @@ import { Document } from '../shared/document.model';
 @Component({
   selector: 'textarea-pane',
   template: `<button (click)="report(textarea.value)">Update Log</button>
-    <textarea class="rendered-document">{{source_text}}</textarea>`,
+    <textarea class="rendered-document" type="text" class="form-control" id="text_input"
+             [(ngModel)]="model.text_input" text_input="text_input"
+      ></textarea>`,
   styles: [`.rendered-document {
     font-size: 1.25rem;
     height: calc(100% - 0px);
@@ -13,11 +15,14 @@ import { Document } from '../shared/document.model';
     white-space: pre-line;
 }`]
 })
+
 export class TextAreaPane {
-  @Input() source_text:string;
 
-  report(str: string) {
+  model = {text_input: ''}
 
-    console.log(`TEXTAREA VALUE: ${str}`)
+  constructor() {
+
   }
+  // onSubmit() { this.submitted = true; console.log(model.text) }
+
 }

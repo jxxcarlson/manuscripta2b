@@ -56,6 +56,7 @@ export class EditorToolsComponent implements OnInit {
       .take(1)
       .subscribe((activeDocument: Document) => [
         this.doc = activeDocument,
+        console.log(`2. DOC TEXT: ${this.doc.text}`),
         this.documentService.updateDocument(this.doc, this.user$.token)
       ])
   }

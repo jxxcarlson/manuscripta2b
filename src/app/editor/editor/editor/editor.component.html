@@ -19,7 +19,13 @@
 
   <div class="five wide column">
     <div [textPageHeight]>
-      <textarea-pane  (keyup.escape)="report(textarea.value)" [source_text]="edit_text"></textarea-pane>
+      <button (click)="updateTextOfActiveDocument()">Save text</button>
+      <textarea class="source-document"
+                id="text_input"
+                (keyup.escape)="report()"
+                [(ngModel)]="model.source_text" name="source_text"
+      ></textarea>
+      <!-- <textarea-pane  (keyup.escape)="report(textarea.value)" [source_text]="edit_text"></textarea-pane> ->
       <!-- <text-input></text-input> -->
     </div>
   </div>

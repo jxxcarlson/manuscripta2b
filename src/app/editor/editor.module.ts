@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import {AppRoutingModule} from '../app-routing.module'
 
-
+import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common'
 import {EditorComponent} from "./editor/editor/editor.component";
 import {DocumentService} from '../services/document.service'
@@ -31,7 +31,8 @@ import {EditorToolsComponent} from './editor-tools/editor-tools.component'
     DocumentDisplayModule,
     DocumentListModule,
     TextHelpersModule,
-    SearchModule
+    SearchModule,
+    FormsModule
 
   ],
 

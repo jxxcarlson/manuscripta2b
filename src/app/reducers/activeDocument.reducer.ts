@@ -15,7 +15,7 @@ export const activeDocumentReducer: ActionReducer<Document> = (state: any = [], 
     case IDENTITY:
       return action.payload
     case UPDATE_DOCUMENT:
-      return action.payload
+      state = action.payload
 
     default:
       return state;
