@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild  } from '@angular/core';
 import {NavbarService} from '../../../toplevel/navbar/navbar.service'
+import {EditorToolsComponent} from '../../editor-tools/editor-tools.component'
 
 import {Document} from '../../../interfaces/document.interface'
 
 import { UPDATE_EDIT_TEXT, SET_EDIT_TEXT } from '../../../reducers/editor.reducer'
 import { UPDATE_DOCUMENT } from '../../../reducers/activeDocument.reducer'
 
-import { Observable} from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 interface AppState {
   documents: Document[],
@@ -59,7 +60,7 @@ export class EditorComponent implements OnInit {
       .take(1)
       .subscribe( (doc: Document) => [
         doc.text = this.model.source_text,
-        console.log(`EDIT TEXT: ${doc.text}`)
+        // console.log(`EDIT TEXT: ${doc.text}`)
         this.store.dispatch({type:UPDATE_DOCUMENT, payload: doc})
       ])
   }
@@ -75,13 +76,22 @@ export class EditorComponent implements OnInit {
       ])
   }
 
-  report() {
+  manualUpdate() {
 
-    console.log(`REPORT: source_text = ${this.model.source_text}`)
     this.updateTextOfActiveDocument()
 
   }
 
+  ticks=0
+  private timer;
+  // Subscription object
+  private sub: Subscription;
+
+  tickerFunc(tick){
+    console.log(tick);
+    this.updateTextOfActiveDocument()
+    this.ticks = tick + 1
+  }
 
   ngOnInit() {
 
@@ -95,8 +105,19 @@ export class EditorComponent implements OnInit {
         // this.text$ = val.text,
         this.edit_text = val.text,
         this.model.source_text = val.text,
-        console.log(`Text changed: ${val.text}`)
+        // console.log(`Text changed: ${val.text}`)
       ])
+
+    this.timer = Observable.timer(2000,5000);
+    // subscribing to a observable returns a subscription object
+    this.sub = this.timer.subscribe(t => this.tickerFunc(t));
+  }
+
+  ngOnDestroy(){
+    console.log("Destroy timer");
+    // unsubscribe here
+    this.sub.unsubscribe();
+
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { User } from '../../interfaces/user.interface'
 
 
@@ -24,7 +24,10 @@ import {async} from "rxjs/scheduler/async";
   // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./editor-tools.component.css']
 })
-export class EditorToolsComponent implements OnInit {
+export class EditorToolsComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(EditorToolsComponent)
+  private editorToolsComponent: EditorToolsComponent;
 
   activeDocument$: Observable<Document>
   doc: Document
@@ -56,10 +59,12 @@ export class EditorToolsComponent implements OnInit {
       .take(1)
       .subscribe((activeDocument: Document) => [
         this.doc = activeDocument,
-        console.log(`2. DOC TEXT: ${this.doc.text}`),
+        // console.log(`2. DOC TEXT: ${this.doc.text}`),
         this.documentService.updateDocument(this.doc, this.user$.token)
       ])
   }
+
+
 
   ngOnInit() {
 
@@ -67,8 +72,9 @@ export class EditorToolsComponent implements OnInit {
       .select('user')
       .subscribe((val: Observable<User>)=> [
         this.user$ = val,
-        console.log(`ET: userState changed: ${JSON.stringify(this.user$)}`)
+        // console.log(`ET: userState changed: ${JSON.stringify(this.user$)}`)
       ])
+
 
   }
 
