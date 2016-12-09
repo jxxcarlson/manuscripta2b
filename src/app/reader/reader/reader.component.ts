@@ -18,6 +18,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AppState} from '../../interfaces/appstate.interface'
 import {UIState} from '../../interfaces/uistate.interface'
 
+interface MyWindow extends Window {
+  myFunction(): void;
+}
+
+declare var window: MyWindow;
+
 
 @Component({
   selector: 'app-reader',
@@ -29,6 +35,7 @@ export class ReaderComponent implements OnInit {
   documents: Observable<Document[]>
   documentId: string
   printUrl: string
+  printerValid: boolean = false
 
   constructor(private store: Store<AppState>,
               private navbarService: NavbarService,
@@ -52,12 +59,18 @@ export class ReaderComponent implements OnInit {
     return uistate;
   }
 
+  invalidatePrinter() {
+
+    this.printerValid = false
+  }
+
   printActiveDocument() {
 
       this.store
         .take(1)
         .subscribe((state) => [
-          this.documentService.printDocument(state.activeDocument.id, state.user.token, (payload) => this.printUrl = payload)
+          this.documentService.printDocument(state.activeDocument.id, state.user.token,
+            (payload) => [this.printUrl = payload, this.printerValid = true])
         ])
 
   }

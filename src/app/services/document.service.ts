@@ -12,6 +12,7 @@ import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
 import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
+import {SET_EDIT_TEXT} from '../reducers/editor.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
@@ -167,9 +168,8 @@ export class DocumentService {
 
     return this.http.get(url , options)
       .map((res) => res.json()['url'])
-      .subscribe(payload =>  [
-        callback(payload)
-      ])
+      .subscribe(payload => callback(payload)
+      )
   }
 
 

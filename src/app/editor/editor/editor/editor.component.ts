@@ -71,7 +71,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   tickerFunc(tick){
 
-    if (tick == 1) {  this.wordCount = this.model.source_text.split(' ').length) }
+    if (tick == 1) {  this.wordCount = this.model.source_text.split(' ').length }
     this.wordCount = this.model.source_text.split(' ').length
 
     if (this.number_of_keypresses > 0 ) {
