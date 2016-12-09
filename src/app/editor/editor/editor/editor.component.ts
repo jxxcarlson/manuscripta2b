@@ -64,14 +64,14 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   }
 
-  updateTextOfActiveDocument() {
+  updateTextOfActiveDocument(text) {
 
     console.log('Update text')
 
     this.store.select('activeDocument')
       .take(1)
       .subscribe( (doc: Document) => [
-        doc.text = this.model.source_text,
+        doc.text = text,
         // console.log(`EDIT TEXT: ${doc.text}`)
         this.store.dispatch({type:UPDATE_DOCUMENT, payload: doc})
       ])
@@ -91,7 +91,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   updateAndRenderText() {
 
     // console.log(`Update and render text`)
-    this.updateTextOfActiveDocument()
+    this.updateTextOfActiveDocument(this.model.source_text)
     this.editorToolsComponent.updateDocument()
 
 
@@ -112,7 +112,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     if (this.number_of_keypresses > 0 ) {
 
       console.log(`update text: ${this.tickCycleCount}`)
-      this.updateTextOfActiveDocument()
+      this.updateTextOfActiveDocument(this.model.source_text)
 
       if (this.tickCycleCount > this.tickCycleSize) {
 
