@@ -12,6 +12,7 @@ import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
 import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
+import { SET_EDIT_TEXT } from '../reducers/editor.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
@@ -124,9 +125,19 @@ export class DocumentService {
 
   }
 
-  updateTextOfActiveDocument(text) {
+  /// TEXT FUNCTIONS ///
 
-    console.log('Update text')
+
+  setTextFromActiveDocument() {
+
+    this.store.select('activeDocument')
+      .take(1)
+      .subscribe( (doc: Document) => [
+        this.store.dispatch({type:SET_EDIT_TEXT, payload: doc.text})
+      ])
+  }
+
+  updateTextOfActiveDocument(text) {
 
     this.store.select('activeDocument')
       .take(1)

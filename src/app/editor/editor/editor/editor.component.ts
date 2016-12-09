@@ -2,13 +2,10 @@ import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild  } from 
 import {NavbarService} from '../../../toplevel/navbar/navbar.service'
 import {EditorToolsComponent} from '../../editor-tools/editor-tools.component'
 import {DocumentService} from '../../../services/document.service'
-
 import {Document} from '../../../interfaces/document.interface'
-
-import { SET_EDIT_TEXT } from '../../../reducers/editor.reducer'
-
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
+
 interface AppState {
   documents: Document[],
   activeDocument: Document
@@ -58,15 +55,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
 
-  setText() {
-
-    this.store.select('activeDocument')
-      .take(1)
-      .subscribe( (doc: Document) => [
-        this.store.dispatch({type:SET_EDIT_TEXT, payload: doc.text})
-      ])
-  }
-
   updateAndRenderText() {
 
     this.documentService.updateTextOfActiveDocument(this.model.source_text)
@@ -80,14 +68,10 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
 
-
   tickerFunc(tick){
-
-    // console.log(`tick: ${this.tickCycleCount}`);
 
     if (this.number_of_keypresses > 0 ) {
 
-      console.log(`update text: ${this.tickCycleCount}`)
       this.documentService.updateTextOfActiveDocument(this.model.source_text)
 
       if (this.tickCycleCount > this.tickCycleSize) {
@@ -107,20 +91,16 @@ export class EditorComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.navbarService.updateUIState('edit')
-
-    this.setText()
+    this.documentService.setTextFromActiveDocument()
 
     this.store
       .select('activeDocument')
       .subscribe((val: Document)=> [
-        // this.text$ = val.text,
         this.edit_text = val.text,
         this.model.source_text = val.text,
-        // console.log(`Text changed: ${val.text}`)
       ])
 
     this.timer = Observable.timer(2000,1000);
-    // subscribing to a observable returns a subscription object
     this.sub = this.timer.subscribe(t => this.tickerFunc(t));
   }
 
