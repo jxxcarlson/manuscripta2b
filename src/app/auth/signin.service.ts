@@ -5,19 +5,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Store} from '@ngrx/store';
 // import {User} from '../../models/user.model'
 
-interface AppState {
-  documents: Document[],
-  activeDocument: Document
-  user: User
-}
-
-interface User {
-  id: number
-  username: string
-  token: string
-  signedIn: boolean
-}
-
+import {User} from '../interfaces/user.interface'
+import {AppState} from '../interfaces/appstate.interface'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -42,7 +31,7 @@ export class SigninService {
       .subscribe(payload => [
           this.store.dispatch({
             type: AUTHORIZE_USER,
-            payload: { username: username, id: payload.user_id, token: payload.token, signedIn: payload.token != null }
+            payload: { username: username, password: password, id: payload.user_id, token: payload.token, signedIn: payload.token != null }
           })
         ]
       )
@@ -52,7 +41,7 @@ export class SigninService {
 
   signout() {
 
-    var nullUser: User = {id: -1, username: 'nobody', token: '', signedIn: false }
+    var nullUser: User = {id: -1, username: 'nobody', password: '', token: '', signedIn: false }
 
     this.store.dispatch({type: AUTHORIZE_USER, payload: nullUser})
   }
