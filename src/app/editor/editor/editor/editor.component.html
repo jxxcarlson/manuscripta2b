@@ -24,7 +24,7 @@
       </div>
       <textarea class="source-document"
                 id="text_input"
-                (keyup.escape)="manualUpdate()"
+                (keyup.escape)="updateAndRenderText()"
                 (keyup)="handleKeyPress($event.target)"
                 [(ngModel)]="model.source_text" name="source_text"
       ></textarea>
