@@ -5,6 +5,7 @@ import {DocumentService} from '../../../services/document.service'
 import {Document} from '../../../interfaces/document.interface'
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
+import {Constants} from '../../../toplevel/constants'
 
 interface AppState {
   documents: Document[],
@@ -31,12 +32,12 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   // Timer for auto-update of document text
   number_of_keypresses: number = 0
-  tickCycleSize = 10
   tickCycleCount =0
   private timer;
   private sub: Subscription;
 
   constructor(
+              private constants: Constants,
               private navbarService: NavbarService,
               private store: Store<AppState>,
               private documentService: DocumentService,
@@ -74,7 +75,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
       this.documentService.updateTextOfActiveDocument(this.model.source_text)
 
-      if (this.tickCycleCount > this.tickCycleSize) {
+      if (this.tickCycleCount > this.constants.tickCycleSize) {
 
         console.log(`render text: ${this.tickCycleCount}`)
         this.editorToolsComponent.updateDocument()

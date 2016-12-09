@@ -148,5 +148,14 @@ export class DocumentService {
       ])
   }
 
+  applyActiveDocument(callback) {
+
+    this.store.select('activeDocument')
+      .take(1)
+      .subscribe( (doc: Document) => [
+       callback(doc)
+      ])
+  }
+
 
 }

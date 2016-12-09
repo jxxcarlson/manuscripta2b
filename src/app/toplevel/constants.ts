@@ -3,7 +3,8 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class Constants{
 
-  apiRoot: string;
+  apiRoot: string
+  tickCycleSize: number
   document1: any
   document2: any
 
@@ -11,6 +12,7 @@ export class Constants{
 
     // this.apiRoot = 'http://localhost:2300/v1'
     this.apiRoot = 'http://xdoc-api.herokuapp.com/v1'
+    this.tickCycleSize = 10
 
     this.document1 = {
       id: '23',
