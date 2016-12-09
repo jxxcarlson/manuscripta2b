@@ -15,6 +15,7 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'home', component: HomeComponent},
   { path: 'read', component: ReaderComponent },
+  { path: 'documents/:id', component: ReaderComponent},
   { path: 'edit', component: EditorComponent },
   { path: 'images', component: ImagesComponent },
   { path: 'settings', component: SettingsComponent },
