@@ -9,7 +9,6 @@ import { MathJaxPane } from './mathjaxpane.component'
 import { HtmlPane } from './htmlpane.component'
 import { TextPane } from './textpane.component'
 import { TextAreaPane } from './textareapane.component'
-import { TextInput } from './text_input.component'
 
 @NgModule ({
 
@@ -21,8 +20,7 @@ import { TextInput } from './text_input.component'
     MathJaxPane,
     HtmlPane,
     TextPane,
-    TextAreaPane,
-    TextInput
+    TextAreaPane
   ],
 
   imports: [
@@ -40,8 +38,7 @@ import { TextInput } from './text_input.component'
     MathJaxPane,
     HtmlPane,
     TextPane,
-    TextAreaPane,
-    TextInput
+    TextAreaPane
 
   ]
 

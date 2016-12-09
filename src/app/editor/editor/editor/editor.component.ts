@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild  } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit} from '@angular/core';
 import {NavbarService} from '../../../toplevel/navbar/navbar.service'
 import {EditorToolsComponent} from '../../editor-tools/editor-tools.component'
 import {DocumentService} from '../../../services/document.service'
@@ -50,9 +50,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
     store.select('activeDocument')
       .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
 
-    store.select('editor')
-      .subscribe( (edit_state: Observable<Editor>) => this.edit_state$ = edit_state )
-
   }
 
 
@@ -94,17 +91,13 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.navbarService.updateUIState('edit')
     this.documentService.setTextFromActiveDocument()
 
-
-     this.store.select(state => this.model.source_text = state.activeDocument.text)
-
-   // this.store.select('activeDocument')
+    this.store.select(state => this.model.source_text = state.activeDocument.text)
 
     this.store
       .select('activeDocument')
       .subscribe((val: Document)=> [
         this.model.source_text = val.text,
       ])
-
 
     this.timer = Observable.timer(2000,1000);
     this.sub = this.timer.subscribe(t => this.tickerFunc(t));
