@@ -6,10 +6,10 @@
 
   <!--- SIGN OUT BUTTON -->
   <p [hidden]="!(( user$ | async ).signedIn)" style="font-size:1.5em;" >Signed in as  {{ ( user$ | async)?.username }}</p>
-  <button [hidden]="!(user$.signedIn)" (click)="signOut()">Sign out</button>
+  <button [hidden]="!(user$ | async)?.signedIn" (click)="signOut()">Sign out</button>
 
   <!--- SIGN IN FORM -->
-  <div [hidden]="(user$.signedIn)">
+  <div [hidden]="( user$ | async ).signedIn">
     <h2>Sign in</h2>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
 

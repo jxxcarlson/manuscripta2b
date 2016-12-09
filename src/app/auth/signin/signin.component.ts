@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
   public submitted: boolean;
   public events: any[] = [];
 
-  username$: Observable<string>
+  // username$: Observable<string>
   user$: Observable<User>
 
 
@@ -39,18 +39,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    // An Observable: this.user$ = this.userStore.select('user')
-
     this.user$ = this.userStore.select(state => state.user)
-
-    /*
-    this.userStore
-      .select('user')
-      .subscribe((val: Observable<User>)=> [
-        this.user$ = val,
-        console.log(`userState changed: ${JSON.stringify(this.user$)}`)
-      ])
-      */
 
     this.myForm = this._fb.group({
       username: ['', [<any>Validators.required, <any>Validators.minLength(5)]],
@@ -82,4 +71,15 @@ export class SigninComponent implements OnInit {
   }
 
 }
+
+/*
+ this.userStore
+ .select('user')
+ .subscribe((val: Observable<User>)=> [
+ this.user$ = val,
+ console.log(`userState changed: ${JSON.stringify(this.user$)}`)
+ ])
+ */
+
+// An Observable: this.user$ = this.userStore.select('user')
 
