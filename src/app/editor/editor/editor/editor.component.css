@@ -5,3 +5,16 @@
   overflow: scroll;
   white-space: pre-line;
 }
+
+.info {
+  margin-left:8px;
+  height:18px;
+  baseline-shift: -4px;
+
+}
+
+.label-row {
+  display: inline-block;
+  padding-top:10px;
+  padding-bottom: -10px;
+}

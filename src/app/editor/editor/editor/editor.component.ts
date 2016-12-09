@@ -29,6 +29,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   documents: Observable<Document[]>
 
   model = { source_text: ''}
+  wordCount: number
 
   // Timer for auto-update of document text
   number_of_keypresses: number = 0
@@ -57,6 +58,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   updateAndRenderText() {
 
     this.documentService.updateTextOfActiveDocument(this.model.source_text)
+    this.wordCount = this.model.source_text.split(' ').length
     this.editorToolsComponent.updateDocument()
 
   }
@@ -68,6 +70,9 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
 
   tickerFunc(tick){
+
+    if (tick == 1) {  this.wordCount = this.model.source_text.split(' ').length) }
+    this.wordCount = this.model.source_text.split(' ').length
 
     if (this.number_of_keypresses > 0 ) {
 
@@ -99,6 +104,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       .subscribe((val: Document)=> [
         this.model.source_text = val.text,
       ])
+
 
     this.timer = Observable.timer(2000,1000);
     this.sub = this.timer.subscribe(t => this.tickerFunc(t));
