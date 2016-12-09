@@ -1,0 +1,14 @@
+
+button {
+  margin-left:8px;
+  height:25px;
+  baseline-shift: -10px;
+
+}
+
+.button-row {
+  display: inline-block;
+  margin-top:-15px;
+  padding-top:10;
+  padding-bottom: 0.45em;
+}
