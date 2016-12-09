@@ -12,14 +12,11 @@ import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
 import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
-import { SET_EDIT_TEXT } from '../reducers/editor.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
-interface AppState {
-  documents: Document[],
-  activeDocument: Document
-}
+
+import {AppState} from '../interfaces/appstate.interface'
 
 
 @Injectable()
@@ -161,36 +158,20 @@ export class DocumentService {
       ])
   }
 
-  printDocument(document: Document) {
+  // Request a url for a print version of
+  // the given the ID of document
+  printDocument(documentId: number, token: string, callback) {
 
-    let url = `${this.apiRoot}/printdocument/${document.id}`
+    let url = `${this.apiRoot}/printdocument/${documentId}`
+    let options = this.standarOptions(token)
+
+    return this.http.get(url , options)
+      .map((res) => res.json()['url'])
+      .subscribe(payload =>  [
+        callback(payload)
+      ])
   }
 
-  /*
-  this.printDocument = function (scope, id, queryObj) {
-
-  var deferred = $q.defer();
-
-  var url = envService.read('apiUrl') + '/printdocument/' + id
-  var options = {headers: {"accesstoken": UserService.accessToken()}}
-  return $http.get(url, options)
-    .then(function (response) {
-      // promise is fulfilled
-      deferred.resolve(response.data);
-      var jsonData = response.data
-      var url = jsonData['url']
-      scope.printUrl = jsonData['url']
-      // promise is returned
-      return deferred.promise;
-    }, function (response) {
-      // the following line rejects the promise
-      deferred.reject(response);
-      // promise is returned
-      return deferred.promise;
-    })
-}
-
-*/
 
 
 }

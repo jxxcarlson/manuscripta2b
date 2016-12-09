@@ -11,7 +11,9 @@
       <searchbar></searchbar>
 
       <div class="button-row">
-        <button>Share</button> <button>Print</button>
+        <button>Share</button>
+        <button (click)="printActiveDocument()">Print</button>
+        <a href="{{printUrl}}">LINK</a>
       </div>
 
       <document-list> </document-list>

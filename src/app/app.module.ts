@@ -13,6 +13,7 @@ import { uistateReducer } from './reducers/uistate.reducer'
 import { userReducer } from './reducers/user.reducer'
 
 import {DocumentService} from './services/document.service';
+import {UserService} from './services/user.service';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreLogMonitorModule, useLogMonitor} from '@ngrx/store-log-monitor';
@@ -80,7 +81,7 @@ import {TextHelpersModule} from './text_helpers/text_helpers.module'
   ],
   providers: [
     QueryParser, Constants,
-    DocumentService
+    DocumentService, UserService
   ],
   bootstrap: [AppComponent, [ ]]
 })

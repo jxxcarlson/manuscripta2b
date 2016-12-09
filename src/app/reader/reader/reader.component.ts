@@ -3,6 +3,7 @@ import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 import {Params} from '@angular/router'
 import {DocumentService} from '../../services/document.service'
+import {UserService} from '../../services/user.service'
 
 
 
@@ -14,10 +15,8 @@ import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
 import { SET_DOCUMENTS } from '../../reducers/documents.reducer'
 import {ActivatedRoute, Router} from "@angular/router";
-interface AppState {
-  documents: Document[]
-  activeDocument: Document
-}
+import {AppState} from '../../interfaces/appstate.interface'
+import {UIState} from '../../interfaces/uistate.interface'
 
 
 @Component({
@@ -29,27 +28,51 @@ export class ReaderComponent implements OnInit {
 
   documents: Observable<Document[]>
   documentId: string
+  printUrl: string
 
   constructor(private store: Store<AppState>,
               private navbarService: NavbarService,
               private route: ActivatedRoute,
-              private  documentService: DocumentService,
+              private documentService: DocumentService,
+              private userService: UserService,
               private router: Router) {
 
     this.store = store
     this.navbarService = navbarService
+
+
+  }
+
+  getUIState(store: Store<AppState>): UIState {
+
+    let uistate: UIState;
+
+    store.take(1).subscribe(s => uistate = s.uistate);
+
+    return uistate;
+  }
+
+  printActiveDocument() {
+
+      this.store
+        .take(1)
+        .subscribe((state) => [
+          this.documentService.printDocument(state.activeDocument.id, state.user.token, (payload) => this.printUrl = payload)
+        ])
 
   }
 
   ngOnInit() {
 
     this.documentId = this.route.params['_value']['id']
+
     if (this.documentId != undefined) {
-      // this.documentService.loadAndActivateDocument(parseInt(this.documentId))
+
       this.documentService.getDocumentAndSubdocuments(parseInt(this.documentId))
     }
 
     this.navbarService.updateUIState('read')
+
 
   }
 
