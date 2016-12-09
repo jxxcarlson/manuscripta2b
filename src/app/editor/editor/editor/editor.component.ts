@@ -94,12 +94,17 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.navbarService.updateUIState('edit')
     this.documentService.setTextFromActiveDocument()
 
+
+     this.store.select(state => this.model.source_text = state.activeDocument.text)
+
+   // this.store.select('activeDocument')
+
     this.store
       .select('activeDocument')
       .subscribe((val: Document)=> [
-        this.edit_text = val.text,
         this.model.source_text = val.text,
       ])
+
 
     this.timer = Observable.timer(2000,1000);
     this.sub = this.timer.subscribe(t => this.tickerFunc(t));
