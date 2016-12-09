@@ -100,6 +100,15 @@ export class DocumentService {
 
   }
 
+  standarOptions(token: string) {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'accesstoken': token
+    });
+    return new RequestOptions({ headers: headers });
+  }
+
 
   updateDocument(document: Document, token: string) {
 
@@ -110,12 +119,7 @@ export class DocumentService {
     }
 
     let url = `${this.apiRoot}/documents/${document.id}`
-    console.log(`2: calling documentService.updateDocument with url = ${url}`)
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'accesstoken': token
-    });
-    let options = new RequestOptions({ headers: headers });
+    let options = this.standarOptions(token)
 
     return this.http.post(url, params , options)
       .map((res) => res.json())
@@ -156,6 +160,37 @@ export class DocumentService {
        callback(doc)
       ])
   }
+
+  printDocument(document: Document) {
+
+    let url = `${this.apiRoot}/printdocument/${document.id}`
+  }
+
+  /*
+  this.printDocument = function (scope, id, queryObj) {
+
+  var deferred = $q.defer();
+
+  var url = envService.read('apiUrl') + '/printdocument/' + id
+  var options = {headers: {"accesstoken": UserService.accessToken()}}
+  return $http.get(url, options)
+    .then(function (response) {
+      // promise is fulfilled
+      deferred.resolve(response.data);
+      var jsonData = response.data
+      var url = jsonData['url']
+      scope.printUrl = jsonData['url']
+      // promise is returned
+      return deferred.promise;
+    }, function (response) {
+      // the following line rejects the promise
+      deferred.reject(response);
+      // promise is returned
+      return deferred.promise;
+    })
+}
+
+*/
 
 
 }
