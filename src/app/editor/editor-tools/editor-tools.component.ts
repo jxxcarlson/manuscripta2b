@@ -1,78 +1,69 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, state} from '@angular/core';
 import { User } from '../../interfaces/user.interface'
+import { AppState } from '../../interfaces/appstate.interface'
 
 
-import { Observable} from 'rxjs/Rx';
+// import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 import 'rxjs/add/operator/take'
 
-import { Document } from '../../interfaces/document.interface'
-
-interface AppState {
-  documents: Document[],
-  activeDocument: Document
-}
+// import { Document } from '../../interfaces/document.interface'
 
 
 import {DocumentService} from '../../services/document.service'
-import {async} from "rxjs/scheduler/async";
+// import {async} from "rxjs/scheduler/async";
 
 
 @Component({
   selector: 'editor-tools',
   templateUrl: './editor-tools.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./editor-tools.component.css']
 })
 export class EditorToolsComponent implements OnInit {
 
-  activeDocument$: Observable<Document>
-  doc: Document
-  user$: Observable<User>
+  // user: User
 
   constructor(
     private documentService: DocumentService,
     private store: Store<AppState>,
-    private userStore: Store<AppState>
+    private userStore: Store<User>
   ) {
 
     this.store = store
     this.userStore = userStore
 
-
-    store.select('activeDocument')
-      .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
   }
-
-  // https://scotch.io/tutorials/angular-2-http-requests-with-observables
-  // myservice.getDocument().mergeMap(doc => myhttp.postDoc(doc))
-
-  // https://github.com/ngrx/store/issues/175
-  // https://github.com/ngrx/store/issues/147
 
   updateDocument() {
 
-    this.store.select('activeDocument')
+    this.store
       .take(1)
-      .subscribe((activeDocument: Document) => [
-        this.doc = activeDocument,
-        // console.log(`2. DOC TEXT: ${this.doc.text}`),
-        this.documentService.updateDocument(this.doc, this.user$.token)
+      .subscribe((state) => [
+        this.documentService.updateDocument(state.activeDocument, state.user.token)
       ])
   }
 
 
-
   ngOnInit() {
 
+    /*
     this.userStore
       .select('user')
+      .take(1)
       .subscribe((val: Observable<User>)=> [
         this.user$ = val,
         // console.log(`ET: userState changed: ${JSON.stringify(this.user$)}`)
       ])
 
+      */
 
   }
 
 }
+
+
+// https://scotch.io/tutorials/angular-2-http-requests-with-observables
+// myservice.getDocument().mergeMap(doc => myhttp.postDoc(doc))
+
+// https://github.com/ngrx/store/issues/175
+// https://github.com/ngrx/store/issues/147
