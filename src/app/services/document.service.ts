@@ -124,4 +124,18 @@ export class DocumentService {
 
   }
 
+  updateTextOfActiveDocument(text) {
+
+    console.log('Update text')
+
+    this.store.select('activeDocument')
+      .take(1)
+      .subscribe( (doc: Document) => [
+        doc.text = text,
+        // console.log(`EDIT TEXT: ${doc.text}`)
+        this.store.dispatch({type:UPDATE_DOCUMENT, payload: doc})
+      ])
+  }
+
+
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild  } from '@angular/core';
 import {NavbarService} from '../../../toplevel/navbar/navbar.service'
 import {EditorToolsComponent} from '../../editor-tools/editor-tools.component'
+import {DocumentService} from '../../../services/document.service'
 
 import {Document} from '../../../interfaces/document.interface'
 
-import { UPDATE_EDIT_TEXT, SET_EDIT_TEXT } from '../../../reducers/editor.reducer'
-import { UPDATE_DOCUMENT } from '../../../reducers/activeDocument.reducer'
+import { SET_EDIT_TEXT } from '../../../reducers/editor.reducer'
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
@@ -29,20 +29,20 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   activeDocument$: Observable<Document>
   documents: Observable<Document[]>
-  edit_text: string
-
 
   model = { source_text: ''}
+
+  // Timer for auto-update of document text
   number_of_keypresses: number = 0
   tickCycleSize = 10
   tickCycleCount =0
   private timer;
-  // Subscription object
   private sub: Subscription;
 
   constructor(
               private navbarService: NavbarService,
               private store: Store<AppState>,
+              private documentService: DocumentService,
               private cd: ChangeDetectorRef) {
 
     console.log('CONSTRUCT EDITOR')
@@ -58,48 +58,24 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
 
-  updateText() {
-
-    this.store.dispatch({type:SET_EDIT_TEXT, payload: this.model.source_text})
-
-  }
-
-  updateTextOfActiveDocument(text) {
-
-    console.log('Update text')
-
-    this.store.select('activeDocument')
-      .take(1)
-      .subscribe( (doc: Document) => [
-        doc.text = text,
-        // console.log(`EDIT TEXT: ${doc.text}`)
-        this.store.dispatch({type:UPDATE_DOCUMENT, payload: doc})
-      ])
-  }
-
   setText() {
 
     this.store.select('activeDocument')
       .take(1)
       .subscribe( (doc: Document) => [
-        console.log(  `SET EDITOR TEXT TO ${doc.text}`),
-        this.edit_text = doc.text,
         this.store.dispatch({type:SET_EDIT_TEXT, payload: doc.text})
       ])
   }
 
   updateAndRenderText() {
 
-    // console.log(`Update and render text`)
-    this.updateTextOfActiveDocument(this.model.source_text)
+    this.documentService.updateTextOfActiveDocument(this.model.source_text)
     this.editorToolsComponent.updateDocument()
-
 
   }
 
   handleKeyPress(arg) {
 
-    console.log(`KP: ${this.number_of_keypresses}`)
     this.number_of_keypresses  = this.number_of_keypresses + 1
   }
 
@@ -107,12 +83,12 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   tickerFunc(tick){
 
-    console.log(`tick: ${this.tickCycleCount}`);
+    // console.log(`tick: ${this.tickCycleCount}`);
 
     if (this.number_of_keypresses > 0 ) {
 
       console.log(`update text: ${this.tickCycleCount}`)
-      this.updateTextOfActiveDocument(this.model.source_text)
+      this.documentService.updateTextOfActiveDocument(this.model.source_text)
 
       if (this.tickCycleCount > this.tickCycleSize) {
 
@@ -154,8 +130,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.sub.unsubscribe();
 
   }
-
-
 
 
 }
