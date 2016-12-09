@@ -21,6 +21,7 @@
     <div [textPageHeight]>
       <div style="margin-bottom:8px;">
         <button (click)="updateAndRenderText()">Update (ESC)</button>
+        <label syle="paddingleft:8px;">ID: {{ ( activeDocument$ | async )?.id }}</label>
       </div>
       <textarea class="source-document"
                 id="text_input"

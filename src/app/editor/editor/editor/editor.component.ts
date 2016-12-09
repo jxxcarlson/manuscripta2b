@@ -47,8 +47,9 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.navbarService = navbarService
     this.store = store
 
-    store.select('activeDocument')
-      .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
+    this.activeDocument$ = store.select(state => state.activeDocument)
+    //store.select('activeDocument')
+    //  .subscribe( (activeDocument: Observable<Document>) => this.activeDocument$ = activeDocument )
 
   }
 
