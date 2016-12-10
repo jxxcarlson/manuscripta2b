@@ -31,8 +31,6 @@ export class NavbarComponent implements OnInit {
     this.activeNavSection$ = this.navbarService.activeNavSection$
 
 
-
-
   }
 
   textColor(target: string, active: string): string {
@@ -48,14 +46,22 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  makeFirstDocumentActive (){
+
+    setTimeout(() => {
+      this.documentService.selectFirstDocument()
+    }, 700)
+
+
+  }
+
   getRandomDocuments() {
 
-     console.log(`GET RANDOM DOCUMENT`)
-
-    this.documentService.search('random=10')
+    let token = ''
+    this.documentService.search('random=10', token, 'select_first')
+    this.makeFirstDocumentActive()
     this.router.navigateByUrl('/read', { skipLocationChange: false });
-
-    // this.navbarService.updateUIState('read')
+    this.navbarService.updateUIState('read')
   }
 
   ngOnInit() {
@@ -72,7 +78,8 @@ export class NavbarComponent implements OnInit {
 
     doIt() {
 
-      this.documentService.search('random=10')
+      let token = ''
+      this.documentService.search('random=10', token)
       console.log('OK Boss, I got the document')
   }
 

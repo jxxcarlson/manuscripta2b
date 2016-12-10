@@ -11,6 +11,7 @@ import {Constants} from '../toplevel/constants'
 import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
+import { SET_DOCUMENTS_AND_SELECT } from '../reducers/appReducer.reducer'
 import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
 import {SET_EDIT_TEXT} from '../reducers/editor.reducer'
 
@@ -45,6 +46,7 @@ export class DocumentService {
 
   // Use document ID to get doc from the server, then append to document list
   loadDocument(id: number) {
+
     this.http.get(`${this.apiRoot}/documents/${id}`)
       .map(res => res.json())
       .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
@@ -85,16 +87,36 @@ export class DocumentService {
 
   }
 
+  selectFirstDocument() {
+
+    this.store.select('documents')
+      .take(1)
+      .subscribe( (docs: Document[]) => [
+        this.select(docs[0])
+      ])
+
+  }
+
   // Query the database and replace the current document list
   // with the results of the search
-  search (searchTerm: string): void {
+  search (searchTerm: string, token: string, option: string = 'standard'): void {
+
+    let options = this.standarOptions(token)
 
     var qp: QueryParser = new QueryParser();
     var apiQuery: string = qp.parse(searchTerm)
 
-    this.http.get(`${this.apiRoot}/documents?${apiQuery}&content=all`)
+    if (option == 'standard')  {
+      var actionType = SET_DOCUMENTS
+    } else {
+      var actionType = SET_DOCUMENTS_AND_SELECT
+    }
+
+    this.http.get(`${this.apiRoot}/documents?${apiQuery}`)
       .map((res) => res.json())
-      .subscribe(payload =>  this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']}))
+      .subscribe(payload =>  [
+        this.store.dispatch({type: actionType, payload: payload['documents']})
+      ])
 
   }
 
@@ -182,33 +204,6 @@ export class DocumentService {
       .subscribe(payload => callback(payload)
       )
   }
-
-
-/*
-
- // url to send to server to generate latex:
- var url = envService.read('apiUrl') + '/exportlatex/' + id
- // We already know the url of the tar file with the exported document:
- scope.exportLatexUrl = "http://psurl.s3.amazonaws.com/latex/" + id + ".tar"
- var options = {headers: {"accesstoken": UserService.accessToken()}}
- return $http.get(url, options)
- .then(function (response) {
- // promise is fulfilled
- deferred.resolve(response.data);
- var jsonData = response.data
- var  url = jsonData['tar_url']
- // return the title of the document. This is the signal
- // that the tar file is ready
- scope.title = DocumentService.document().title
- // promise is returned
- return deferred.promise;
- }, function (response) {
- // the following line rejects the promise
- deferred.reject(response);
- // promise is returned
- return deferred.promise;
- })
- */
 
 
 }
