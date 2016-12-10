@@ -29,8 +29,13 @@ export class ReaderComponent implements OnInit {
   documents: Observable<Document[]>
   activeDocument: Document
   documentId: string
+
   printUrl: string
   printerValid: boolean = false
+
+  exportUrl: string
+  exportValid: boolean = false
+
   host: string = 'http://localhost:4200'
 
   constructor(private store: Store<AppState>,
@@ -49,10 +54,8 @@ export class ReaderComponent implements OnInit {
   }
 
 
-  invalidatePrinter() {
-
-    this.printerValid = false
-  }
+  invalidatePrinter() { this.printerValid = false }
+  invalidateExport() { this.exportValid = false }
 
   shareActiveDocument() {
 
@@ -72,6 +75,16 @@ export class ReaderComponent implements OnInit {
             (payload) => [this.printUrl = payload, this.printerValid = true])
         ])
 
+  }
+
+  exportDocumetToLaTeX() {
+
+    this.store
+      .take(1)
+      .subscribe((state) => [
+        this.documentService.exportDocumentToLaTex(state.activeDocument.id, state.user.token,
+          (payload) => [this.exportUrl = payload, this.exportValid = true])
+      ])
   }
 
   getDocumentFromRoute() {

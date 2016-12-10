@@ -172,6 +172,43 @@ export class DocumentService {
       )
   }
 
+  exportDocumentToLaTex(documentId: number, token: string, callback) {
+
+    let url = `${this.apiRoot}/exportlatex/${documentId}`
+    let options = this.standarOptions(token)
+
+    return this.http.get(url , options)
+      .map((res) => res.json()['tar_url'])
+      .subscribe(payload => callback(payload)
+      )
+  }
+
+
+/*
+
+ // url to send to server to generate latex:
+ var url = envService.read('apiUrl') + '/exportlatex/' + id
+ // We already know the url of the tar file with the exported document:
+ scope.exportLatexUrl = "http://psurl.s3.amazonaws.com/latex/" + id + ".tar"
+ var options = {headers: {"accesstoken": UserService.accessToken()}}
+ return $http.get(url, options)
+ .then(function (response) {
+ // promise is fulfilled
+ deferred.resolve(response.data);
+ var jsonData = response.data
+ var  url = jsonData['tar_url']
+ // return the title of the document. This is the signal
+ // that the tar file is ready
+ scope.title = DocumentService.document().title
+ // promise is returned
+ return deferred.promise;
+ }, function (response) {
+ // the following line rejects the promise
+ deferred.reject(response);
+ // promise is returned
+ return deferred.promise;
+ })
+ */
 
 
 }

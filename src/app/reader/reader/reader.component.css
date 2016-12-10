@@ -12,3 +12,12 @@ button {
   padding-top:10;
   padding-bottom: 0.45em;
 }
+
+span, a {
+
+  color: cornflowerblue;
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: 1.25rem;
+
+}

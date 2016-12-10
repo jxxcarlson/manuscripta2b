@@ -11,13 +11,19 @@
       <searchbar></searchbar>
 
       <div class="button-row">
-<!-- <a href=`mailto:?&Subject={{activeDocument.title}}&Body=You might be interested in {{activeDocument.title}} at "http://{{host}}/documents{{activeDocument.id}}"`>Share</a> -->
-        <button (click)="printActiveDocument()">Print</button>
-        <a style="margin-left:8px;"
+      <a href="mailto:?&Subject={{activeDocument.title}}&Body=You might be interested in the article %0D%0A%0D%0A %20%20%20%20 {{activeDocument.title}} %0D%0A%0D%0A at {{host}}/documents//{{activeDocument.id}}">Share</a>
+        <span (click)="printActiveDocument()">Print</span>
+        <span (click)="exportDocumetToLaTeX()">TeX</span>
+        <a style="margin-left:8px; color: dodgerblue"
            target = "_blank"
            [hidden]="!printerValid"
            (click)="invalidatePrinter()"
            href="{{printUrl}}">Click to print</a>
+        <a style="margin-left:8px; color: dodgerblue"
+           target = "_blank"
+           [hidden]="!exportValid"
+           (click)="invalidateExport()"
+           href="{{exportUrl}}">Click to download</a>
       </div>
 
       <document-list> </document-list>
