@@ -4,13 +4,13 @@ import { Store } from '@ngrx/store'
 import {Params} from '@angular/router'
 import {DocumentService} from '../../services/document.service'
 import {UserService} from '../../services/user.service'
-
+import {MailService} from '../../services/mailService'
+import {Constants} from '../../toplevel/constants'
 
 
 import {DocumentListModule} from '../document-list/document-list.module'
 
-// import {NavbarService} from '../,,/toplevel/navbar/navbar.service'
-import {NavbarService} from '../../toplevel/navbar/navbar.service'
+import {NavbarService} from '../../toplevel/navbar/navbar.service/'
 
 
 import { SET_DOCUMENTS } from '../../reducers/documents.reducer'
@@ -33,35 +33,40 @@ declare var window: MyWindow;
 export class ReaderComponent implements OnInit {
 
   documents: Observable<Document[]>
+  activeDocument: Document
   documentId: string
   printUrl: string
   printerValid: boolean = false
+  host: string = 'http://localhost:4200'
 
   constructor(private store: Store<AppState>,
-              private navbarService: NavbarService,
+              //private navbarService: NavbarService,
               private route: ActivatedRoute,
               private documentService: DocumentService,
-              private userService: UserService,
+              private mailService: MailService,
               private router: Router) {
 
     this.store = store
-    this.navbarService = navbarService
+    // this.navbarService = navbarService
 
+    store.select(s => s.activeDocument)
+      .subscribe( activeDocument => this.activeDocument = activeDocument)
 
   }
 
-  getUIState(store: Store<AppState>): UIState {
-
-    let uistate: UIState;
-
-    store.take(1).subscribe(s => uistate = s.uistate);
-
-    return uistate;
-  }
 
   invalidatePrinter() {
 
     this.printerValid = false
+  }
+
+  shareActiveDocument() {
+
+    this.store
+      .take(1)
+      .subscribe((state) =>
+        this.mailService.shareDocument(state.activeDocument))
+
   }
 
   printActiveDocument() {
@@ -75,7 +80,7 @@ export class ReaderComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  getDocumentFromRoute() {
 
     this.documentId = this.route.params['_value']['id']
 
@@ -83,10 +88,30 @@ export class ReaderComponent implements OnInit {
 
       this.documentService.getDocumentAndSubdocuments(parseInt(this.documentId))
     }
+  }
 
-    this.navbarService.updateUIState('read')
+  ngOnInit() {
+
+    this.getDocumentFromRoute()
+
+    // this.navbarService.updateUIState('read')
 
 
   }
 
 }
+
+
+/**
+
+
+ getUIState(store: Store<AppState>): UIState {
+
+    let uistate: UIState;
+
+    store.take(1).subscribe(s => uistate = s.uistate);
+
+    return uistate;
+  }
+
+ **/

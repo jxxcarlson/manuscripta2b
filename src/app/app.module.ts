@@ -14,6 +14,8 @@ import { userReducer } from './reducers/user.reducer'
 
 import {DocumentService} from './services/document.service';
 import {UserService} from './services/user.service';
+import {MailService} from './services/mailService'
+import {WindowRef} from './services/windowRef'
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreLogMonitorModule, useLogMonitor} from '@ngrx/store-log-monitor';
@@ -81,7 +83,8 @@ import {TextHelpersModule} from './text_helpers/text_helpers.module'
   ],
   providers: [
     QueryParser, Constants,
-    DocumentService, UserService
+    DocumentService, UserService,
+    MailService, WindowRef
   ],
   bootstrap: [AppComponent, [ ]]
 })

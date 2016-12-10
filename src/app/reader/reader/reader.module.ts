@@ -4,24 +4,24 @@ import { DocumentDisplayModule } from '../document/document_display.module'
 import { DocumentListModule } from '../document-list/document-list.module'
 
 
-@NgModule ({
 
+@NgModule ({
 
   declarations: [
 
-
   ],
-
 
   imports: [
 
     BrowserModule,
     DocumentDisplayModule,
-    DocumentListModule
+    DocumentListModule,
 
   ],
 
-  providers: [],
+  providers: [
+
+  ],
 
   exports: [
 
