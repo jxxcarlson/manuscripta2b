@@ -1,22 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import {Params} from '@angular/router'
 import {DocumentService} from '../../services/document.service'
-import {UserService} from '../../services/user.service'
 import {MailService} from '../../services/mailService'
 import {Constants} from '../../toplevel/constants'
 
 
-import {DocumentListModule} from '../document-list/document-list.module'
+import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
-import {NavbarService} from '../../toplevel/navbar/navbar.service/'
-
-
-import { SET_DOCUMENTS } from '../../reducers/documents.reducer'
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppState} from '../../interfaces/appstate.interface'
-import {UIState} from '../../interfaces/uistate.interface'
+import {Document} from '../../interfaces/document.interface'
 
 interface MyWindow extends Window {
   myFunction(): void;
@@ -40,14 +34,14 @@ export class ReaderComponent implements OnInit {
   host: string = 'http://localhost:4200'
 
   constructor(private store: Store<AppState>,
-              //private navbarService: NavbarService,
+              private navbarService: NavbarService,
               private route: ActivatedRoute,
               private documentService: DocumentService,
               private mailService: MailService,
               private router: Router) {
 
     this.store = store
-    // this.navbarService = navbarService
+    this.navbarService = navbarService
 
     store.select(s => s.activeDocument)
       .subscribe( activeDocument => this.activeDocument = activeDocument)
@@ -94,7 +88,7 @@ export class ReaderComponent implements OnInit {
 
     this.getDocumentFromRoute()
 
-    // this.navbarService.updateUIState('read')
+    this.navbarService.updateUIState('read')
 
 
   }
