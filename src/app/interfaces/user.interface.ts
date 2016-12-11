@@ -3,6 +3,5 @@ export interface User {
   username: string;
   password: string
   token: string;
-  rawToken: string
   signedIn: boolean;
 };

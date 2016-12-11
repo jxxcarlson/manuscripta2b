@@ -1,12 +1,10 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AppState } from '../../interfaces/appstate.interface';
-import { Observable} from 'rxjs/Rx';
+import {DocumentService} from '../../services/document.service'
 import { Store } from '@ngrx/store';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'new-document',
@@ -19,26 +17,44 @@ export class NewDocumentComponent implements OnInit {
   model = {title: ''}
 
   constructor(
-              private store: Store<AppState>
+              private store: Store<AppState>,
+              private documentService: DocumentService,
+              private router: Router
+
   ) {
 
     this.store = store
+    this.documentService = documentService
 
   }
+  gotoRoute() {
+
+    setTimeout(() => {
+      [this.router.navigateByUrl('/edit'),
+        console.log('GO TO ROUTE')]
+    }, 700)
+  }
+
 
   submit() {
 
     console.log(`TITLE: ${this.model.title}`)
+    this.store
+      .take(1)
+      .subscribe((state) => [
+        this.documentService.createDocument(
+          this.model.title,
+          state.user.token)
+      ])
 
+    this.gotoRoute()
 
   }
 
 
   ngOnInit() {
 
-
   }
-
 
 
 }

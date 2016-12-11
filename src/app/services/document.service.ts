@@ -72,8 +72,11 @@ export class DocumentService {
       ])
   }
 
-  select(document) {
-    if (document.rendered_content == undefined) {
+  select(document: Document, token: string = '') {
+
+    let options = this.standardOptions(token)
+
+    if (document.rendered_text == undefined) {
 
       this.http.get(`${this.apiRoot}/documents/${document.id}`)
         .map(res => res.json())
@@ -124,6 +127,37 @@ export class DocumentService {
     });
 
     return new RequestOptions({ headers: headers });
+  }
+
+  select2(document: Document, token: string) {
+
+    setTimeout(() => {
+      this.select(document, token)
+    }, 700)
+  }
+
+  createDocument(title: string, token:string) {
+
+    console.log(`DS, createDocument -- Making new document with title = ${title}`)
+
+    let params = {
+      title: title,
+      token: token,
+      options: '{}',
+      current_document_id: 0,
+      parent_document_id: 0
+    }
+
+    let url = `${this.apiRoot}/documents`
+
+    return this.http.post(url, params)
+      .map((res) => res.json())
+      .subscribe(payload =>  [
+        console.log(`CREATE DOCUMENT: ${JSON.stringify(payload)}`),
+        this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
+        this.select2(payload['document'], token)
+      ])
+
   }
 
 
