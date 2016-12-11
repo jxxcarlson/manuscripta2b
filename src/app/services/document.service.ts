@@ -101,21 +101,21 @@ export class DocumentService {
 
   // Query the database and replace the current document list
   // with the results of the search
-  search (searchTerm: string, token: string): void {
-
-    let options = this.standardOptions(token)
+  search (searchTerm: string): void {
 
     var qp: QueryParser = new QueryParser();
     var apiQuery: string = qp.parse(searchTerm)
+    var url = `${this.apiRoot}/documents?${apiQuery}`
 
-    this.http.get(`${this.apiRoot}/documents?${apiQuery}`, options)
-      .map((res) => res.json())
-      .subscribe(payload =>  [
-        // console.log(`SEARCH PAYLOAD: ${JSON.stringify(payload)}`),
-        this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']})
-        // this.store.dispatch({type: SET_DOCUMENTS, payload: {documents: payload['documents'], activeDocument: payload['first_document']}})
+    this.store
+      .take(1)
+      .subscribe((state) => [
+        this.http.get(url, this.standardOptions(state.user.token))
+          .map((res) => res.json())
+          .subscribe(payload =>  [
+            this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']})
+          ])
       ])
-
   }
 
   // return the header required by the xdoc API

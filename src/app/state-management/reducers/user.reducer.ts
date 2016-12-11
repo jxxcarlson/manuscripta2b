@@ -1,6 +1,7 @@
 // https://github.com/ngrx/store
 //
 export const AUTHORIZE_USER =  'AUTHORIZE_USER'
+export const GET_TOKEN =  'GET_TOKEN'
 
 
 import { User } from '../interfaces/user.interface'

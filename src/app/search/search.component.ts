@@ -22,13 +22,7 @@ export class SearchComponent implements OnInit {
 
   doSearch(searchTerm: HTMLInputElement) {
 
-    this.store
-      .take(1)
-      .subscribe((state) => [
-        console.log(`QQQ, SEARCH, TOKEN = ${JSON.stringify(state.user.token)}`),
-        this.documentService.search(searchTerm.value, state.user.token)
-      ])
-
+    this.documentService.search(searchTerm.value)
 
   }
 
