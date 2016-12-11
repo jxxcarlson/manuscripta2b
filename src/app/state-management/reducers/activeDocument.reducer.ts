@@ -9,15 +9,16 @@ import { Document } from '../interfaces/document.interface'
 import { ActionReducer, Action } from '@ngrx/store';
 
 export const activeDocumentReducer: ActionReducer<Document> = (state: any = [], action: Action) => {
+
   switch (action.type) {
     case SELECT_DOCUMENT:
       return action.payload;
     case IDENTITY:
       return action.payload
     case UPDATE_DOCUMENT:
-      state = action.payload
-
+      return action.payload
     default:
       return state;
   }
+
 };
