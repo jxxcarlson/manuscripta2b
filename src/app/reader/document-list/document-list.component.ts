@@ -2,7 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { Document } from '../../shared/document.model'
 import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
-import { SET_DOCUMENTS } from '../../reducers/documents.reducer'
+import { SET_DOCUMENTS } from '../../state-management/reducers/documents.reducer'
 import { DocumentService } from '../../services/document.service'
 
 

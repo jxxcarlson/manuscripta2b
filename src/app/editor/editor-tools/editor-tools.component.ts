@@ -1,6 +1,6 @@
 import {Component, OnInit, state} from '@angular/core';
-import { User } from '../../interfaces/user.interface'
-import { AppState } from '../../interfaces/appstate.interface'
+import { User } from '../../state-management/interfaces/user.interface'
+import { AppState } from '../../state-management/interfaces/appstate.interface'
 
 
 // import { Observable} from 'rxjs/Rx';

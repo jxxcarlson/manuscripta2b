@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../navbar/navbar.service'
-import { AppState } from '../../interfaces/appstate.interface';
+import { AppState } from '../../state-management/interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
-import { User } from '../../interfaces/user.interface'
+import { User } from '../../state-management/interfaces/user.interface'
 import { Observable} from 'rxjs/Rx';
 
 

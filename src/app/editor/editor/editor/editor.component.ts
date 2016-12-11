@@ -2,7 +2,7 @@ import {Component, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit} from '@a
 import {NavbarService} from '../../../toplevel/navbar/navbar.service'
 import {EditorToolsComponent} from '../../editor-tools/editor-tools.component'
 import {DocumentService} from '../../../services/document.service'
-import {Document} from '../../../interfaces/document.interface'
+import {Document} from '../../../state-management/interfaces/document.interface'
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 import {Constants} from '../../../toplevel/constants'
@@ -12,7 +12,7 @@ interface AppState {
   activeDocument: Document
 }
 
-import {Editor} from '../../../interfaces/editor.interface'
+import {Editor} from '../../../state-management/interfaces/editor.interface'
 
 
 @Component({

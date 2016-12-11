@@ -7,10 +7,10 @@ import {AppRoutingModule} from './app-routing.module'
 import { Constants } from './toplevel/constants'
 
 import { StoreModule } from '@ngrx/store';
-import { documentsReducer } from './reducers/documents.reducer'
-import { activeDocumentReducer } from './reducers/activeDocument.reducer'
-import { uistateReducer } from './reducers/uistate.reducer'
-import { userReducer } from './reducers/user.reducer'
+import { documentsReducer } from './state-management/reducers/documents.reducer'
+import { activeDocumentReducer } from './state-management/reducers/activeDocument.reducer'
+import { uistateReducer } from './state-management/reducers/uistate.reducer'
+import { userReducer } from './state-management/reducers/user.reducer'
 
 import {DocumentService} from './services/document.service';
 import {UserService} from './services/user.service';

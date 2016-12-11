@@ -3,14 +3,13 @@ import { Constants } from '../toplevel/constants'
 import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Store} from '@ngrx/store';
-// import {User} from '../../models/user.model'
 
-import {User} from '../interfaces/user.interface'
-import {AppState} from '../interfaces/appstate.interface'
+import {User} from '../state-management/interfaces/user.interface'
+import {AppState} from '../state-management/interfaces/appstate.interface'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { AUTHORIZE_USER } from '../reducers/user.reducer'
+import { AUTHORIZE_USER } from '../state-management/reducers/user.reducer'
 
 
 @Injectable()
@@ -33,13 +32,11 @@ export class SigninService {
           this.store.dispatch({
             type: AUTHORIZE_USER,
             payload: { username: username, password: password,
-              id: payload.user_id, token: payload.token, rawToken: payload,
+              id: payload.user_id, token: payload.token,
               signedIn: payload.token != null }
           })
         ]
       )
-
-
   }
 
   signout() {

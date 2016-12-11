@@ -5,11 +5,11 @@ import {DocumentService} from '../../services/document.service'
 import {Router} from '@angular/router';
 
 
-import { AppState } from '../../interfaces/appstate.interface';
+import { AppState } from '../../state-management/interfaces/appstate.interface';
 import { Store } from '@ngrx/store';
-import { UIState } from '../../interfaces/uistate.interface';
+import { UIState } from '../../state-management/interfaces/uistate.interface';
 
-import { uistateReducer, initialState } from '../../reducers/uistate.reducer'
+import { uistateReducer, initialState } from '../../state-management/reducers/uistate.reducer'
 
 @Component({
   selector: 'navbar',

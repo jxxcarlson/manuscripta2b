@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
 
-import {AppState} from '../interfaces/appstate.interface'
-import {User} from '../interfaces/user.interface'
+import {AppState} from '../state-management/interfaces/appstate.interface'
+import {User} from '../state-management/interfaces/user.interface'
 import {WindowRef} from '../services/windowRef'
 
 @Injectable()

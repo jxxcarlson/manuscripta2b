@@ -2,7 +2,6 @@
 
 
 
-<div class="container">
 
   <!--- SIGN OUT BUTTON -->
   <p [hidden]="!(( user$ | async ).signedIn)" style="font-size:1.5em;" >Signed in as  {{ ( user$ | async)?.username }}</p>
@@ -38,4 +37,3 @@
     </form>
   </div>
 
-</div>

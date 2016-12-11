@@ -7,6 +7,7 @@ import {AppRoutingModule} from '../../app-routing.module'
 import { NavbarComponent } from './navbar.component'
 import {NavbarService} from "./navbar.service";
 import { CommonModule } from '@angular/common'
+import {SearchModule} from '../../search/search.module'
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common'
   imports: [
 
     AppRoutingModule,
+    SearchModule,
     CommonModule // for async pipe
 
   ],

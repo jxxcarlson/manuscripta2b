@@ -5,20 +5,20 @@ import {Observable} from "rxjs/Observable";
 
 import 'rxjs/add/operator/map';
 
-import {Document} from '../interfaces/document.interface';
+import {Document} from '../state-management/interfaces/document.interface';
 import {Constants} from '../toplevel/constants'
 
 import { QueryParser } from './queryparser.service'
 
-import { ADD_DOCUMENT, SET_DOCUMENTS } from '../reducers/documents.reducer'
-import { SET_DOCUMENTS_AND_SELECT } from '../reducers/appReducer.reducer'
-import { IDENTITY, UPDATE_DOCUMENT } from '../reducers/activeDocument.reducer'
-import {SET_EDIT_TEXT} from '../reducers/editor.reducer'
+import { ADD_DOCUMENT, SET_DOCUMENTS } from '../state-management/reducers/documents.reducer'
+import { SET_DOCUMENTS_AND_SELECT } from '../state-management/reducers/appReducer.reducer'
+import { IDENTITY, UPDATE_DOCUMENT } from '../state-management/reducers/activeDocument.reducer'
+import {SET_EDIT_TEXT} from '../state-management/reducers/editor.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
 
-import {AppState} from '../interfaces/appstate.interface'
+import {AppState} from '../state-management/interfaces/appstate.interface'
 
 
 @Injectable()

@@ -9,8 +9,8 @@ import {Constants} from '../../toplevel/constants'
 import {NavbarService} from '../../toplevel/navbar/navbar.service'
 
 import {ActivatedRoute, Router} from "@angular/router";
-import {AppState} from '../../interfaces/appstate.interface'
-import {Document} from '../../interfaces/document.interface'
+import {AppState} from '../../state-management/interfaces/appstate.interface'
+import {Document} from '../../state-management/interfaces/document.interface'
 
 interface MyWindow extends Window {
   myFunction(): void;

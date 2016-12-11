@@ -3,9 +3,9 @@ import {Store} from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
-import {User} from '../../interfaces/user.interface'
-import {UIState} from '../../interfaces/uistate.interface'
-import {UPDATE_NAV_STATE} from '../../reducers/uistate.reducer'
+import {User} from '../../state-management/interfaces/user.interface'
+import {UIState} from '../../state-management/interfaces/uistate.interface'
+import {UPDATE_NAV_STATE} from '../../state-management/reducers/uistate.reducer'
 
 export interface AppState{
 

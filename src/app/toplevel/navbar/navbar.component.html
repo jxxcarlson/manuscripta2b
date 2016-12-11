@@ -18,14 +18,15 @@
         <!--<span class="" style="color:white; margin-left:50px;">  NS = {{ activeNavSection$ }} </span>  -->
       </div>
 
-        <div style="display: inline-block; float:right; margin-right:40px;padding-top:8px;">
+      <!-- <searchbar style="width:100px;"></searchbar> -->
+
+
+      <div style="display: inline-block; float:right; margin-right:40px;padding-top:8px;">
         <span class="nav-item"><a [style.color]="textColor('settings',activeNavSection$)" [routerLink]="['settings']">Settings</a></span>
         <span class="mybutton" (click)="getRandomDocuments()"> Explore</span>
         <span class="nav-item"><a [style.color]="textColor('home',activeNavSection$)" [routerLink]="['home']">Home</a></span>
         <span class="nav-item"><a [style.color]="textColor('about',activeNavSection$)" [routerLink]="['about']">About</a></span>
           <!-- <span><a class="nav-item" routerLink="/about" routerLinkActive="nav-item-active">About</a></span> -->
-
-
       </div>
 
 

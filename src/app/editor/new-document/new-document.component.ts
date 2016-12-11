@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { AppState } from '../../interfaces/appstate.interface';
+import { AppState } from '../../state-management/interfaces/appstate.interface';
 import {DocumentService} from '../../services/document.service'
 import { Store } from '@ngrx/store';
 import {Router} from '@angular/router';
