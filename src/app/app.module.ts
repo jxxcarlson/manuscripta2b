@@ -45,7 +45,8 @@ import {EditorModule} from "./editor/editor.module";
 import {DocumentDisplayModule} from './reader/document/document_display.module'
 import {DocumentListModule} from './reader/document-list/document-list.module'
 import {SearchModule} from './search/search.module';
-import {TextHelpersModule} from './text_helpers/text_helpers.module'
+import {TextHelpersModule} from './text_helpers/text_helpers.module';
+import { NewDocumentComponent } from './editor/new-document/new-document.component'
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {TextHelpersModule} from './text_helpers/text_helpers.module'
     AboutComponent,
     ImagesComponent,
     SearchScopeControlComponent,
-    SettingsComponent
+    SettingsComponent,
+    NewDocumentComponent
   ],
 
   imports: [

@@ -94,15 +94,13 @@ export class DocumentService {
       .subscribe( (docs: Document[]) => [
         this.select(docs[0])
       ])
-
   }
 
   // Query the database and replace the current document list
   // with the results of the search
   search (searchTerm: string, token: string): void {
 
-
-    let options = this.standarOptions(token)
+    let options = this.standardOptions(token)
 
     var qp: QueryParser = new QueryParser();
     var apiQuery: string = qp.parse(searchTerm)
@@ -110,18 +108,21 @@ export class DocumentService {
     this.http.get(`${this.apiRoot}/documents?${apiQuery}`, options)
       .map((res) => res.json())
       .subscribe(payload =>  [
+        // console.log(`SEARCH PAYLOAD: ${JSON.stringify(payload)}`),
         this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']})
+        // this.store.dispatch({type: SET_DOCUMENTS, payload: {documents: payload['documents'], activeDocument: payload['first_document']}})
       ])
 
   }
 
-  standarOptions(token: string) {
+  // return the header required by the xdoc API
+  standardOptions(token: string) {
 
     let headers = new Headers({
       'Content-Type': 'application/json',
       'accesstoken': token
     });
-    console.log(`In standardOptions, token = ${token}, headers = ${JSON.stringify(headers)}`)
+
     return new RequestOptions({ headers: headers });
   }
 
@@ -135,7 +136,7 @@ export class DocumentService {
     }
 
     let url = `${this.apiRoot}/documents/${document.id}`
-    let options = this.standarOptions(token)
+    let options = this.standardOptions(token)
 
     return this.http.post(url, params , options)
       .map((res) => res.json())
@@ -151,18 +152,18 @@ export class DocumentService {
     console.log(`ID: ${document.id}`)
     console.log(`Author: ${document.author}`)
     console.log(`Parent: ${document.links.parent.id}`)
-    // console.log(`DOCUMENT: ${JSON.stringify(document)}`)
 
     let params = {
       author_name: document.author
     }
 
     let url = `${this.apiRoot}/documents/${document.links.parent.id}?${command}=${document.id}`
-    // http://xdoc-api.herokuapp.com/v1/documents/89?move_down=231
+    // Typical URL: http://xdoc-api.herokuapp.com/v1/documents/89?move_down=231
+    // Move document 231 down one step in the subdocument list of its parent, document 89
 
     console.log(`MOVE: url = ${url}`)
 
-    let options = this.standarOptions(token)
+    let options = this.standardOptions(token)
 
     return this.http.post(url, params , options)
       .map((res) => res.json())
@@ -213,7 +214,7 @@ export class DocumentService {
   printDocument(documentId: number, token: string, callback) {
 
     let url = `${this.apiRoot}/printdocument/${documentId}`
-    let options = this.standarOptions(token)
+    let options = this.standardOptions(token)
 
     return this.http.get(url , options)
       .map((res) => res.json()['url'])
@@ -224,7 +225,7 @@ export class DocumentService {
   exportDocumentToLaTex(documentId: number, token: string, callback) {
 
     let url = `${this.apiRoot}/exportlatex/${documentId}`
-    let options = this.standarOptions(token)
+    let options = this.standardOptions(token)
 
     return this.http.get(url , options)
       .map((res) => res.json()['tar_url'])
