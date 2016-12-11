@@ -8,7 +8,19 @@ export const UPDATE_DOCUMENT =  'UPDATE_DOCUMENT'
 import { Document } from '../interfaces/document.interface'
 import { ActionReducer, Action } from '@ngrx/store';
 
-export const activeDocumentReducer: ActionReducer<Document> = (state: any = [], action: Action) => {
+const initialDocument: Document = {
+
+  id: 0,
+  title: 'Dummy document',
+  author: 'No one',
+  text: 'Dummy text',
+  rendered_text: 'Dummy text',
+  has_subdocuments: false,
+  documents: [],
+  links: { parent: { id: -1, title: 'Nonexistent'}}
+}
+
+export const activeDocumentReducer: ActionReducer<Document> = (state: Document = initialDocument, action: Action) => {
 
   switch (action.type) {
     case SELECT_DOCUMENT:
@@ -16,7 +28,7 @@ export const activeDocumentReducer: ActionReducer<Document> = (state: any = [], 
     case IDENTITY:
       return action.payload
     case UPDATE_DOCUMENT:
-      return action.payload
+      return Object.assign (state, action.payload)
     default:
       return state;
   }
