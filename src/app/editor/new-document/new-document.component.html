@@ -2,11 +2,25 @@
 
 
 
-<div class="text container">
+<div class="ui centered grid">
 
-  <h3>New document</h3>
-  <div>
+    <div six wide column style="margin-top:2rem;">
 
-  </div>
+      <div container style="text-align:left">
+
+        <h2>New document</h2>
+
+        <label>Title</label>
+        <input type="text"
+               [(ngModel)]="model.title" name="title"
+        >
+        <br>
+        <br>
+        <button (click)="submit()">Create</button>
+
+      </div>
+
+
+    </div>
 
 </div>

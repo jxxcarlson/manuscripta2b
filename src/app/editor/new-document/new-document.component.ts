@@ -16,11 +16,21 @@ import { Store } from '@ngrx/store';
 export class NewDocumentComponent implements OnInit {
 
 
+  model = {title: ''}
+
   constructor(
               private store: Store<AppState>
   ) {
 
     this.store = store
+
+  }
+
+  submit() {
+
+    console.log(`TITLE: ${this.model.title}`)
+
+
   }
 
 

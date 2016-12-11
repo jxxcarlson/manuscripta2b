@@ -1,0 +1,19 @@
+label {
+
+  margin-right:8px;
+  font-weight:bold;
+  font-size: 1.2rem;
+}
+
+input {
+
+  width:200px;
+  height: 30px;
+  background-color: #eee;
+}
+
+
+button {
+
+  width: 100px;
+}
