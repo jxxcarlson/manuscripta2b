@@ -8,6 +8,7 @@ import { AboutComponent } from './toplevel/about/about.component'
 import { HomeComponent } from './toplevel/home/home.component'
 import { ReaderComponent } from './reader/reader/reader.component'
 import { EditorComponent } from './editor/editor/editor/editor.component'
+import { NewDocumentComponent } from './editor/new-document/new-document.component'
 import { ImagesComponent } from './images/images/images.component'
 import { SettingsComponent } from './toplevel/settings/settings.component'
 
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'edit', component: EditorComponent },
   { path: 'images', component: ImagesComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'newdocument', component: NewDocumentComponent},
   { path: '', component: HomeComponent }
 ];
 
