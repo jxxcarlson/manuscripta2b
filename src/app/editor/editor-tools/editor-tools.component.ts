@@ -39,7 +39,18 @@ export class EditorToolsComponent implements OnInit {
     this.store
       .take(1)
       .subscribe((state) => [
+        console.log(`QQQ: UPDATE, token = ${JSON.stringify(state.user.token)}`),
         this.documentService.updateDocument(state.activeDocument, state.user.token)
+      ])
+  }
+
+  moveSubdocument(direction: string) {
+
+    this.store
+      .take(1)
+      .subscribe((state) => [
+        console.log(`QQQ: UPDATE, token = ${JSON.stringify(state.user.token)}`),
+        this.documentService.moveSubdocument(state.activeDocument, direction, state.user.token)
       ])
   }
 

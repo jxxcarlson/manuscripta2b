@@ -12,8 +12,8 @@ export class Constants{
 
   constructor(){
 
-    //this.apiRoot = 'http://localhost:2300/v1'
-    this.apiRoot = 'http://xdoc-api.herokuapp.com/v1'
+    this.apiRoot = 'http://localhost:2300/v1'
+    // this.apiRoot = 'http://xdoc-api.herokuapp.com/v1'
     this.host = 'localhost:4200'
     this.tickCycleSize = 10
 

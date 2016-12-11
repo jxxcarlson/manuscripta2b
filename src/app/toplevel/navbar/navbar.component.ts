@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
   getRandomDocuments() {
 
     let token = ''
-    this.documentService.search('random=10', token, 'select_first')
+    this.documentService.search('random=10', token)
     this.makeFirstDocumentActive()
     this.router.navigateByUrl('/read', { skipLocationChange: false });
     this.navbarService.updateUIState('read')

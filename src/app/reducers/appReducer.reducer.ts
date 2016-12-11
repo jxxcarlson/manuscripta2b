@@ -11,8 +11,8 @@ export const appReducer: ActionReducer<AppState> =
   (state: AppState, action: Action) => {
     switch (action.type) {
       case SET_DOCUMENTS_AND_SELECT:
-        console.log(action.payload[0])
-        state.activeDocument = action.payload[0]
+        //state.documents = action.payload['documents']
+        // state.activeDocument = action.payload['activeDocument']
         return action.payload
       default:
         return state;

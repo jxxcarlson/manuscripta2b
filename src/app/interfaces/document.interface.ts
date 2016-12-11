@@ -1,9 +1,13 @@
 export interface Document {
-  id: number;
-  title: string;
-  text: string;
-  rendered_text: string;
-  has_subdocuments: boolean;
+  id: number
+  title: string
+  author: string
+  text: string
+  rendered_text: string
+  has_subdocuments: boolean
+  links: {
+    parent: {id: number, title: string}
+  }
   documents: Document[]
 }
 

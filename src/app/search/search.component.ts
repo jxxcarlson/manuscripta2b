@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
     this.store
       .take(1)
       .subscribe((state) => [
-        console.log(`TOKEN = ${state.user.token}`),
+        console.log(`QQQ, SEARCH, TOKEN = ${JSON.stringify(state.user.token)}`),
         this.documentService.search(searchTerm.value, state.user.token)
       ])
 

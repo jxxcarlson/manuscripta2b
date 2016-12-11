@@ -29,9 +29,12 @@ export class SigninService {
     return this.http.get(url)
       .map((res:Response) => res.json())
       .subscribe(payload => [
+          console.log(`PAYLOAD: ${payload}`),
           this.store.dispatch({
             type: AUTHORIZE_USER,
-            payload: { username: username, password: password, id: payload.user_id, token: payload.token, signedIn: payload.token != null }
+            payload: { username: username, password: password,
+              id: payload.user_id, token: payload.token, rawToken: payload,
+              signedIn: payload.token != null }
           })
         ]
       )

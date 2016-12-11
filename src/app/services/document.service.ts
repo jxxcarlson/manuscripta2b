@@ -99,23 +99,18 @@ export class DocumentService {
 
   // Query the database and replace the current document list
   // with the results of the search
-  search (searchTerm: string, token: string, option: string = 'standard'): void {
+  search (searchTerm: string, token: string): void {
+
 
     let options = this.standarOptions(token)
 
     var qp: QueryParser = new QueryParser();
     var apiQuery: string = qp.parse(searchTerm)
 
-    if (option == 'standard')  {
-      var actionType = SET_DOCUMENTS
-    } else {
-      var actionType = SET_DOCUMENTS_AND_SELECT
-    }
-
-    this.http.get(`${this.apiRoot}/documents?${apiQuery}`)
+    this.http.get(`${this.apiRoot}/documents?${apiQuery}`, options)
       .map((res) => res.json())
       .subscribe(payload =>  [
-        this.store.dispatch({type: actionType, payload: payload['documents']})
+        this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']})
       ])
 
   }
@@ -126,6 +121,7 @@ export class DocumentService {
       'Content-Type': 'application/json',
       'accesstoken': token
     });
+    console.log(`In standardOptions, token = ${token}, headers = ${JSON.stringify(headers)}`)
     return new RequestOptions({ headers: headers });
   }
 
@@ -148,6 +144,37 @@ export class DocumentService {
       ])
 
   }
+
+  // moveSubdocument( parent_id: number, subdocument_id: number, command: string, token: string ) {
+  moveSubdocument( document: Document, command: string, token: string ) {
+
+    console.log(`ID: ${document.id}`)
+    console.log(`Author: ${document.author}`)
+    console.log(`Parent: ${document.links.parent.id}`)
+    // console.log(`DOCUMENT: ${JSON.stringify(document)}`)
+
+    let params = {
+      author_name: document.author
+    }
+
+    let url = `${this.apiRoot}/documents/${document.links.parent.id}?${command}=${document.id}`
+    // http://xdoc-api.herokuapp.com/v1/documents/89?move_down=231
+
+    console.log(`MOVE: url = ${url}`)
+
+    let options = this.standarOptions(token)
+
+    return this.http.post(url, params , options)
+      .map((res) => res.json())
+      .subscribe(payload =>  [
+        console.log(`PAYLOAD (MOVE): ${JSON.stringify(payload)}`),
+        this.store.dispatch({
+          type: SET_DOCUMENTS_AND_SELECT,
+          payload: payload.document.links.documents
+        })
+      ])
+  }
+
 
   /// TEXT FUNCTIONS ///
 
