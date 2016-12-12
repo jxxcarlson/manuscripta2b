@@ -1,8 +1,8 @@
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from "rxjs/Observable";
-
+import {Store} from '@ngrx/store'
+// import {Observable} from "rxjs/Observable";
+import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import {Document} from '../state-management/interfaces/document.interface';
@@ -11,8 +11,8 @@ import {Constants} from '../toplevel/constants'
 import { QueryParser } from './queryparser.service'
 
 import { ADD_DOCUMENT, SET_DOCUMENTS } from '../state-management/reducers/documents.reducer'
-import { SET_DOCUMENTS_AND_SELECT } from '../state-management/reducers/appReducer.reducer'
-import { IDENTITY, UPDATE_DOCUMENT } from '../state-management/reducers/activeDocument.reducer'
+import { SET_DOCUMENTS_AND_SELECT, ADD_DOCUMENT_AND_SELECT } from '../state-management/reducers/appReducer.reducer'
+import { SELECT_DOCUMENT, UPDATE_DOCUMENT } from '../state-management/reducers/activeDocument.reducer'
 import {SET_EDIT_TEXT} from '../state-management/reducers/editor.reducer'
 
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
@@ -47,44 +47,64 @@ export class DocumentService {
   // Use document ID to get doc from the server, then append to document list
   loadDocument(id: number) {
 
-    this.http.get(`${this.apiRoot}/documents/${id}`)
-      .map(res => res.json())
-      .subscribe(payload =>  this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
+    let url = `${this.apiRoot}/documents/${id}`
+
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload => this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}))
+      ).subscribe()
+
   }
 
   // Use document ID to get doc from the server, then append to document list
   loadAndActivateDocument(id: number) {
-    this.http.get(`${this.apiRoot}/documents/${id}`)
-      .map(res => res.json())
-      .subscribe(payload =>  [
-        this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
-        this.store.dispatch({type: IDENTITY, payload: payload['document']}),
-      ])
+
+    let url = `${this.apiRoot}/documents/${id}`
+
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload =>[
+          this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
+          this.store.dispatch({type: SELECT_DOCUMENT, payload: payload['document']})
+        ])
+      ).subscribe()
+
   }
 
 
   getDocumentAndSubdocuments(id: number) {
-    this.http.get(`${this.apiRoot}/documents/${id}`)
-      .map(res => res.json())
-      .subscribe(payload =>  [
-        this.store.dispatch({type: IDENTITY, payload: payload['document']}),
-        this.store.dispatch({type: SET_DOCUMENTS, payload: payload.document.links.documents})
-      ])
+
+    let url = `${this.apiRoot}/documents/${id}`
+
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload =>[
+          this.store.dispatch({type: SELECT_DOCUMENT, payload: payload['document']}),
+          this.store.dispatch({type: SET_DOCUMENTS, payload: payload.document.links.documents})
+        ])
+      ).subscribe()
+
   }
 
-  select(document: Document, token: string = '') {
-
-    let options = this.standardOptions(token)
+  select(document: Document) {
 
     if (document.rendered_text == undefined) {
 
-      this.http.get(`${this.apiRoot}/documents/${document.id}`)
-        .map(res => res.json())
-        .subscribe(payload =>  this.store.dispatch({type: IDENTITY, payload: payload['document']}))
+      let url = `${this.apiRoot}/documents/${document.id}`
+
+      this.store.select(state=> state.user.token)
+        .flatMap( token => this.http.get(url, this.standardOptions(token))
+          .map((res) => res.json())
+          .do(payload =>
+            this.store.dispatch({type: SELECT_DOCUMENT, payload: payload['document']}))
+        ).subscribe()
 
     } else {
 
-      this.store.dispatch({type: IDENTITY, payload: document})
+      this.store.dispatch({type: SELECT_DOCUMENT, payload: document})
 
     }
 
@@ -105,21 +125,21 @@ export class DocumentService {
 
     var qp: QueryParser = new QueryParser();
     var apiQuery: string = qp.parse(searchTerm)
-    var url = `${this.apiRoot}/documents?${apiQuery}`
+    var url: string = `${this.apiRoot}/documents?${apiQuery}`
 
-    this.store
-      .take(1)
-      .subscribe((state) => [
-        this.http.get(url, this.standardOptions(state.user.token))
-          .map((res) => res.json())
-          .subscribe(payload =>  [
-            this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']})
-          ])
-      ])
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload => [
+          this.store.dispatch({type: SET_DOCUMENTS, payload: payload['documents']}),
+          this.select(payload['documents'][0])
+        ])
+      ).subscribe()
   }
 
+
   // return the header required by the xdoc API
-  standardOptions(token: string) {
+  standardOptions(token: string): RequestOptions {
 
     let headers = new Headers({
       'Content-Type': 'application/json',
@@ -129,39 +149,30 @@ export class DocumentService {
     return new RequestOptions({ headers: headers });
   }
 
-  select2(document: Document, token: string) {
+  select2(document: Document) {
 
     setTimeout(() => {
-      this.select(document, token)
+      this.select(document)
     }, 700)
   }
 
-  createDocument(title: string, token:string) {
 
-    console.log(`DS, createDocument -- Making new document with title = ${title}`)
-
-    let params = {
-      title: title,
-      token: token,
-      options: '{}',
-      current_document_id: 0,
-      parent_document_id: 0
-    }
+  createDocument(params) {
 
     let url = `${this.apiRoot}/documents`
 
-    return this.http.post(url, params)
-      .map((res) => res.json())
-      .subscribe(payload =>  [
-        console.log(`CREATE DOCUMENT: ${JSON.stringify(payload)}`),
-        this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
-        this.select2(payload['document'], token)
-      ])
-
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.post(url, Object.assign(params, {token: token}))
+        .map((res) => res.json())
+        .do(payload => [
+          this.store.dispatch({type: ADD_DOCUMENT, payload: payload['document']}),
+          this.select(payload['document'])
+        ])
+      ).subscribe()
   }
 
 
-  updateDocument(document: Document, token: string) {
+  updateDocument(document: Document) {
 
     let params = {
       id: document.id,
@@ -170,18 +181,18 @@ export class DocumentService {
     }
 
     let url = `${this.apiRoot}/documents/${document.id}`
-    let options = this.standardOptions(token)
 
-    return this.http.post(url, params , options)
-      .map((res) => res.json())
-      .subscribe(payload =>  [
-        this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload['document']})
-      ])
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.post(url, params, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload => this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload['document']}))
+      ).subscribe()
 
   }
 
+
   // moveSubdocument( parent_id: number, subdocument_id: number, command: string, token: string ) {
-  moveSubdocument( document: Document, command: string, token: string ) {
+  moveSubdocument( document: Document, command: string ) {
 
     console.log(`ID: ${document.id}`)
     console.log(`Author: ${document.author}`)
@@ -195,19 +206,16 @@ export class DocumentService {
     // Typical URL: http://xdoc-api.herokuapp.com/v1/documents/89?move_down=231
     // Move document 231 down one step in the subdocument list of its parent, document 89
 
-    console.log(`MOVE: url = ${url}`)
+    console.log(`moveSubdocument, url = ${url}`)
 
-    let options = this.standardOptions(token)
-
-    return this.http.post(url, params , options)
-      .map((res) => res.json())
-      .subscribe(payload =>  [
-        console.log(`PAYLOAD (MOVE): ${JSON.stringify(payload)}`),
-        this.store.dispatch({
-          type: SET_DOCUMENTS_AND_SELECT,
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.post(url, params, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload => this.store.dispatch({
+          type: SET_DOCUMENTS,
           payload: payload.document.links.documents
-        })
-      ])
+        }))
+      ).subscribe()
   }
 
 
@@ -248,23 +256,25 @@ export class DocumentService {
   printDocument(documentId: number, token: string, callback) {
 
     let url = `${this.apiRoot}/printdocument/${documentId}`
-    let options = this.standardOptions(token)
 
-    return this.http.get(url , options)
-      .map((res) => res.json()['url'])
-      .subscribe(payload => callback(payload)
-      )
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json()['url'])
+        .do(payload => [console.log(JSON.stringify(payload), callback(payload)])
+      ).subscribe()
+
   }
 
   exportDocumentToLaTex(documentId: number, token: string, callback) {
 
     let url = `${this.apiRoot}/exportlatex/${documentId}`
-    let options = this.standardOptions(token)
 
-    return this.http.get(url , options)
-      .map((res) => res.json()['tar_url'])
-      .subscribe(payload => callback(payload)
-      )
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.get(url, this.standardOptions(token))
+        .map((res) => res.json()['tar_url'])
+        .do(payload => [console.log(JSON.stringify(payload), callback(payload)])
+      ).subscribe()
+
   }
 
 

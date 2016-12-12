@@ -38,14 +38,14 @@ export class NewDocumentComponent implements OnInit {
 
   submit() {
 
-    console.log(`TITLE: ${this.model.title}`)
-    this.store
-      .take(1)
-      .subscribe((state) => [
-        this.documentService.createDocument(
-          this.model.title,
-          state.user.token)
-      ])
+    let params = {
+      title: this.model.title,
+      options: '{}',
+      current_document_id: 0,
+      parent_document_id: 0
+    }
+
+    this.documentService.createDocument(params)
 
     this.gotoRoute()
 

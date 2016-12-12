@@ -2,7 +2,6 @@
 // https://github.com/ngrx/store
 //
 export const SELECT_DOCUMENT =  'SELECT_DOCUMENT'
-export const IDENTITY = 'IDENTITY'
 export const UPDATE_DOCUMENT =  'UPDATE_DOCUMENT'
 
 import { Document } from '../interfaces/document.interface'
@@ -25,8 +24,6 @@ export const activeDocumentReducer: ActionReducer<Document> = (state: Document =
   switch (action.type) {
     case SELECT_DOCUMENT:
       return action.payload;
-    case IDENTITY:
-      return action.payload
     case UPDATE_DOCUMENT:
       return Object.assign (state, action.payload)
     default:
@@ -34,3 +31,4 @@ export const activeDocumentReducer: ActionReducer<Document> = (state: Document =
   }
 
 };
+
