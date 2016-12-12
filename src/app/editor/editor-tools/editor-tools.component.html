@@ -2,7 +2,11 @@
 
   <div class="button-row">
     <button><a [routerLink]="['/newdocument']">New</a></button>
-    <button>Backup</button>
+    <button
+      style="color:white"
+      (click)="togglePublic()"
+      [style.background-color]="(publicColor$ | async)"
+    >{{ publicTitle$ | async }}</button>
   </div>
 
   <div class="button-row">

@@ -190,6 +190,23 @@ export class DocumentService {
 
   }
 
+  togglePublic(document: Document) {
+
+    let params = {
+      id: document.id,
+      public: !document.public,
+    }
+
+    let url = `${this.apiRoot}/documents/${document.id}`
+
+    this.store.select(state=> state.user.token)
+      .flatMap( token => this.http.post(url, params, this.standardOptions(token))
+        .map((res) => res.json())
+        .do(payload => this.store.dispatch({type: UPDATE_DOCUMENT, payload: payload['document']}))
+      ).subscribe()
+
+  }
+
 
   // moveSubdocument( parent_id: number, subdocument_id: number, command: string, token: string ) {
   moveSubdocument( document: Document, command: string ) {
@@ -260,7 +277,7 @@ export class DocumentService {
     this.store.select(state=> state.user.token)
       .flatMap( token => this.http.get(url, this.standardOptions(token))
         .map((res) => res.json()['url'])
-        .do(payload => [console.log(JSON.stringify(payload), callback(payload)])
+        .do(payload => callback(payload))
       ).subscribe()
 
   }
@@ -272,7 +289,7 @@ export class DocumentService {
     this.store.select(state=> state.user.token)
       .flatMap( token => this.http.get(url, this.standardOptions(token))
         .map((res) => res.json()['tar_url'])
-        .do(payload => [console.log(JSON.stringify(payload), callback(payload)])
+        .do(payload => callback(payload))
       ).subscribe()
 
   }

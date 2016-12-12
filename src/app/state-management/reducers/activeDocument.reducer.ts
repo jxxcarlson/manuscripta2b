@@ -15,6 +15,7 @@ const initialDocument: Document = {
   text: 'Dummy text',
   rendered_text: 'Dummy text',
   has_subdocuments: false,
+  public: false,
   documents: [],
   links: { parent: { id: -1, title: 'Nonexistent'}}
 }

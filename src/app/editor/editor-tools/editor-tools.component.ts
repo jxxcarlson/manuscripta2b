@@ -3,11 +3,11 @@ import { User } from '../../state-management/interfaces/user.interface'
 import { AppState } from '../../state-management/interfaces/appstate.interface'
 
 
-// import { Observable} from 'rxjs/Rx';
+import { Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store'
 import 'rxjs/add/operator/take'
 
-// import { Document } from '../../interfaces/document.interface'
+import { Document } from '../../state-management/interfaces/document.interface'
 
 
 import {DocumentService} from '../../services/document.service'
@@ -23,6 +23,10 @@ export class EditorToolsComponent implements OnInit {
 
   // user: User
 
+  activeDocument$: Observable<Document>
+  publicColor$: Observable<string>
+  publicTitle$: Observable<string>
+
   constructor(
     private documentService: DocumentService,
     private store: Store<AppState>,
@@ -33,6 +37,16 @@ export class EditorToolsComponent implements OnInit {
     this.userStore = userStore
 
   }
+
+  togglePublic() {
+
+    this.store
+      .take(1)
+      .subscribe((state) => [
+        this.documentService.togglePublic(state.activeDocument)
+      ])
+  }
+
 
   updateDocument() {
 
@@ -58,16 +72,10 @@ export class EditorToolsComponent implements OnInit {
 
   ngOnInit() {
 
-    /*
-    this.userStore
-      .select('user')
-      .take(1)
-      .subscribe((val: Observable<User>)=> [
-        this.user$ = val,
-        // console.log(`ET: userState changed: ${JSON.stringify(this.user$)}`)
-      ])
+    this.activeDocument$ = this.store.select(state => state.activeDocument)
+    this.publicColor$ = this.store.select(state => state.activeDocument.public ? 'cornflowerblue' : 'darkred')
+    this.publicTitle$ = this.store.select(state => state.activeDocument.public ? 'Public' : 'Private')
 
-      */
 
   }
 
