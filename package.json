@@ -8,7 +8,8 @@
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "e2e": "protractor",
+    "preinstall": "npm install typings && npm install angular-cli"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +52,9 @@
     "protractor": "4.0.9",
     "tslint": "3.13.0",
     "webdriver-manager": "10.2.5"
+  },
+  "engines": {
+    "node": "~7"
   },
   "repository": {
     "type": "git",
