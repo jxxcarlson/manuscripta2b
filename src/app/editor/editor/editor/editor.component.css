@@ -1,5 +1,6 @@
 .source-document {
-  font-size: 1.25rem;
+  font-size: 1.00rem;
+  line-height: 1.35rem;
   height: calc(100% - 0px);
   width: 100%;
   overflow: scroll;
