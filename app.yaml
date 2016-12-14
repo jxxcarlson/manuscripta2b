@@ -1,10 +1,44 @@
 # [START runtime]
-runtime: nodejs
-
+runtime: python27
+threadsafe: yes
 # [END runtime]
 
-# Temporary setting to keep gcloud from uploading node_modules
-skip_files:
-- ^node_modules$
 
 env: flex
+
+handlers:
+
+- url: /(.+)
+  static_files: dist/\1
+  upload: dist/(.*)
+
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+
+# Temporary setting to keep gcloud from uploading not required files for deployment
+skip_files:
+- ^node_modules$
+- ^app\.yaml
+- ^README\..*
+- \.gitignore
+- ^\.git$
+- ^src$
+- ^e2e$
+- \.editorconfig
+- ^karma\.config\.js
+- ^package\.json
+- ^protractor\.conf\.js
+- ^tslint\.json
+
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /bootstrap
+  static_dir: bootstrap
+
+- url: /.*
+  script: guestbook.app
