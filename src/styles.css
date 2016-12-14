@@ -1,6 +1,9 @@
 
 /** @import 'app/vendor/css/font-awesome.min.css'; **/
 @import './app/vendor/semantic.min.css';
+@import './app/vendor/foundation-potion.css';
+@import './app/vendor/coderay.css';
+@import './app/vendor/extras.css';
 
 
 form.ui.segment.form {

@@ -4,7 +4,7 @@ import { Document } from '../shared/document.model';
 @Component({
   selector: 'html-pane',
   template: '<div class="rendered-document" [innerHTML]=document.rendered_text></div>',
-  styleUrls: ['./asciidoctor.css', './coderay.css', './extras.css', './anypane.component.css']
+  styleUrls: ['./asciidoctor.css', '../vendor/coderay.css', '../vendor/extras.css', './anypane.component.css']
 })
 export class HtmlPane {
   @Input() document:Document;
